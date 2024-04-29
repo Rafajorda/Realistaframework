@@ -1,0 +1,308 @@
+.error { color: red;
+         font-family: arial;
+         font-size: 10pt;
+         font-style:italic;
+}
+body{
+    background-color:#F0F0FF;
+    background-image: url(../img/background.jpg);
+    background-attachment: fixed;
+    background-repeat:no-repeat;
+}
+h1{
+    font-size: 32pt;
+}
+#wrapper {
+	width:800px;
+	margin:auto;
+	background-color:#FFFFFF;	
+}
+#header {
+	height:80px;
+	background-image:url(../img/header.jpg);
+	background-repeat:no-repeat;
+	height:120px;
+}
+#menu {
+	background-image:url(../img/menu.png);
+	height:25px;
+	padding-top:5px;
+	text-align:center;
+}
+#menu a, #footer a{
+	color:#FFFFFF;
+	text-decoration:none;
+	font-weight:bold;
+}
+#menu a:hover, #footer a:hover{
+	text-decoration:underline;
+}
+#contenido {
+	padding:20px;
+}
+#footer {
+	background-image:url(../img/menu.png);
+	height:25px;
+	padding-top:5px;
+	text-align:center;
+}
+.Button_green {
+	background-color:green;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid green;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.Button_green:hover {
+	background-color:greenyellow;
+}
+.Button_green:active {
+	position:relative;
+	top:1px;
+}
+.Button_blue {
+	background-color:blue;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid blue;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.Button_blue:hover {
+	background-color:cyan;
+}
+.Button_blue:active {
+	position:relative;
+	top:1px;
+}
+.Button_red {
+	background-color:crimson;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid crimson;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.Button_red:hover {
+	background-color:red;
+}
+.Button_red:active {
+	position:relative;
+	top:1px;
+}
+.bigger-image {
+	width: 100%; /* Set the width to fill the parent container */
+	height: auto; /* Automatically adjust the height to maintain aspect ratio */
+	/* Adjust the width and height as needed */
+  }
+  .list_product .img-container img.bigger-image {
+    width: 100%;
+    height: auto;
+}  
+  /* The Modal (background) */
+  #myModal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  }
+  
+  /* Modal Content (image) */
+  .modal-content {
+	margin: auto;
+	display: block;
+	width: 80%;
+	max-width: 700px;
+  }
+  
+  /* The Close Button */
+  .close {
+	position: absolute;
+	top: 15px;
+	right: 35px;
+	color: #f1f1f1;
+	font-size: 40px;
+	font-weight: bold;
+	transition: 0.3s;
+  }
+  
+  .close:hover,
+  .close:focus {
+	color: #bbb;
+	text-decoration: none;
+	cursor: pointer;
+  }
+  
+  /* Add Animation */
+  @keyframes zoom {
+	from {transform:scale(0)}
+	to {transform:scale(1)}
+  }
+  
+  /* The Close Button */
+  .close {
+	position: absolute;
+	top: 15px;
+	right: 35px;
+	color: #f1f1f1;
+	font-size: 40px;
+	font-weight: bold;
+	transition: 0.3s;
+  }
+  
+  .close:hover,
+  .close:focus {
+	color: #bbb;
+	text-decoration: none;
+	cursor: pointer;
+  }
+
+  .bigger-image {
+	width: 100%; /* Set the width to fill the parent container */
+	height: auto; /* Automatically adjust the height to maintain aspect ratio */
+	/* Adjust the width and height as needed */
+  }
+  
+  .list_product .img-container img {
+	width: 100%; /* Set the width to fill the parent container */
+	height: auto; /* Automatically adjust the height to maintain aspect ratio */
+	/* Adjust the width and height as needed */
+  }
+  
+  .list_product .img-container img.bigger-image {
+	width: 100%; /* Set the width to fill the parent container */
+	height: auto; /* Automatically adjust the height to maintain aspect ratio */
+	/* Adjust the width and height as needed */
+  }
+  
+	.list_content_shop {
+	  display: flex;
+	  flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+	  margin-bottom: 20px;
+	}
+  
+	.panel-heading h4 {
+	  margin-top: 0; /* Remove default margin */
+  }
+  
+  .panel-body {
+	  padding: 10px; /* Add some padding */
+  }
+  
+  .panel-footer {
+	  padding: 10px; /* Add some padding */
+  }
+  
+.search__form {
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#autocom {
+    width: 350px; /* Set the width to your desired size */
+    height: 40px; /* Set the height to your desired size */
+    font-size: 16px; /* Optionally adjust font size */
+    padding: 5px; /* Optionally adjust padding */
+}
+.search__form #autocom {
+    width: 350px; /* Set the width to your desired size */
+    height: 40px; /* Set the height to your desired size */
+    font-size: 16px; /* Optionally adjust font size */
+    padding: 5px; /* Optionally adjust padding */
+}
+
+#search_auto {
+    margin-top: 20px;
+}
+
+/* Estilos opcionales para el botón de búsqueda */
+#search-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#search-btn:hover {
+    background-color: #0056b3;
+}
+
+.containerinshop {
+    display: flex; /* Use flexbox for layout */
+    align-items: flex-start; /* Align items at the start */
+}
+
+.container_shop {
+    flex: 1; /* Take up remaining space */
+    margin-right: 20px; /* Adjust margin as needed */
+}
+
+#map-container {
+    width: 500px; /* Adjust width as needed */
+}
+
+#map {
+    width: 100%; /* Occupy full width of its container */
+    height: 500px; /* Adjust height as needed */
+}
+
+#mapd {
+    width: 100%; /* Occupy full width of its container */
+    height: 500px; /* Adjust height as needed */
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-btn:hover {
+    background-color: #0056b3;
+}
+
+
