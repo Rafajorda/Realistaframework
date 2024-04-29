@@ -1,5 +1,5 @@
 <?php
-    $path = $_SERVER['DOCUMENT_ROOT'] . '/RealistaV13';
+    $path = $_SERVER['DOCUMENT_ROOT'] . '/Realistaframework';
     include($path . "/model/connect.php");
 
     class DAOLogin{

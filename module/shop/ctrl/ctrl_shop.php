@@ -1,5 +1,5 @@
 <?php
-$path = $_SERVER['DOCUMENT_ROOT'] . '/realistaV13';
+$path = $_SERVER['DOCUMENT_ROOT'] . '/realistaframework';
 include($path . "/module/shop/model/DAO_shop.php");
 include($path . "/model/middleware_auth.php");
 @session_start();

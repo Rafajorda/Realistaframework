@@ -1,5 +1,5 @@
 <?php
-$path = $_SERVER['DOCUMENT_ROOT'] . '/realistaV13';
+$path = $_SERVER['DOCUMENT_ROOT'] . '/realistaframework';
 include($path . "/module/search/model/DAO_search.php");
 @session_start();
 if (isset($_SESSION["tiempo"])) {  

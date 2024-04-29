@@ -1,5 +1,5 @@
 <?php
-$path = $_SERVER['DOCUMENT_ROOT'] . '/realistaV13';
+$path = $_SERVER['DOCUMENT_ROOT'] . '/realistaframework';
 include($path . "/model/connect.php");
 
 class DAOShop{

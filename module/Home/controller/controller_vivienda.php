@@ -7,7 +7,7 @@ class controller_vivienda{
 }
 //     // $data = 'hola crtl vivienda';
 //    //  die('<script>console.log('.json_encode( $data ) .');</script>');
-//    $path = $_SERVER['DOCUMENT_ROOT'] . '/realistaV13';
+//    $path = $_SERVER['DOCUMENT_ROOT'] . '/realistaframework';
 //    include($path . "/module/home/model/DAOVivienda.php");
 //    // include ("module/vivienda/model/DAOVivienda.php");
 //     @session_start();
