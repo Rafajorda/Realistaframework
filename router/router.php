@@ -2,8 +2,8 @@
 
     require_once 'autoload.php';
     
-     $path = $_SERVER['DOCUMENT_ROOT'] . '/RealistaF/RealistaFramework/';
-    include($path . "utils/common.inc.php");
+    //  $path = $_SERVER['DOCUMENT_ROOT'] . '/';
+    // include($path . "utils/common.inc.php");
     // include($path . "utils/mail.inc.php");
    // include($path . "paths.php");
 
@@ -29,10 +29,19 @@
             }else{
                 $this -> uriModule = 'view';
             }
-            if(isset($_GET['op'])){
-                $this -> uriFunction = ($_GET['op'] === "") ? 'view' : $_GET['op'];
+            // if(isset($_GET['op'])){
+            //     $this -> uriFunction = ($_GET['op'] === "") ? 'view' : $_GET['op'];
+            // }else{
+            //     $this -> uriFunction = 'view';
+            // }
+            if(isset($_POST['op'])){
+                $this -> uriFunction = $_POST['op'];
             }else{
-                $this -> uriFunction = 'view';
+               if(isset($_GET['op'])){
+                    $this -> uriFunction = ($_GET['op'] === "") ? 'view' : $_GET['op'];
+                }else{
+                    $this -> uriFunction = 'view';
+                }
             }
         }
     
@@ -60,12 +69,6 @@
                 }
             }
             throw new Exception('Not Module found.');
-           // $path = 'module/Home/controller/controller_home.class.php';
-          //  require_once($path);
-
-            // $controllerName = 'controller_home';
-            // return new $controllerName;
-
         }
         
         private function loadFunction() {

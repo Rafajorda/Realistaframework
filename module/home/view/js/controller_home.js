@@ -1,9 +1,11 @@
 
-//console.log("que haces aqui??");
+var viewPathInc = "<?php echo VIEW_PATH_INC; ?>";
+console.log("VIEW_PATH_INC:", viewPathInc);
+
 //____________________________________________________________________________________________________________________
 
 function carrusel() {
-    ajaxPromise("?module=home&op=carrusel", 'GET', 'JSON')
+    ajaxPromise(friendlyURL("?module=home"), 'POST', 'JSON',{ 'op': 'carrusel'})
         .then(function (data) {
            // console.log(data);
             var carouselList = $('.carousel__list');
@@ -59,7 +61,7 @@ var glider = new Glider(carouselList.get(0), {
 
 function Category() {
    // console.log('loadcategories');
-    ajaxPromise('?module=home&op=category','GET', 'JSON')
+    ajaxPromise(friendlyURL("?module=home"), 'POST', 'JSON',{ 'op': 'category'})
    
     .then(function(data) {
        
@@ -95,7 +97,7 @@ function Category() {
 }
 function loadCities() {
     // console.log('loadcategories');
-     ajaxPromise('?module=home&op=city','GET', 'JSON') 
+     ajaxPromise(friendlyURL("?module=home"), 'POST', 'JSON',{ 'op': 'city'}) 
      .then(function(data) {
         
          for (row in data) {
@@ -131,7 +133,7 @@ function loadCities() {
 
 
  function loadvisitas() {
-     ajaxPromise('?module=home&op=visits','GET', 'JSON')
+     ajaxPromise(friendlyURL("?module=home"), 'POST', 'JSON',{ 'op': 'visits'})
     
      .then(function(data) {
         
@@ -170,7 +172,7 @@ function loadCities() {
 
 function loadoperations() {
     // console.log('loadcategories');
-     ajaxPromise('?module=home&op=operation','GET', 'JSON')
+     ajaxPromise(friendlyURL("?module=home"), 'POST', 'JSON',{ 'op': 'operation'})
     
      .then(function(data) {
         
@@ -206,7 +208,7 @@ function loadoperations() {
  }
  function loadrecommend() {
     // console.log('loadcategories');
-     ajaxPromise('?module=home&op=recommend','GET', 'JSON')
+     ajaxPromise(friendlyURL("?module=home"), 'POST', 'JSON',{ 'op': 'recommend'})
     
      .then(function(data) {
         console.log(data);
@@ -312,7 +314,7 @@ function loadoperations() {
 // }
 
 function loadTipo() {
-    ajaxPromise('?module=home&op=type','GET', 'JSON')
+    ajaxPromise(friendlyURL("?module=home"), 'POST', 'JSON',{ 'op': 'type'})
     .then(function(data) {
         for (row in data) {
             var newtipo = $('<div></div>').addClass('col-md-3 col-sm-6 div_type')

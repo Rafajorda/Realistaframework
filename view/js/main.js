@@ -16,6 +16,7 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
     });
 };
 function friendlyURL(url) {
+    if(url !==undefined){
     var link = "";
     url = url.replace("?", "");
     url = url.split("&");
@@ -29,7 +30,8 @@ function friendlyURL(url) {
         	link += "/" + aux[1];
         }
     }
-    return "http://localhost/RealistaF/Realistaframework/module" + link;
+    return link;
+    }
 }
 
 //================LOAD-HEADER================
@@ -122,6 +124,7 @@ function load_menu() {
 
 $(document).ready(function() {
      load_menu();
+     friendlyURL();
     // click_logout();
     // change_button();
    // click_shop();

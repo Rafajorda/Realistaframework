@@ -1,6 +1,6 @@
 <?php
 
-$path = $_SERVER['DOCUMENT_ROOT'] . '/RealistaF/RealistaFramework/';
+$path = $_SERVER['DOCUMENT_ROOT'] . '/';
 
  //include($path . "paths.php");
 

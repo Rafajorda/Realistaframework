@@ -1,8 +1,8 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'] . "/RealistaF/Realistaframework/model/jwt.class.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/model/jwt.class.php");
 
 function decode_token($token){
-    $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/Realistaframework/model/credentials.ini');
+    $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/model/credentials.ini');
     $secret = $jwt['JWT_SECRET'];
 
     $JWT = new JWT;
@@ -12,7 +12,7 @@ function decode_token($token){
 }
 
 function create_accesstoken($username,$id){
-    $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/Realistaframework/model/credentials.ini');
+    $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/model/credentials.ini');
     $header = $jwt['JWT_HEADER'];
     // $header = '{
     //     "alg": "HS256",
@@ -26,7 +26,7 @@ function create_accesstoken($username,$id){
     return $token;
 }
 function create_refreshtoken($username,$id){
-    $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/Realistaframework/model/credentials.ini');
+    $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/model/credentials.ini');
     $header = $jwt['JWT_HEADER'];
     // $header = '{
     //     "alg": "HS256",
