@@ -1,5 +1,5 @@
 <?php
-include($_SERVER['DOCUMENT_ROOT'] . "/Realistaframework/model/JWT.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/RealistaF/Realistaframework/model/jwt.class.php");
 
 function decode_token($token){
     $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/Realistaframework/model/credentials.ini');

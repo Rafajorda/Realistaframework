@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 $path = $_SERVER['DOCUMENT_ROOT'] . '/realistaframework';
 include($path . "/module/search/model/DAO_search.php");
 @session_start();
@@ -118,4 +118,4 @@ switch ($_GET['op']) {
     default:
         include("view/inc/error/error404.php");
         break;
-}
+} -->

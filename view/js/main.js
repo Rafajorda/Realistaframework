@@ -15,7 +15,22 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
         }); 
     });
 };
-
+function friendlyURL(url) {
+    var link = "";
+    url = url.replace("?", "");
+    url = url.split("&");
+    cont = 0;
+    for (var i = 0; i < url.length; i++) {
+    	cont++;
+        var aux = url[i].split("=");
+        if (cont == 2) {
+        	link += "/" + aux[1] + "/";	
+        }else{
+        	link += "/" + aux[1];
+        }
+    }
+    return "http://localhost/RealistaF/Realistaframework/module" + link;
+}
 
 //================LOAD-HEADER================
 function load_menu() {
@@ -58,48 +73,48 @@ function load_menu() {
 
 
 //================CLICK-LOGIUT================
-function click_logout() {
-    $(document).on('click', '#logout', function() {
-        localStorage.removeItem('total_prod');
-        toastr.success("Logout succesfully");
-        setTimeout('logout();', 1000);
-    });
+// function click_logout() {
+//     $(document).on('click', '#logout', function() {
+//         localStorage.removeItem('total_prod');
+//         toastr.success("Logout succesfully");
+//         setTimeout('logout();', 1000);
+//     });
 
-}
+// }
 
 //================LOG-OUT================
-function logout() {
-    ajaxPromise('module/login/ctrl/ctrl_login.php?op=logout', 'POST', 'JSON')
-        .then(function(data) {
-            localStorage.removeItem('accesstoken');
-            localStorage.removeItem('refreshtoken');
-            window.location.href = "index.php?module=ctrl_home&op=list";
-        }).catch(function() {
-            console.log('Something has occured');
-        });
-}
+// function logout() {
+//     ajaxPromise('module/login/ctrl/ctrl_login.php?op=logout', 'POST', 'JSON')
+//         .then(function(data) {
+//             localStorage.removeItem('accesstoken');
+//             localStorage.removeItem('refreshtoken');
+//             window.location.href = "index.php?module=ctrl_home&op=list";
+//         }).catch(function() {
+//             console.log('Something has occured');
+//         });
+// }
 
 
 
 
 
-function change_button() {
-    var token = localStorage.getItem('accesstoken');
-    var loginButton = document.querySelector('.login-button-menu');
-    if (token) {    
-        if (loginButton) {
-            $('.log-icon').show();
-            loginButton.innerHTML = '<a id="logout">Logout</a>';
-            //click_logout();   
-        }
-    } else {
+// function change_button() {
+//     var token = localStorage.getItem('accesstoken');
+//     var loginButton = document.querySelector('.login-button-menu');
+//     if (token) {    
+//         if (loginButton) {
+//             $('.log-icon').show();
+//             loginButton.innerHTML = '<a id="logout">Logout</a>';
+//             //click_logout();   
+//         }
+//     } else {
      
-        if (loginButton) {
-            $('.log-icon').hide();
-            loginButton.innerHTML = '<a href="index.php?page=login">Login</a>';
-        }
-    }
-}
+//         if (loginButton) {
+//             $('.log-icon').hide();
+//             loginButton.innerHTML = '<a href="index.php?page=login">Login</a>';
+//         }
+//     }
+// }
 
 
 
@@ -107,7 +122,7 @@ function change_button() {
 
 $(document).ready(function() {
      load_menu();
-    click_logout();
-    change_button();
+    // click_logout();
+    // change_button();
    // click_shop();
 });

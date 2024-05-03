@@ -3,7 +3,7 @@
 		public static function con(){
 
 
-		$cred =	parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/RealistaFramework/model/credentials.ini');
+		$cred =	parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/RealistaF/RealistaFramework/model/credentials.ini');
 			$host = $cred['DB_HOST'];  
     		$user =  $cred['DB_USER'];                    
     		$pass = $cred['DB_PASS'];                             
