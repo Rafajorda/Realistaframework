@@ -70,7 +70,8 @@
             }
             throw new Exception('Not Module found.');
         }
-        
+
+      
         private function loadFunction() {
             $path = MODULES_PATH . $this -> nameModule . '/resources/function.xml'; 
             if (file_exists($path)) {

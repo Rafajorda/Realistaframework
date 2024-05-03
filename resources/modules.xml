@@ -3,12 +3,13 @@
     <module>
         <name>home</name>
         <uri>home</uri>
+        <uri>view</uri>
     </module>
-    <!-- <module>
+   <module>
         <name>shop</name>
         <uri>shop</uri>
-    </module>
-    <module>
+    </module> 
+    <!-- <module>
         <name>search</name>
         <uri>search</uri>
     </module> -->

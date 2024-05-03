@@ -1,8 +1,8 @@
 <?php
-$path = $_SERVER['DOCUMENT_ROOT'] . '/realistaframework';
-include($path . "/model/connect.php");
+// $path = $_SERVER['DOCUMENT_ROOT'] . '/realistaframework';
+// include($path . "/model/connect.php");
 
-class DAOShop{
+class shop_dao{
 	function select_all_vivienda($total_prod, $items_page){
 		$sql = "SELECT `vivienda`.*, `categoria`.`namecat`, `tipo`.`nametipo`, `city`.`namecity`, `operation`.`nameop`,`ahorro`.`nameahorro`, `images`.`imgimages`
 		FROM `tipo`

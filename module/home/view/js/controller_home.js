@@ -1,7 +1,4 @@
 
-var viewPathInc = "<?php echo VIEW_PATH_INC; ?>";
-console.log("VIEW_PATH_INC:", viewPathInc);
-
 //____________________________________________________________________________________________________________________
 
 function carrusel() {
@@ -343,150 +340,146 @@ function loadTipo() {
     });
 }
 
-// function remove_filters() {
-//     localStorage.removeItem('filters');
-//     localStorage.removeItem('filter_m2');
-//     localStorage.removeItem('filter_m2MAX');
-//     localStorage.removeItem('filter_m2MIN');
-//     localStorage.removeItem('filter_ahorro');
-//     localStorage.removeItem('filter_type');
-//     localStorage.removeItem('filter_category');
-//     localStorage.removeItem('filter_operation');
-//     localStorage.removeItem('filter_city');
-//     localStorage.removeItem('filtrosshop');
-//     localStorage.removeItem('filter_pricemin');
-//     localStorage.removeItem('filter_pricemax');
-//     localStorage.removeItem('order');
-//     localStorage.removeItem('currentPage');
-//     }
+function remove_filters() {
+    localStorage.removeItem('filters');
+    localStorage.removeItem('filter_m2');
+    localStorage.removeItem('filter_m2MAX');
+    localStorage.removeItem('filter_m2MIN');
+    localStorage.removeItem('filter_ahorro');
+    localStorage.removeItem('filter_type');
+    localStorage.removeItem('filter_category');
+    localStorage.removeItem('filter_operation');
+    localStorage.removeItem('filter_city');
+    localStorage.removeItem('filtrosshop');
+    localStorage.removeItem('filter_pricemin');
+    localStorage.removeItem('filter_pricemax');
+    localStorage.removeItem('order');
+    localStorage.removeItem('currentPage');
+    }
 
 
-// function clicks() {
-//     // $(document).on("click", '.div_cat', function() {
-//     //     console.log('clickity click cat');
-//     //   var filtershome = [];
-//     //  filtershome.push({"categoria":[this.getAttribute('id')]});
-//     //    localStorage.removeItem('filtershome')
-//     //   localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
-//     //   setTimeout(function(){ 
-//     //       window.location.href = 'index.php?page=shop';
-//     //     }, 1000);   
-//     // });
-//     $(document).on("click", '.div_cat', function() {
-//         console.log('clickity click cat');
-//         remove_filters();
+function clicks() {
+    // $(document).on("click", '.div_cat', function() {
+    //     console.log('clickity click cat');
+    //   var filtershome = [];
+    //  filtershome.push({"categoria":[this.getAttribute('id')]});
+    //    localStorage.removeItem('filtershome')
+    //   localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
+    //   setTimeout(function(){ 
+    //       window.location.href = 'index.php?page=shop';
+    //     }, 1000);   
+    // });
+    $(document).on("click", '.div_cat', function() {
+        console.log('clickity click cat');
+        remove_filters();
        
-
-
-
-
-//         var filtershome = [];
+        var filtershome = [];
        
-//         // Push the filter name "categoria" and its value obtained from this.getAttribute('id')
-//         filtershome.push(["categoria", this.getAttribute('id')]);
-//         localStorage.removeItem('filtershome');
-//         localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
-//         setTimeout(function() { 
-//             window.location.href = 'index.php?page=shop';
-//         }, 1000);   
-//     });
+        // Push the filter name "categoria" and its value obtained from this.getAttribute('id')
+        filtershome.push(["categoria", this.getAttribute('id')]);
+        localStorage.removeItem('filtershome');
+        localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
+        setTimeout(function() { 
+            window.location.href = 'shop';
+        }, 1000);   
+    });
 
 
     
-//     $(document).on("click", '.div_city', function() {  
-//         console.log('clickity click city');
-//         remove_filters();
-//         var filtershome = [];
-//        filtershome.push(["city",this.getAttribute('id')]);
-//         localStorage.removeItem('filtershome')
-//         localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
-//         setTimeout(function(){ 
-//             window.location.href = 'index.php?page=shop';
-//           }, 1000);   
+    $(document).on("click", '.div_city', function() {  
+        console.log('clickity click city');
+        remove_filters();
+        var filtershome = [];
+       filtershome.push(["city",this.getAttribute('id')]);
+        localStorage.removeItem('filtershome')
+        localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
+        setTimeout(function(){ 
+            window.location.href = 'shop';
+          }, 1000);   
        
-//     });
-//     $(document).on("click", '.div_op', function() {
-//         console.log('clickity click operation');
-//         remove_filters();
-//         var filtershome = [];
-//        filtershome.push(["operation",this.getAttribute('id')]);
-//         localStorage.removeItem('filtershome')
-//         localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
-//         setTimeout(function(){ 
-//             window.location.href = 'index.php?page=shop';
-//           }, 1000);   
+    });
+    $(document).on("click", '.div_op', function() {
+        console.log('clickity click operation');
+        remove_filters();
+        var filtershome = [];
+       filtershome.push(["operation",this.getAttribute('id')]);
+        localStorage.removeItem('filtershome')
+        localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
+        setTimeout(function(){ 
+            window.location.href = 'index.php?page=shop';
+          }, 1000);   
        
-//     });
-//     $(document).on("click", '.div_type', function() {
-//         console.log('clickity click tipo');
-//         remove_filters();
-//         var filtershome = [];
-//        filtershome.push(["tipo",this.getAttribute('id')]);
-//          localStorage.removeItem('filtershome')
-//         localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
-//         setTimeout(function(){ 
-//             window.location.href = 'index.php?page=shop';
-//           }, 1000);   
+    });
+    $(document).on("click", '.div_type', function() {
+        console.log('clickity click tipo');
+        remove_filters();
+        var filtershome = [];
+       filtershome.push(["tipo",this.getAttribute('id')]);
+         localStorage.removeItem('filtershome')
+        localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
+        setTimeout(function(){ 
+            window.location.href = 'shop';
+          }, 1000);   
        
-//     });
-//     $(document).on("click", '.div_rec', function() {
-//         console.log('clickity click rec');
-//         remove_filters();
-//         var filtershome = [];
-//        filtershome.push([this.getAttribute('idtab'),this.getAttribute('id')]);
-//          localStorage.removeItem('filtershome')
-//         localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
-//         setTimeout(function(){ 
-//             window.location.href = 'index.php?page=shop';
-//           }, 1000);   
+    });
+    $(document).on("click", '.div_rec', function() {
+        console.log('clickity click rec');
+        remove_filters();
+        var filtershome = [];
+       filtershome.push([this.getAttribute('idtab'),this.getAttribute('id')]);
+         localStorage.removeItem('filtershome')
+        localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
+        setTimeout(function(){ 
+            window.location.href = 'shop';
+          }, 1000);   
        
-//     });
+    });
 
-//     $(document).on("click", '.div_ahorro', function() {
-//         console.log('clickity click ahorro');
-//         remove_filters();
-//         var filtershome = [];
-//         filtershome.push(["ahorro",this.getAttribute('id')]);
-//          localStorage.removeItem('filtershome')
-//         localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
-//         setTimeout(function(){ 
-//             window.location.href = 'index.php?page=shop';
-//           }, 1000);   
+    $(document).on("click", '.div_ahorro', function() {
+        console.log('clickity click ahorro');
+        remove_filters();
+        var filtershome = [];
+        filtershome.push(["ahorro",this.getAttribute('id')]);
+         localStorage.removeItem('filtershome')
+        localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
+        setTimeout(function(){ 
+            window.location.href = 'index.php?page=shop';
+          }, 1000);   
        
-//     });
+    });
 
 
-//     $(document).on("click", '.div_visitas', function() {
-//     //     console.log('clickity click visitas');
-//     //     var filtershome = [];
-//     //     filtershome.push(["visitas",this.getAttribute('id')]);
-//     //    //  localStorage.removeItem('filtershome')
-//     //     localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
-//     //     setTimeout(function(){ 
-//     //         window.location.href = 'index.php?page=shop';
-//     //       }, 1000);   
+    $(document).on("click", '.div_visitas', function() {
+    //     console.log('clickity click visitas');
+    //     var filtershome = [];
+    //     filtershome.push(["visitas",this.getAttribute('id')]);
+    //    //  localStorage.removeItem('filtershome')
+    //     localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
+    //     setTimeout(function(){ 
+    //         window.location.href = 'index.php?page=shop';
+    //       }, 1000);   
 
-//     var viviendaID =  $(this).data('idvivienda'); // Get the ID of the clicked vivienda
-//     window.location.href = 'index.php?page=shop&viviendaID=' + viviendaID;
-//     // var filtershome = [viviendaID]; // Construct filters based on the clicked vivienda
-//     // localStorage.setItem('viviendavisitas', JSON.stringify(filtershome)); // Store the filters
-//     // window.location.href = 'index.php?page=shop'; // Redirect to the shop page
+    var viviendaID =  $(this).data('idvivienda'); // Get the ID of the clicked vivienda
+    window.location.href = 'index.php?page=shop&viviendaID=' + viviendaID;
+    // var filtershome = [viviendaID]; // Construct filters based on the clicked vivienda
+    // localStorage.setItem('viviendavisitas', JSON.stringify(filtershome)); // Store the filters
+    // window.location.href = 'index.php?page=shop'; // Redirect to the shop page
        
-//     });
+    });
 
-//     // $(document).on("click", '.div_motor', function() {
-//     //     var type_motor_filter = [];
-//     //     type_motor_filter.push({ "name_tmotor": [this.getAttribute('id')] });
-//     //     localStorage.removeItem('filters');
-//     //     localStorage.removeItem('brand_filter');
-//     //     localStorage.removeItem('category_filter');
-//     //     localStorage.setItem('type_motor_filter', JSON.stringify(type_motor_filter));
+    // $(document).on("click", '.div_motor', function() {
+    //     var type_motor_filter = [];
+    //     type_motor_filter.push({ "name_tmotor": [this.getAttribute('id')] });
+    //     localStorage.removeItem('filters');
+    //     localStorage.removeItem('brand_filter');
+    //     localStorage.removeItem('category_filter');
+    //     localStorage.setItem('type_motor_filter', JSON.stringify(type_motor_filter));
 
-//     //     setTimeout(function() {
-//     //         window.location.href = ' index.php?module=ctrl_shop&op=list ';
-//     //     }, 300);
-//     // });
-// }
+    //     setTimeout(function() {
+    //         window.location.href = ' index.php?module=ctrl_shop&op=list ';
+    //     }, 300);
+    // });
+}
 
 
 
@@ -505,7 +498,7 @@ $(document).ready(function() {
     loadrecommend();
     loadvisitas();
     // loadAhorro();
-    //  clicks();
+     clicks();
     //  loadultimabusqueda()
 });
 
