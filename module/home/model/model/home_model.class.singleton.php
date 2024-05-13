@@ -1,5 +1,4 @@
 <?php
-//include("module/home/model/BLL/home_bll.class.singleton.php");
     class home_model {
 
         private $bll;
@@ -48,6 +47,13 @@
             // return 'hola type';
              return $this -> bll -> get_visits_BLL();
          }
+
+        //  public function get_count() {
+        //     return $this -> bll -> get_count_BLL();
+        // }
+        // public function get_count_shop($args) {
+        //     return $this -> bll -> get_count_shop_BLL($args);
+        // }
 
     }
 ?>

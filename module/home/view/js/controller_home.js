@@ -406,7 +406,7 @@ function clicks() {
         localStorage.removeItem('filtershome')
         localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
         setTimeout(function(){ 
-            window.location.href = 'index.php?page=shop';
+            window.location.href = 'shop';
           }, 1000);   
        
     });
@@ -443,7 +443,7 @@ function clicks() {
          localStorage.removeItem('filtershome')
         localStorage.setItem('filtershome', JSON.stringify(filtershome)); 
         setTimeout(function(){ 
-            window.location.href = 'index.php?page=shop';
+            window.location.href = 'shop';
           }, 1000);   
        
     });

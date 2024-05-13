@@ -1,6 +1,5 @@
 RewriteEngine on
 RewriteBase /
-# RewriteBase /Framework_PHP_OO_MVC/
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

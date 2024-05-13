@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>type_vivienda</name>
+        <uri>type_vivienda</uri>
+    </function>
+    <function>
+        <name>autocomplete</name>
+        <uri>autocomplete</uri>
+    </function>
+    <function>
+        <name>type_ahorro</name>
+        <uri>type_ahorro</uri>
+    </function>
+    <function>
+        <name>ahorrov</name>
+        <uri>ahorrov</uri>
+    </function>
+    <function>
+        <name>type_ahorro_vivienda</name>
+        <uri>type_ahorro_vivienda</uri>
+    </function>
+    <function>
+        <name>only_ahorro</name>
+        <uri>only_ahorro</uri>
+    </function>
+    <function>
+        <name>only_type</name>
+        <uri>only_type</uri>
+    </function>
+    <function>
+        <name>ahorro_type</name>
+        <uri>ahorro_type</uri>
+    </function>
+    <function>
+        <name>city</name>
+        <uri>city</uri>
+    </function>
+    <function>
+        <name>type_ahorro_vivienda</name>
+        <uri>type_ahorro_vivienda</uri>
+    </function>
+</functions>

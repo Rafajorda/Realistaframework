@@ -46,5 +46,11 @@
 		public function get_visits_BLL() {
 			return $this -> dao -> select_data_visits($this -> db);
 		}
+		// public function get_count_BLL() {
+		// 	return $this -> dao -> select_count($this -> db);
+		// }
+		// public function get_count_shop_BLL($args) {
+		// 	return $this -> dao -> select_count_shop($this -> db,$args);
+		// }
 	}
 ?>

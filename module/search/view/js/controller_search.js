@@ -1,45 +1,22 @@
+
 function load_ahorro() {
-    ajaxPromise('module/search/ctrl/ctrl_search.php?op=ahorro_vivienda', 'POST', 'JSON')
+    ajaxPromise(friendlyURL("?module=search&op=ahorrov"), 'POST', 'JSON')
         .then(function(data) {
             $('#ahorro_vivienda').append('<option value = "0">ahorro_vivienda</option>');
             for (row in data) {
                 $('#ahorro_vivienda').append('<option value = "' + data[row].idahorro + '">' + data[row].nameahorro + '</option>');
             }
+            console.log(data);
         }).catch(function() {
             console.log("Fail load ahorro_vivienda");
         });
 }
 
-// function load_type(data) {
-//     if (data == undefined) {
-//         ajaxPromise('module/search/ctrl/ctrl_search.php?op=type_vivienda', 'POST', 'JSON')
-//             .then(function(data) {
-//                 $('#type_vivienda').empty();
-//                 $('#type_vivienda').append('<option value = "0">types</option>');
-//                 for (row in data) {
-//                     $('#type_vivienda').append('<option value = "' + data[row].nametipo + '"</option>');
-//                 }
-//             }).catch(function(data) {
-//                 console.log('Fail load type');
-//             });
-//     } else {
-//         ajaxPromise('module/search/ctrl/ctrl_search.php?op=type_category', 'POST', 'JSON', data)
-//             .then(function(data) {
-//                 $('#type_vivienda').empty();
-//                 $('#type_vivienda').append('<option value = "0">types</option>');
-//                 for (row in data) {
-//                     $('#type_vivienda').append('<option value = "' + data[row].name_type + '">' + data[row].name_type + '</option>');
-//                 }
-//             }).catch(function(data) {
-//                 console.log('Fail load type');
-//             });
-//     }
-// }
 //__________________________________________________________________________________
 function load_ahorro_type(data) {
-    console.log(data);
+    console.log("ahorro",data);
     if (data == undefined || (data && data.ahorro === "0") ) {
-        ajaxPromise('module/search/ctrl/ctrl_search.php?op=type_ahorro_vivienda', 'POST', 'JSON',data)
+        ajaxPromise(friendlyURL("?module=search&op=type_ahorro_vivienda"), 'POST', 'JSON',data)
             .then(function(data) {
                 $('#type_vivienda').empty();
                 $('#type_vivienda').append('<option value = "0">tipo</option>');
@@ -50,7 +27,7 @@ function load_ahorro_type(data) {
                 console.log('Fail load pepito');
             });
     } else {
-        ajaxPromise('module/search/ctrl/ctrl_search.php?op=type_ahorro_vivienda', 'POST', 'JSON', data)
+        ajaxPromise(friendlyURL("?module=search&op=type_ahorro_vivienda"), 'POST', 'JSON', data)
             .then(function(data) {
                 $('#type_vivienda').empty();
                 $('#type_vivienda').append('<option value = "0">types</option>');
@@ -65,7 +42,7 @@ function load_ahorro_type(data) {
 function launch_search() {
    
     load_ahorro();
-    load_ahorro_type();
+   load_ahorro_type();
     $('#ahorro_vivienda').on('change', function() {
         let ahorro = $(this).val();
         console.log(ahorro);
@@ -77,55 +54,6 @@ function launch_search() {
     });
 }
 
-// function autocomplete() {
-//     $("#autocom").on("keyup focus input", function() {
-//         let sdata = { complete: $(this).val() };
-
-//         if (($('#ahorro_vivienda').val() != 0)) {
-//             sdata.ahorro = $('#ahorro_vivienda').val();
-//             if (($('#ahorro_vivienda').val() != 0) && ($('#type_vivienda').val() != 0)) {
-//                 sdata.type = $('#type_vivienda').val();
-//             }
-//         }
-//         if (($('#ahorro_vivienda').val() == 0) && ($('#type_vivienda').val() != 0)) {
-//             sdata.type = $('#type_vivienda').val();
-//             console.log(sdata.type);
-//         }
-//         ajaxPromise('module/search/ctrl/ctrl_search.php?op=autocomplete', 'POST', 'JSON', sdata)
-//             .then(function(data) {
-//                 $('#search_vivienda').empty();
-//                 $('#search_vivienda').fadeIn(10000000);
-                
-//            let uniqueCities = new Set();
-     
-//             data.forEach(function(row) {
-//                 uniqueCities.add({ name: row.namecity, id: row.idcity });
-//             });
-
-//             uniqueCities.forEach(function(city) {
-//                 $('<div></div>').appendTo('#search_vivienda')
-//                     .html(city.name) 
-//                     .attr({ 'class': 'searchElement', 'id': city.id }); 
-//                 });
-                 
-//                 $(document).on('click', '.searchElement', function() {
-//                     let cityName = $(this).html(); 
-//                     let cityId = $(this).attr('id');
-//                     $('#autocom').val(cityName); 
-//                     $('#autocom').data('cityid', cityId); 
-//                     $('#search_vivienda').fadeOut(900);
-//                 });
-
-//                 $(document).on('click scroll', function(event) {
-//                     if (event.target.id !== 'autocom') {
-//                         $('#search_vivienda').fadeOut(1000);
-//                     }
-//                 });
-//             }).catch(function() {
-//                 $('#search_vivienda').fadeOut(500);
-//             });
-//     });
-// }
 
 function autocomplete() {
     let timer;
@@ -144,7 +72,8 @@ function autocomplete() {
         }
 
         timer = setTimeout(function() {
-            ajaxPromise('module/search/ctrl/ctrl_search.php?op=autocomplete', 'POST', 'JSON', sdata)
+            console.log("sdata",sdata);
+            ajaxPromise(friendlyURL("?module=search&op=autocomplete"), 'POST', 'JSON', {'array':sdata})
                 .then(function(data) {
                     $('#search_vivienda').empty();
                     if (data.length > 0) {
@@ -213,9 +142,10 @@ function btn_search() {
 
         localStorage.setItem('search', JSON.stringify(search));
 
-        window.location.href = 'index.php?page=shop';
+        window.location.href = 'shop';
     });
 }
+
 
 $(document).ready(function() {
     launch_search();

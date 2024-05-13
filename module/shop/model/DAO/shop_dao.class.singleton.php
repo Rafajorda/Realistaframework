@@ -1,38 +1,45 @@
 <?php
-// $path = $_SERVER['DOCUMENT_ROOT'] . '/realistaframework';
-// include($path . "/model/connect.php");
+	class shop_dao{
+		static $_instance;
 
-class shop_dao{
-	function select_all_vivienda($total_prod, $items_page){
-		$sql = "SELECT `vivienda`.*, `categoria`.`namecat`, `tipo`.`nametipo`, `city`.`namecity`, `operation`.`nameop`,`ahorro`.`nameahorro`, `images`.`imgimages`
-		FROM `tipo`
-			LEFT JOIN `vivienda` ON `vivienda`.`tipo` = `tipo`.`idtipo`
-			LEFT JOIN `categoria` ON `vivienda`.`categoria` = `categoria`.`idcat`
-			LEFT JOIN `operation` ON `vivienda`.`operation` = `operation`.`idop`
-			LEFT JOIN `city` ON `vivienda`.`city` = `city`.`idcity`
-			LEFT JOIN `images` ON `vivienda`.`images` = `images`.`idimages`
-			LEFT JOIN `ahorro` ON `vivienda`.`ahorro` = `ahorro`.`idahorro`
-			WHERE `vivienda`.`idvivienda` IS NOT NULL
-			LIMIT $total_prod, $items_page";
-
-		$conexion = connect::con();
-		$res = mysqli_query($conexion, $sql);
-		connect::close($conexion);
-
-		$retrArray = array();
-		if (mysqli_num_rows($res) > 0) {
-			while ($row = mysqli_fetch_assoc($res)) {
-				$retrArray[] = $row;
-			}
+		private function __construct() {
 		}
-		return $retrArray;
-	}
 
-	function select_one_vivienda($id){
+ 		public static function getInstance() {
+     	    if(!(self::$_instance instanceof self)){
+    	    	self::$_instance = new self();
+    		}
+    		return self::$_instance;
+		}
+		public function prueba($db){
+			$sql = "SELECT * FROM vivienda";
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		public function select_all_vivienda($db, $total_prod, $items_page){
+			
+			$sql = "SELECT `vivienda`.*, `categoria`.`namecat`, `tipo`.`nametipo`, `city`.`namecity`, `operation`.`nameop`,`ahorro`.`nameahorro`, `images`.`imgimages`
+			FROM `tipo`
+				LEFT JOIN `vivienda` ON `vivienda`.`tipo` = `tipo`.`idtipo`
+				LEFT JOIN `categoria` ON `vivienda`.`categoria` = `categoria`.`idcat`
+				LEFT JOIN `operation` ON `vivienda`.`operation` = `operation`.`idop`
+				LEFT JOIN `city` ON `vivienda`.`city` = `city`.`idcity`
+				LEFT JOIN `images` ON `vivienda`.`images` = `images`.`idimages`
+				LEFT JOIN `ahorro` ON `vivienda`.`ahorro` = `ahorro`.`idahorro`
+				WHERE `vivienda`.`idvivienda` IS NOT NULL
+				LIMIT $total_prod, $items_page";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+	function select_details($db,$id){
 
 		$sql_visitas = "UPDATE vivienda SET visitas = visitas + 1 WHERE idvivienda = '$id'";
-		$conexion = connect::con();
-   		 mysqli_query($conexion, $sql_visitas);
+		$db->ejecutar($sql_visitas);
+		// $conexion = connect::con();
+   		//  mysqli_query($conexion, $sql_visitas);
 
 		$sql = "SELECT `vivienda`.*, `categoria`.`namecat`, `tipo`.`nametipo`, `city`.`namecity`, `operation`.`nameop`,`ahorro`.`nameahorro`, `images`.`imgimages`
 		FROM `tipo`
@@ -44,14 +51,11 @@ class shop_dao{
 			LEFT JOIN `ahorro` ON `vivienda`.`ahorro` = `ahorro`.`idahorro`
 		WHERE idvivienda = '$id'";
 
-		$conexion = connect::con();
-		$res = mysqli_query($conexion, $sql)->fetch_object();
-		connect::close($conexion);
+		$stmt = $db -> ejecutar($sql);
+		return $db -> listar($stmt);
+		}
 
-		return $res;
-	}
-
-	function filtershome_vivienda($filtershome){
+		function filtershome_vivienda($filtershome){
         $select = "SELECT `vivienda`.*, `categoria`.`namecat`, `tipo`.`nametipo`, `city`.`namecity`, `operation`.`nameop`,`ahorro`.`nameahorro`, `images`.`imgimages`
 		FROM `tipo`
 			LEFT JOIN `vivienda` ON `vivienda`.`tipo` = `tipo`.`idtipo`
@@ -89,9 +93,9 @@ class shop_dao{
             }
         }
         return $retrArray;
-    }
+   	 	}
 
-	function filtersshop($filtershop,$total_prod, $items_page){
+		function select_filtersshop($db,$filtershop,$total_prod, $items_page){
 		
 
 			$consulta ="SELECT `vivienda`.*, `categoria`.`namecat`, `tipo`.`nametipo`, `city`.`namecity`, `operation`.`nameop`,`ahorro`.`nameahorro`, `images`.`imgimages`
@@ -177,37 +181,19 @@ class shop_dao{
 				}   
 				$consulta.= " LIMIT $total_prod, $items_page";
 
-			$conexion = connect::con();
-			$res = mysqli_query($conexion, $consulta);
-			connect::close($conexion);
+				$stmt = $db -> ejecutar($consulta);
+				return $db -> listar($stmt);
+		}
 
-			$retrArray = array();
-			if ($res -> num_rows > 0) {
-				while ($row = mysqli_fetch_assoc($res)) {
-					$retrArray[] = $row;
-				}
-			}
-			return $retrArray;
-	}
-
-	function select_count(){
-			$select = "SELECT COUNT(*) contador
+	 	public function select_count($db){
+			$sql = "SELECT COUNT(*) contador
 			FROM vivienda";
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+			
+		}
 
-			$conexion = connect::con();
-			$res = mysqli_query($conexion, $select);
-			connect::close($conexion);
-
-			$retrArray = array();
-			if ($res -> num_rows > 0) {
-				while ($row = mysqli_fetch_assoc($res)) {
-					$retrArray[] = $row;
-				}
-			}
-			return $retrArray;
-	}
-
-	function count_shop($filtershop){
+		public function select_count_shop($db,$filtershop){
 
 		$consulta = "SELECT COUNT(*) contador
 		FROM `tipo`
@@ -288,188 +274,146 @@ class shop_dao{
 
 				}
 			}
-
-			$conexion = connect::con();
-			$res = mysqli_query($conexion, $consulta);
-			connect::close($conexion);
-	
-			$retrArray = array();
-			if ($res -> num_rows > 0) {
-				while ($row = mysqli_fetch_assoc($res)) {
-					$retrArray[] = $row;
-				}
-			}
-			return $retrArray;
-	}
-
-	function count_more_ahorro_related($ahorro,$idvivienda){
-		$sql = "SELECT COUNT(*) AS contador
-				FROM vivienda 
-				WHERE ahorro = '$ahorro'
-				AND idvivienda != '$idvivienda'";
-
-		$conexion = connect::con();
-		$res = mysqli_query($conexion, $sql);
-		connect::close($conexion);
-
-		$retrArray = array();
-		if (mysqli_num_rows($res) > 0) {
-			while ($row = mysqli_fetch_assoc($res)) {
-				$retrArray[] = $row;
-			}
+			$stmt = $db -> ejecutar($consulta);
+			return $db -> listar($stmt);
 		}
-		return $retrArray;
-	}
 
-	function select_ahorro_related($ahorro, $loaded, $viviendas,$idvivienda){
-		
-				
-
-		
-		$sql ="SELECT `vivienda`.*, `categoria`.`namecat`, `tipo`.`nametipo`, `city`.`namecity`, `operation`.`nameop`,`ahorro`.`nameahorro`, `images`.`imgimages`
-		FROM `tipo`
-		LEFT JOIN `vivienda` ON `vivienda`.`tipo` = `tipo`.`idtipo`
-		LEFT JOIN `categoria` ON `vivienda`.`categoria` = `categoria`.`idcat`
-		LEFT JOIN `operation` ON `vivienda`.`operation` = `operation`.`idop`
-		LEFT JOIN `city` ON `vivienda`.`city` = `city`.`idcity`
-		LEFT JOIN `images` ON `vivienda`.`images` = `images`.`idimages`
-		LEFT JOIN `ahorro` ON `vivienda`.`ahorro` = `ahorro`.`idahorro`
-		WHERE `ahorro`.`idahorro` = '$ahorro'
-		AND idvivienda != '$idvivienda'
-		LIMIT $loaded, $viviendas";
-
-
-		$conexion = connect::con();
-		$res = mysqli_query($conexion, $sql);
-		connect::close($conexion);
-
-		
-		$retrArray = array();
-		if (mysqli_num_rows($res) > 0) {
-			while ($row = mysqli_fetch_assoc($res)) {
-				$retrArray[] = $row;
-			}
+		public function select_count_ahorro_related($db,$ahorro,$idvivienda){
+			$sql = "SELECT COUNT(*) AS contador
+					FROM vivienda 
+					WHERE ahorro = '$ahorro'
+					AND idvivienda != '$idvivienda'";
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+			
 		}
-		return $retrArray;
-	}
 
-	function select_extra_vivienda($ahorro,$vivienda){
-		$sql ="SELECT `vivienda`.*, 
-		`categoria`.`namecat`, 
-		`tipo`.`nametipo`, 
-		`city`.`namecity`, 
-		`operation`.`nameop`,
-		`ahorro`.`nameahorro`, 
-		`images`.`imgimages`
-		FROM `vivienda`
-	 	LEFT JOIN `categoria` ON `vivienda`.`categoria` = `categoria`.`idcat`
- 		LEFT JOIN `tipo` ON `vivienda`.`tipo` = `tipo`.`idtipo`
-	 	LEFT JOIN `city` ON `vivienda`.`city` = `city`.`idcity`
- 		LEFT JOIN `operation` ON `vivienda`.`operation` = `operation`.`idop`
-	 	LEFT JOIN `ahorro` ON `vivienda`.`ahorro` = `ahorro`.`idahorro`
- 		LEFT JOIN `images` ON `vivienda`.`images` = `images`.`idimages`
-		WHERE `vivienda`.`idvivienda` != '$vivienda' -- Exclude the given vivienda
-		AND `vivienda`.`ahorro` != '$ahorro'
-		ORDER BY (
-	 	-- Define your similarity metric here
- 		(`vivienda`.`categoria` = (SELECT `categoria` FROM `vivienda` WHERE `idvivienda` = '$vivienda')) +
-	 	(`vivienda`.`tipo` = (SELECT `tipo` FROM `vivienda` WHERE `idvivienda` = '$vivienda')) +
- 		(`vivienda`.`city` = (SELECT `city` FROM `vivienda` WHERE `idvivienda` = '$vivienda')) +
-	 	(`vivienda`.`operation` = (SELECT `operation` FROM `vivienda` WHERE `idvivienda` = '$vivienda'))
-		) DESC
-		LIMIT 1";
+		public function select_ahorro_related($db,$ahorro, $loaded, $viviendas,$idvivienda){
+			
+			$sql ="SELECT `vivienda`.*, `categoria`.`namecat`, `tipo`.`nametipo`, `city`.`namecity`, `operation`.`nameop`,`ahorro`.`nameahorro`, `images`.`imgimages`
+			FROM `tipo`
+			LEFT JOIN `vivienda` ON `vivienda`.`tipo` = `tipo`.`idtipo`
+			LEFT JOIN `categoria` ON `vivienda`.`categoria` = `categoria`.`idcat`
+			LEFT JOIN `operation` ON `vivienda`.`operation` = `operation`.`idop`
+			LEFT JOIN `city` ON `vivienda`.`city` = `city`.`idcity`
+			LEFT JOIN `images` ON `vivienda`.`images` = `images`.`idimages`
+			LEFT JOIN `ahorro` ON `vivienda`.`ahorro` = `ahorro`.`idahorro`
+			WHERE `ahorro`.`idahorro` = '$ahorro'
+			AND idvivienda != '$idvivienda'
+			LIMIT $loaded, $viviendas";
 
 
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
 
 
-		$conexion = connect::con();
-		$res = mysqli_query($conexion, $sql);
-		connect::close($conexion);
+			
+		}
 
+		function select_extra_vivienda($db,$ahorro,$vivienda){
+			$sql ="SELECT `vivienda`.*, 
+			`categoria`.`namecat`, 
+			`tipo`.`nametipo`, 
+			`city`.`namecity`, 
+			`operation`.`nameop`,
+			`ahorro`.`nameahorro`, 
+			`images`.`imgimages`
+			FROM `vivienda`
+		 	LEFT JOIN `categoria` ON `vivienda`.`categoria` = `categoria`.`idcat`
+			LEFT JOIN `tipo` ON `vivienda`.`tipo` = `tipo`.`idtipo`
+		 	LEFT JOIN `city` ON `vivienda`.`city` = `city`.`idcity`
+			LEFT JOIN `operation` ON `vivienda`.`operation` = `operation`.`idop`
+		 	LEFT JOIN `ahorro` ON `vivienda`.`ahorro` = `ahorro`.`idahorro`
+			LEFT JOIN `images` ON `vivienda`.`images` = `images`.`idimages`
+			WHERE `vivienda`.`idvivienda` != '$vivienda' -- Exclude the given vivienda
+			AND `vivienda`.`ahorro` != '$ahorro'
+			ORDER BY (
+		 	-- Define your similarity metric here
+			(`vivienda`.`categoria` = (SELECT `categoria` FROM `vivienda` WHERE `idvivienda` = '$vivienda')) +
+		 	(`vivienda`.`tipo` = (SELECT `tipo` FROM `vivienda` WHERE `idvivienda` = '$vivienda')) +
+			(`vivienda`.`city` = (SELECT `city` FROM `vivienda` WHERE `idvivienda` = '$vivienda')) +
+		 	(`vivienda`.`operation` = (SELECT `operation` FROM `vivienda` WHERE `idvivienda` = '$vivienda'))
+			) DESC
+			LIMIT 1";
+
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+		}
+
+		// public function likes($idvivienda,$iduser){
+			// 	$sql="SELECT COUNT(*) AS count
+			// 	FROM likes
+			// 	WHERE idvivienda = $idvivienda AND id_user = $iduser";
+
+
+
+			// // 	$conexion = connect::con();
+			// // 	$res = mysqli_query($conexion, $sql);
+			// // 	connect::close($conexion);
+
+
+			// // 	$retrArray = array();
+			// // if (mysqli_num_rows($res) > 0) {
+			// // 	while ($row = mysqli_fetch_assoc($res)) {
+			// // 		$retrArray[] = $row;
+			// // 	}
+			// // }
+			// // return $retrArray;
+
+			// $conexion = connect::con();
+			// $res = mysqli_query($conexion, $sql);
+			// connect::close($conexion);
+
+			// if ($res && mysqli_num_rows($res) > 0) {
+			//     $row = mysqli_fetch_assoc($res);
+			//     return $row['count'];
+			// } else {   
+			//     return 0;
+			// }
+
+
+		// }
+
+		// function likes($idvivienda, $iduser) {
+			// 	$sql = "SELECT COUNT(*) AS combination_exists
+			// 			FROM likes
+			// 			WHERE idvivienda = $idvivienda AND id_user = $iduser";
 		
-		$retrArray = array();
-		if (mysqli_num_rows($res) > 0) {
-			while ($row = mysqli_fetch_assoc($res)) {
-				$retrArray[] = $row;
-			}
-		}
-		return $retrArray;
+			// 	$conexion = connect::con();
+			// 	$res = mysqli_query($conexion, $sql);
+			// 	connect::close($conexion);
+	
+			// 	if ($res && mysqli_num_rows($res) > 0) {
+			// 		$row = mysqli_fetch_assoc($res);
+			// 		// Return 1 if combination exists, else return 0
+			// 		return $row['combination_exists'] > 0 ? 1 : 0;
+			// 	} else {
+			// 		// Return 0 if no rows found
+			// 		return 0;
+			// 	}
+		// }
+	
+
+		// function addlike($idvivienda, $iduser) {
+			// 	$sql = "INSERT INTO `likes`(`idvivienda`, `id_user`) VALUES ($idvivienda,$iduser)";
+	
+			// 	$conexion = connect::con();
+			// 	$res = mysqli_query($conexion, $sql);
+			// 	connect::close($conexion);
+		
+			// 	return 0;
+		// }
+
+		// function deletelike($idvivienda, $iduser) {
+			// 	$sql = "DELETE FROM `likes` WHERE `likes`.`idvivienda` = $idvivienda AND `likes`.`id_user` = $iduser";
+	
+			// 	$conexion = connect::con();
+			// 	$res = mysqli_query($conexion, $sql);
+			// 	connect::close($conexion);
+	
+			// 	return 0;
+		// }
+
 
 	}
-
-	// function likes($idvivienda,$iduser){
-	// 	$sql="SELECT COUNT(*) AS count
-	// 	FROM likes
-	// 	WHERE idvivienda = $idvivienda AND id_user = $iduser";
-
-
-
-	// // 	$conexion = connect::con();
-	// // 	$res = mysqli_query($conexion, $sql);
-	// // 	connect::close($conexion);
-
-
-	// // 	$retrArray = array();
-	// // if (mysqli_num_rows($res) > 0) {
-	// // 	while ($row = mysqli_fetch_assoc($res)) {
-	// // 		$retrArray[] = $row;
-	// // 	}
-	// // }
-	// // return $retrArray;
-
-	// $conexion = connect::con();
-    // $res = mysqli_query($conexion, $sql);
-    // connect::close($conexion);
-
-    // if ($res && mysqli_num_rows($res) > 0) {
-    //     $row = mysqli_fetch_assoc($res);
-    //     return $row['count'];
-    // } else {   
-    //     return 0;
-    // }
-
-
-	// }
-
-	function likes($idvivienda, $iduser) {
-		$sql = "SELECT COUNT(*) AS combination_exists
-				FROM likes
-				WHERE idvivienda = $idvivienda AND id_user = $iduser";
-	
-		$conexion = connect::con();
-		$res = mysqli_query($conexion, $sql);
-		connect::close($conexion);
-	
-		if ($res && mysqli_num_rows($res) > 0) {
-			$row = mysqli_fetch_assoc($res);
-			// Return 1 if combination exists, else return 0
-			return $row['combination_exists'] > 0 ? 1 : 0;
-		} else {
-			// Return 0 if no rows found
-			return 0;
-		}
-	}
-	
-
-	function addlike($idvivienda, $iduser) {
-		$sql = "INSERT INTO `likes`(`idvivienda`, `id_user`) VALUES ($idvivienda,$iduser)";
-	
-		$conexion = connect::con();
-		$res = mysqli_query($conexion, $sql);
-		connect::close($conexion);
-	
-		return 0;
-	}
-
-	function deletelike($idvivienda, $iduser) {
-		$sql = "DELETE FROM `likes` WHERE `likes`.`idvivienda` = $idvivienda AND `likes`.`id_user` = $iduser";
-	
-		$conexion = connect::con();
-		$res = mysqli_query($conexion, $sql);
-		connect::close($conexion);
-	
-		return 0;
-	}
-
-
-}
+?>

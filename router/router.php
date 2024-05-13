@@ -64,12 +64,13 @@
                             $controllerName = 'controller_' . (String) $row -> name;
                             $this -> nameModule = (String) $row -> name;
                             return new $controllerName;
+                            
                         }
                     }
                 }
             }
             throw new Exception('Not Module found.');
-        }
+        }   
 
       
         private function loadFunction() {
@@ -78,6 +79,9 @@
                 $functions = simplexml_load_file($path);
                 foreach ($functions as $row) {
                     if (in_array($this -> uriFunction, (Array) $row -> uri)) {
+                        // $functionName = (string) $row->name;
+                        // echo "<script>console.log('Function Loaded: " . $functionName . "');</script>";
+
                         return (String) $row -> name;
                     }
                 }
@@ -85,6 +89,61 @@
             throw new Exception('Not Function found.');
             return (String) 'view';
         }
+        // private function loadModule() {
+        //     if (file_exists('resources/modules.xml')) {
+        //         $modules = simplexml_load_file('resources/modules.xml');
+        //         foreach ($modules as $row) {
+        //             if (in_array($this -> uriModule, (Array) $row -> uri)) {
+        //                 $moduleName = (String) $row -> name;
+        //                 $path = MODULES_PATH . $moduleName . '/resources/function.xml';
+        //                 echo "Module Name: $moduleName, XML Path: $path<br>";
+        //                 if (file_exists($path)) {
+        //                     require_once($path);
+        //                     $controllerName = 'controller_' . $moduleName;
+        //                     $this -> nameModule = $moduleName;
+        //                     return new $controllerName;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     throw new Exception('Module not found.');
+        // }
+        // private function loadModule() {
+        //     if (file_exists('resources/modules.xml')) {
+        //         $modules = simplexml_load_file('resources/modules.xml');
+        //         foreach ($modules as $row) {
+        //             if (in_array($this->uriModule, (array) $row->uri)) {
+        //                 $path = MODULES_PATH . $row->name . '/controller/controller_' . (string) $row->name . '.class.php';
+        //                 echo "Module Name: " . $row->name . ", Controller Path: " . $path . "<br>";
+        //                 if (file_exists($path)) {
+        //                     require_once($path);
+        //                     $controllerName = 'controller_' . (string) $row->name;
+        //                     $this->nameModule = (string) $row->name;
+        //                     return new $controllerName;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     throw new Exception('Module not found.');
+        // }
+        
+        // private function loadFunction() {
+        //     $path = MODULES_PATH . $this -> nameModule . '/resources/function.xml'; 
+        //     echo "Function XML Path: $path<br>";
+        //     if (file_exists($path)) {
+        //         $functions = simplexml_load_file($path);
+        //         foreach ($functions as $row) {
+        //             if (in_array($this -> uriFunction, (Array) $row -> uri)) {
+        //                 $functionName = (String) $row -> name;
+        //                 echo "Function Loaded: $functionName<br>";
+        //                 return $functionName;
+        //             }
+        //         }
+        //     }
+        //     throw new Exception('Function not found.');
+        //     return 'view';
+        // }
+        
     }
     
     router::getInstance() -> routingStart();

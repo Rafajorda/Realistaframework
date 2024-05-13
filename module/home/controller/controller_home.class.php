@@ -38,6 +38,18 @@ class controller_home{
         //echo json_encode('Hola');
         echo json_encode(common::load_model('home_model', 'get_visits'));
     }
+    // function count() {
+    //     //echo ("hola count");
+    //     echo json_encode(common::load_model('home_model', 'get_count'));
+    //   }
+    //   function count_shop(){
+    //      echo json_encode(common::load_model('home_model', 'get_count_shop',$_POST['filtrosshop']));
+    //    // echo("hola!!");
+    //   }
+    function ahorrov(){
+        error_log ("hola ahorro");
+       //echo json_encode(common::load_model('search_model', 'get_ahorro_vivienda'));
+     }
 
 }
 

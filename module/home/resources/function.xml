@@ -32,4 +32,12 @@
         <name>visits</name>
         <uri>visits</uri>
     </function>
+     <function>
+        <name>ahorrov</name>
+        <uri>ahorrov</uri>
+    </function>
+    <!-- <function>
+        <name>count_shop</name>
+        <uri>count_shop</uri>
+    </function> -->
 </functions>

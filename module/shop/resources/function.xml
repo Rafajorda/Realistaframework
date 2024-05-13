@@ -4,4 +4,40 @@
         <name>view</name>
         <uri>view</uri>
     </function>
+    <function>
+        <name>list</name>
+        <uri>list</uri>
+    </function>
+    <function>
+        <name>count</name>
+        <uri>count</uri>
+    </function>
+    <function>
+        <name>count_shop</name>
+        <uri>count_shop</uri>
+    </function>
+    <function>
+        <name>filtershop</name>
+        <uri>filtershop</uri>
+    </function> 
+    <function>
+        <name>ahorro_related</name>
+        <uri>ahorro_related</uri>
+    </function>
+     <function>
+        <name>count_ahorro_related</name>
+        <uri>count_ahorro_related</uri>
+    </function>
+     <function>
+        <name>extra_vivienda</name>
+        <uri>extra_vivienda</uri>
+    </function>
+    <function>
+        <name>details</name>
+        <uri>details</uri>
+    </function> 
+    <function>
+        <name>prueba</name>
+        <uri>prueba</uri>
+    </function>  
 </functions>

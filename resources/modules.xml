@@ -8,11 +8,12 @@
    <module>
         <name>shop</name>
         <uri>shop</uri>
+         <uri>view</uri>
     </module> 
-    <!-- <module>
+    <module>
         <name>search</name>
         <uri>search</uri>
-    </module> -->
+    </module> 
     <!-- <module>
         <name>crud</name>
         <uri>crud</uri>

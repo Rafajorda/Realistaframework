@@ -1,26 +1,30 @@
 <?php
-	$path = $_SERVER['DOCUMENT_ROOT'] . '/realistaframework';
-	include($path . "/model/connect.php");
-    
-	class DAOSearch {
-		function select_type_vivienda(){
+	class search_dao{
+		static $_instance;
+
+    	private function __construct() {
+    	}
+
+    	public static function getInstance() {
+        	if(!(self::$_instance instanceof self)){
+            	self::$_instance = new self();
+        	}
+        	return self::$_instance;
+    	}
+		public function select_ahorro_vivienda($db){
+			$sql = "SELECT * FROM ahorro";	
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
+        }
+
+		public function select_type_vivienda($db){
 			$sql = "SELECT * FROM tipo";
 
-			$conexion = connect::con();
-            $res = mysqli_query($conexion, $sql);
-            connect::close($conexion);
-            return $res;
-        }
-        function select_ahorro_vivienda(){
-			$sql = "SELECT * FROM ahorro";
-
-			$conexion = connect::con();
-            $res = mysqli_query($conexion, $sql);
-            connect::close($conexion);
-            return $res;
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
         }
 
-        function select_type_ahorro($ahorro = null) {
+       public function select_type_ahorro_vivienda($db,$ahorro = null) {
 
 
             $sql = "SELECT DISTINCT t.idtipo, t.nametipo
@@ -31,35 +35,31 @@
                 $sql .= " WHERE a.idahorro = '$ahorro'";
             }
         
-            $conexion = connect::con();
-            $res = mysqli_query($conexion, $sql);
-            connect::close($conexion);
-        
-            return $res;
+			$stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
         }
 
 
 
-        function select_only_ahorro($complete, $ahorro){
+         public function select_only_ahorro($db,$complete, $ahorro){
             $select = "SELECT DISTINCT  c.*
             FROM vivienda v
             JOIN city c ON v.city = c.idcity
             WHERE v.ahorro = '$ahorro' AND c.namecity LIKE '$complete%'";
 
-            $conexion = connect::con();
-            $res = mysqli_query($conexion, $select);
-            connect::close($conexion);
             
-            $retrArray = array();
-            if ($res -> num_rows > 0) {
-                while ($row = mysqli_fetch_assoc($res)) {
-                    $retrArray[] = $row;
-                }
-            }
-            return $retrArray;
+            
+            // $retrArray = array();
+            // if ($res -> num_rows > 0) {
+            //     while ($row = mysqli_fetch_assoc($res)) {
+            //         $retrArray[] = $row;
+            //     }
+            // }
+            $stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
         }
 
-        function select_only_type($type, $complete){
+       public function select_only_type($type, $complete){
             $select = "SELECT DISTINCT  c.*
                FROM vivienda v
                JOIN city c ON v.city = c.idcity
@@ -79,31 +79,22 @@
             return $retrArray;
         }
 
-        function select_ahorro_type($complete, $ahorro, $type) {
-            $select = "SELECT DISTINCT c.*
+       public function select_autocomplete($db,$complete, $ahorro, $type) {
+            $sql = "SELECT DISTINCT c.*
                        FROM vivienda v
                        JOIN city c ON v.city = c.idcity
                        WHERE c.namecity LIKE '$complete%'";
         
             if ($ahorro !== null) {
-                $select .= " AND v.ahorro = '$ahorro'";
+                $sql .= " AND v.ahorro = '$ahorro'";
             }
             
             if ($type !== null) {
-                $select .= " AND v.tipo = '$type'";
+                $sql .= " AND v.tipo = '$type'";
             }
         
-            $conexion = connect::con();
-            $res = mysqli_query($conexion, $select);
-            connect::close($conexion);
-            
-            $retrArray = array();
-            if ($res->num_rows > 0) {
-                while ($row = mysqli_fetch_assoc($res)) {
-                    $retrArray[] = $row;
-                }
-            }
-            return $retrArray;
+            $stmt = $db -> ejecutar($sql);
+			return $db -> listar($stmt);
         }
 
 
@@ -130,7 +121,5 @@
             return $retrArray;
         }
     
-
-
-
 	}
+?>
