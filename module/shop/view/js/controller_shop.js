@@ -132,7 +132,7 @@ function likes(idvivienda, callback) {
     if (localStorage.getItem('accesstoken')) {
         console.log("entre a lo de likes " + idvivienda);
         var accesstoken = localStorage.getItem('accesstoken');
-        ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=likes', 'POST', 'JSON',{'accesstoken': accesstoken, 'idvivienda': idvivienda})
+        ajaxPromise(friendlyURL("?module=shop&op=likes"), 'POST', 'JSON',{'accesstoken': accesstoken, 'idvivienda': idvivienda})
             .then(function(data1) { 
                 console.log(data1 + " aqui data 1 likes");
                 var like = 0;
@@ -157,11 +157,11 @@ function likebutton(){
         if(localStorage.getItem('accesstoken')){
 
             accesstoken = localStorage.getItem('accesstoken');
-            ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=likes', 'POST', 'JSON',{'accesstoken': accesstoken, 'idvivienda': idvivienda})
+            ajaxPromise(friendlyURL("?module=shop&op=likes"), 'POST', 'JSON',{'accesstoken': accesstoken, 'idvivienda': idvivienda})
             .then(function(data) {
                 if(data==0){
 
-                    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=addlike', 'POST', 'JSON',{'accesstoken': accesstoken, 'idvivienda': idvivienda})
+                    ajaxPromise(friendlyURL("?module=shop&op=addlike"), 'POST', 'JSON',{'accesstoken': accesstoken, 'idvivienda': idvivienda})
                     .then(function(data1) {
                         $likeButton.html("<img src='view/img/icon/likefull.png' alt='Icono de like' width='50' height='50'>");
 
@@ -171,7 +171,7 @@ function likebutton(){
                     });
                 }else if(data==1){
 
-                    ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=deletelike', 'POST', 'JSON',{'accesstoken': accesstoken, 'idvivienda': idvivienda})
+                    ajaxPromise(friendlyURL("?module=shop&op=deletelike"), 'POST', 'JSON',{'accesstoken': accesstoken, 'idvivienda': idvivienda})
                     .then(function(data2) {
                         $likeButton.html("<img src='view/img/icon/like.png' alt='Icono de like' width='50' height='50'>");
 
@@ -1482,7 +1482,7 @@ function viviendas_related(loadeds = 0, ahorro, total_viviendas, idvivienda) {
                     
                         
                         if (filter !== undefined && filter !== null) {
-                        //    ajaxForSearch2('module/shop/ctrl/ctrl_shop.php?op=filtershop', 'POST', filter, start, 3);
+                            ajaxForSearch2(friendlyURL("?module=shop&op=filtershop"), 'POST', filter, start, 3);
                         } else {
                             console.log("hola!!!");
                             ajaxForSearch(friendlyURL("?module=shop&op=list"), 'POST',start,3);

@@ -1,1 +1,4 @@
 *.ini
+
+utils/vendor/
+utils/composer.lock

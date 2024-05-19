@@ -374,45 +374,57 @@
 
 		// }
 
-		// function likes($idvivienda, $iduser) {
-			// 	$sql = "SELECT COUNT(*) AS combination_exists
-			// 			FROM likes
-			// 			WHERE idvivienda = $idvivienda AND id_user = $iduser";
+		// function likes($db,$idvivienda, $iduser) {
+		// 		$sql = "SELECT COUNT(*) AS combination_exists
+		// 				FROM likes
+		// 				WHERE idvivienda = $idvivienda AND id_user = $iduser";
 		
-			// 	$conexion = connect::con();
-			// 	$res = mysqli_query($conexion, $sql);
-			// 	connect::close($conexion);
-	
-			// 	if ($res && mysqli_num_rows($res) > 0) {
-			// 		$row = mysqli_fetch_assoc($res);
-			// 		// Return 1 if combination exists, else return 0
-			// 		return $row['combination_exists'] > 0 ? 1 : 0;
-			// 	} else {
-			// 		// Return 0 if no rows found
-			// 		return 0;
-			// 	}
+		// 			$stmt = $db -> ejecutar($sql);
+		// 			/
+		// 		if ($res && mysqli_num_rows($res) > 0) {
+		// 			$row = mysqli_fetch_assoc($res);
+		// 			// Return 1 if combination exists, else return 0
+		// 			return $row['combination_exists'] > 0 ? 1 : 0;
+		// 		} else {
+		// 			// Return 0 if no rows found
+		// 			return 0;
+		// 		}
 		// }
+		function likes($db, $idvivienda, $iduser) {
+			
+			$sql = "SELECT COUNT(*) AS combination_exists
+					FROM likes
+					WHERE idvivienda = $idvivienda AND id_user = $iduser";
+		
+			
+			$res = $db -> ejecutar($sql);
+		
+			// Check if the query was successful and if there are rows returned
+			if ($res && mysqli_num_rows($res) > 0) {
+				$row = mysqli_fetch_assoc($res);
+				// Return 1 if the combination exists, else return 0
+				return $row['combination_exists'] > 0 ? 1 : 0;
+			} else {
+				// Return 0 if no rows found
+				return 0;
+			}
+		}
 	
 
-		// function addlike($idvivienda, $iduser) {
-			// 	$sql = "INSERT INTO `likes`(`idvivienda`, `id_user`) VALUES ($idvivienda,$iduser)";
+		function addlike($db,$idvivienda, $iduser) {
+				$sql = "INSERT INTO `likes`(`idvivienda`, `id_user`) VALUES ($idvivienda,$iduser)";
 	
-			// 	$conexion = connect::con();
-			// 	$res = mysqli_query($conexion, $sql);
-			// 	connect::close($conexion);
+				$res = $db -> ejecutar($sql);
 		
-			// 	return 0;
-		// }
+				return 0;
+		}
 
-		// function deletelike($idvivienda, $iduser) {
-			// 	$sql = "DELETE FROM `likes` WHERE `likes`.`idvivienda` = $idvivienda AND `likes`.`id_user` = $iduser";
+		function deletelike($db,$idvivienda, $iduser) {
+				$sql = "DELETE FROM `likes` WHERE `likes`.`idvivienda` = $idvivienda AND `likes`.`id_user` = $iduser";
+				$res = $db -> ejecutar($sql);
 	
-			// 	$conexion = connect::con();
-			// 	$res = mysqli_query($conexion, $sql);
-			// 	connect::close($conexion);
-	
-			// 	return 0;
-		// }
+				return 0;
+		}
 
 
 	}

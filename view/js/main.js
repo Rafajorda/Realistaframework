@@ -34,11 +34,12 @@ function friendlyURL(url) {
     }
 }
 
+
 //================LOAD-HEADER================
 function load_menu() {
     var token = localStorage.getItem('accesstoken');
     if (token) {
-        ajaxPromise('module/login/ctrl/ctrl_login.php?op=data_user', 'POST', 'JSON', { 'token': token })
+        ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', { 'token': token })
             .then(function(data) {
                 $('#user_info').empty();
                 if (data.type_user == "client") {
@@ -69,207 +70,84 @@ function load_menu() {
         $('.opc_exceptions').empty();
         $('#user_info').hide();
         $('.log-icon').empty();
-        $('<a href="index.php?module=ctrl_login&op=login-register_view"><i id="col-ico" class="fa-solid fa-user fa-2xl"></i></a>').appendTo('.log-icon');
+        $('<a href="friendlyURL("?module=login&op=login")"><i id="col-ico" class="fa-solid fa-user fa-2xl"></i></a>').appendTo('.log-icon');
     }
+}
+function load_content() {
+    let path = window.location.pathname.split('/');
+    console.log(path);
+    if(path[2] === 'recover'){
+        window.location.href = friendlyURL("?module=login&op=recover_view");
+        localStorage.setItem("token_email", path[3]);
+    }else if (path[2] === 'verify') {
+        ajaxPromise(friendlyURL("?module=login&op=verify_email"), 'POST', 'JSON', {token_email: path[3]})
+        .then(function(data) {
+            toastr.options.timeOut = 3000;
+            toastr.success('Email verified');
+            setTimeout(window.location.href = friendlyURL("?module=home"), 3000);
+        })
+        .catch(function() {
+          console.log('Error: verify email error');
+        });
+    
+    }else if (path[2] === 'view') {
+        $(".login-wrap").show();
+        $(".forget_html").hide();
+    }else if (path[2] === 'recover_view') {
+        load_form_new_password();
+      }
+}
+
+//================CLICK-LOGIUT================
+function click_logout() {
+    $(document).on('click', '#logout', function() {
+        localStorage.removeItem('total_prod');
+        toastr.success("Logout succesfully");
+        setTimeout('logout();', 1000);
+    });
+
+}
+
+//================LOG-OUT================
+function logout() {
+    ajaxPromise(friendlyURL("?module=login&op=logout"), 'POST', 'JSON')
+        .then(function(data) {
+            localStorage.removeItem('accesstoken');
+            localStorage.removeItem('refreshtoken');
+            window.location.href = friendlyURL("?module=home");
+        }).catch(function() {
+            console.log('Something has occured');
+        });
 }
 
 
-//================CLICK-LOGIUT================
-// function click_logout() {
-//     $(document).on('click', '#logout', function() {
-//         localStorage.removeItem('total_prod');
-//         toastr.success("Logout succesfully");
-//         setTimeout('logout();', 1000);
-//     });
-
-// }
-
-//================LOG-OUT================
-// function logout() {
-//     ajaxPromise('module/login/ctrl/ctrl_login.php?op=logout', 'POST', 'JSON')
-//         .then(function(data) {
-//             localStorage.removeItem('accesstoken');
-//             localStorage.removeItem('refreshtoken');
-//             window.location.href = "index.php?module=ctrl_home&op=list";
-//         }).catch(function() {
-//             console.log('Something has occured');
-//         });
-// }
 
 
 
-
-
-// function change_button() {
-//     var token = localStorage.getItem('accesstoken');
-//     var loginButton = document.querySelector('.login-button-menu');
-//     if (token) {    
-//         if (loginButton) {
-//             $('.log-icon').show();
-//             loginButton.innerHTML = '<a id="logout">Logout</a>';
-//             //click_logout();   
-//         }
-//     } else {
+function change_button() {
+    var token = localStorage.getItem('accesstoken');
+    var loginButton = document.querySelector('.login-button-menu');
+    if (token) {    
+        if (loginButton) {
+            $('.log-icon').show();
+            loginButton.innerHTML = '<a id="logout">Logout</a>';
+            //click_logout();   
+        }
+    } else {
      
-//         if (loginButton) {
-//             $('.log-icon').hide();
-//             loginButton.innerHTML = '<a href="index.php?page=login">Login</a>';
-//         }
-//     }
-// }
+        if (loginButton) {
+            $('.log-icon').hide();
+            loginButton.innerHTML = '<a href="login">Login</a>';
+        }
+    }
+}
 //________________________________________________________________________________
 
-// function load_ahorro() {
-//     ajaxPromise(friendlyURL("?module=home&op=ahorrov "), 'POST', 'JSON',)
-//         .then(function(data) {
-//             // $('#ahorro_vivienda').append('<option value = "0">ahorro_vivienda</option>');
-//             // for (row in data) {
-//             //     $('#ahorro_vivienda').append('<option value = "' + data[row].idahorro + '">' + data[row].nameahorro + '</option>');
-//             // }
-//             console.log(data);
-//         }).catch(function() {
-//             console.log("Fail load ahorro_vivienda");
-//         });
-// }
-
-// //__________________________________________________________________________________
-// function load_ahorro_type(data) {
-//     console.log("ahorro",data);
-//     if (data == undefined || (data && data.ahorro === "0") ) {
-//         ajaxPromise(friendlyURL("?module=search&op=type_ahorro_vivienda"), 'POST', 'JSON',data)
-//             .then(function(data) {
-//                 $('#type_vivienda').empty();
-//                 $('#type_vivienda').append('<option value = "0">tipo</option>');
-//                 for (row in data) {
-//                     $('#type_vivienda').append('<option value = "' + data[row].idtipo + '">' + data[row].nametipo + '</option>');
-//                 }
-//             }).catch(function(data) {
-//                 console.log('Fail load pepito');
-//             });
-//     } else {
-//         ajaxPromise(friendlyURL("?module=search&op=type_ahorro_vivienda"), 'POST', 'JSON', data)
-//             .then(function(data) {
-//                 $('#type_vivienda').empty();
-//                 $('#type_vivienda').append('<option value = "0">types</option>');
-//                 for (row in data) {
-//                     $('#type_vivienda').append('<option value = "' + data[row].idtipo + '">' + data[row].nametipo + '</option>');
-//                 }
-//             }).catch(function(data) {
-//                 console.log('Fail load type');
-//             });
-//     }
-// }
-// function launch_search() {
-   
-//     load_ahorro();
-//    // load_ahorro_type();
-//     $('#ahorro_vivienda').on('change', function() {
-//         let ahorro = $(this).val();
-//         console.log(ahorro);
-//         if (ahorro === 0) {
-//             load_ahorro_type(ahorro);
-//         } else {
-//             load_ahorro_type({ahorro});
-//         }
-//     });
-// }
-
-
-// function autocomplete() {
-//     let timer;
-
-//     $("#autocom").on(" keyup focus input", function() {
-//         clearTimeout(timer);
-//         let sdata = { complete: $(this).val() };
-
-//         if ($('#ahorro_vivienda').val() != "0") {
-//             sdata.ahorro = $('#ahorro_vivienda').val();
-//             if ($('#type_vivienda').val() != "0") {
-//                 sdata.type = $('#type_vivienda').val();
-//             }
-//         } else if ($('#type_vivienda').val() != "0") {
-//             sdata.type = $('#type_vivienda').val();
-//         }
-
-//         timer = setTimeout(function() {
-//             ajaxPromise("?module=search&op=autocomplete", 'POST', 'JSON', sdata)
-//                 .then(function(data) {
-//                     $('#search_vivienda').empty();
-//                     if (data.length > 0) {
-//                         let uniqueCities = new Set();
-//                         data.forEach(function(row) {
-//                             uniqueCities.add({ name: row.namecity, id: row.idcity });
-//                         });
-//                         uniqueCities.forEach(function(city) {
-//                             $('<div></div>').appendTo('#search_vivienda')
-//                                 .html(city.name)
-//                                 .attr({ 'class': 'searchElement', 'id': city.id })
-//                                 .on('click', function() {
-//                                     $('#autocom').val(city.name);
-//                                     $('#autocom').data('cityid', city.id);
-//                                     $('#search_vivienda').fadeOut(900);
-//                                 });
-//                         });
-//                         $('#search_vivienda').fadeIn(100);
-//                     } else {
-//                         $('#search_vivienda').fadeOut(1000);
-//                     }
-//                 })
-//                 .catch(function() {
-//                     $('#search_vivienda').fadeOut(500);
-//                 });
-//         }, 500);
-//     });
-
-//     $(document).on('click scroll', function(event) {
-//         if (!$(event.target).closest('#search_vivienda').length) {
-//             $('#search_vivienda').fadeOut(1000);
-//         }
-//     });
-// }
-
-
-
-// function btn_search() {
-//     $('#search-btn').on('click', function() {
-//         var search = [];
-
-//         if ($('#autocom').val() == "") {
-//           //  search.push({ "city": '0' });
-         
-//           if($('#ahorro_vivienda').val()!=0){
-//             search.push([ "ahorro", $('#ahorro_vivienda').val() ]);
-//           } 
-//           if($('#type_vivienda').val()!=0){
-//             search.push([ "tipo", $('#type_vivienda').val() ]);
-//           }
-//         } else {
-//             search.push([ "city", $('#autocom').data('cityid') ]);
-//             if($('#ahorro_vivienda').val()!=0){
-//             search.push([ "ahorro", $('#ahorro_vivienda').val() ]);
-//             }
-//             if($('#type_vivienda').val()!=0){
-//             search.push(["tipo", $('#type_vivienda').val() ]);
-//             }
-//         }
-
-//         localStorage.removeItem('filters');
-//         localStorage.removeItem('type_filter');
-//         localStorage.removeItem('category_filter');
-//         localStorage.removeItem('order');
-        
-
-//         localStorage.setItem('search', JSON.stringify(search));
-
-//         window.location.href = 'shop';
-//     });
-// }
-
-
 $(document).ready(function() {
-    // load_menu();
+    load_content();
+     load_menu();
      friendlyURL();
-    // click_logout();
-    // change_button();
+     click_logout();
+     change_button();
    // click_shop();
 });

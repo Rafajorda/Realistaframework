@@ -39,5 +39,17 @@
     <function>
         <name>prueba</name>
         <uri>prueba</uri>
-    </function>  
+    </function>
+    <function>
+        <name>likes</name>
+        <uri>likes</uri>
+    </function>
+    <function>
+        <name>addlike</name>
+        <uri>addlike</uri>
+    </function>
+    <function>
+        <name>deletelike</name>
+        <uri>deletelike</uri>
+    </function> 
 </functions>

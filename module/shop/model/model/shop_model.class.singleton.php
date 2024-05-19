@@ -39,6 +39,9 @@
        public function get_extra_vivienda($args){
         return $this -> bll -> get_extra_vivienda_BLL($args);
        }
+       public function get_likes($args) {
+        return $this -> bll -> get_likes_BLL($args);
+    }
 
     }
 ?>

@@ -47,5 +47,15 @@
 			//return "hola carrusel bll";
 			return $this -> dao -> select_extra_vivienda($this -> db, $args[0],$args[1]);
 		}
+		public function get_likes_BLL($args) {
+			//return "hola carrusel bll";
+
+			$token = middleware::decode_token($args[0]);
+			
+			//	$this -> dao->likes($args[1],$token['id']);
+				// echo json_encode($rdo);
+			
+			return $this -> dao->likes($this -> db,$args[1],$token['id']);
 	}
+}
 ?>

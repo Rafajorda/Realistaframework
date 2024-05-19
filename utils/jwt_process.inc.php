@@ -12,6 +12,8 @@ class jwt_process {
     public static function decode_token($token) {
         $jwt = parse_ini_file(UTILS . "credentials.ini");
         $JWT = new jwt();
-    }        return $JWT -> decode($token, $jwt['JWT_SECRET']);
+        return $JWT -> decode($token, $jwt['JWT_SECRET']);
+
+    }           
 
 }

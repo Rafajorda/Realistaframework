@@ -36,6 +36,9 @@ class controller_shop{
       //  echo("hola list");
        echo json_encode(common::load_model('shop_model', 'get_count_ahorro_related', array($_POST['ahorro'], $_POST['idvivienda'])));
     }
+    function likes(){
+      echo json_encode(common::load_model('shop_model', 'get_likes',array($_POST['accesstoken'],$_POST['idvivienda'])));
+    }
 }
 ?>
 
