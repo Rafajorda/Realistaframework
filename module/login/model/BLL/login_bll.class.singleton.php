@@ -60,26 +60,40 @@
 
 			if (!empty($this -> dao -> select_user($this->db, $args[0], $args[0]))) {	
 				$user = $this -> dao -> select_user($this->db, $args[0], $args[0]);
-				if (password_verify($args[1], $user[0]['password']) && $user[0]['activate'] == 1) {
-					//$jwt = jwt_process::encode($user[0]['username']);
-					$_SESSION['username'] = $user[0]['username'];
-					$_SESSION['tiempo'] = time();
-                    // session_regenerate_id();
-					$accesstoken= middleware::create_accesstoken($user[0]["username"],$user[0]["id_user"]);
-					$refreshtoken= middleware::create_refreshtoken($user[0]["username"],$user[0]["id_user"]);
-					$token = array($accesstoken,$refreshtoken);
-					$_SESSION['username'] = $user[0]['username']; //Guardamos el usario 
-					$_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
-					return $token;
-				} else if (password_verify($args[1], $user[0]['password']) && $user[0]['activate'] == 0) {
-					return 'activate error';
-				} else {
-					return 'error potato';
-				}
+				
+					if (password_verify($args[1], $user[0]['password']) && $user[0]['activate'] == 1) {
+						//$jwt = jwt_process::encode($user[0]['username']);
+						$_SESSION['username'] = $user[0]['username'];
+						$_SESSION['tiempo'] = time();
+						// session_regenerate_id();
+					 $potato=	$this -> dao -> rescount($this->db,$args[0]);
+						$accesstoken= middleware::create_accesstoken($user[0]["username"],$user[0]["id_user"]);
+						$refreshtoken= middleware::create_refreshtoken($user[0]["username"],$user[0]["id_user"]);
+						$token = array($accesstoken,$refreshtoken);
+						$_SESSION['username'] = $user[0]['username']; //Guardamos el usario 
+						$_SESSION['tiempo'] = time(); //Guardamos el tiempo que se logea
+						return $token;
+					} else if (password_verify($args[1], $user[0]['password']) && $user[0]['activate'] == 0) {
+						return 'activate error';
+					} else {
+						$count = $this -> dao -> seecount($this->db,$args[0]);
+						if($count<3){ 
+						$fail= $this -> dao -> addcount($this->db,$args[0]);
+						return 'error_passwd';
+						}else{
+						$activate=	$this -> dao -> set_active($this->db,$args[0]);
+						//$pinguino=	$this -> dao -> addcount($this->db,$args[0]);
+						$message = common::generate_OTP();
+						$rr= OTP::OTP_send2($message);
+							return'3_fails';
+						}
+					}
+				
             } else {
-				return 'user error';
+				return 'error_user';
 			}
 		}
+		
 
 		// public function get_social_login_BLL($args) {
 		// 	if (!empty($this -> dao -> select_user($this->db, $args[1], $args[2]))) {
@@ -138,12 +152,20 @@
 		}
 
 		public function get_data_user_BLL($args) {
-			$token = explode('"', $args);
-			$decode = middleware::decode_username($token[1]);
-			return $this -> dao -> select_data_user($this->db, $decode);
+
+			// $json = decode_token($_POST['token']);
+			// $daoLog = new DAOLogin();
+			// $rdo = $daoLog->select_data_user($json['username']);
+			// echo json_encode($rdo);
+			// exit;
+			
+
+			// $token = explode('"', $args);
+			$decode = middleware::decode_token($args);
+			return $this -> dao -> select_data_user($this->db, $decode['username']);
 		}
 
-		public function get_activity_BLL() {
+		public function get_actividad_BLL() {
             if (!isset($_SESSION["tiempo"])) {  
 				return "inactivo";
 			} else {  
@@ -156,16 +178,25 @@
 		}
 
 		public function get_controluser_BLL($args) {
-			$token = explode('"', $args);
-			$void_email = "";
-			$decode = middleware::decode_username($token[1]);
-			$user = $this -> dao -> select_user($this->db, $decode, $void_email);
+			// $token = explode('"', $args);
+			// $void_email = "";
+			// $decode = middleware::decode_username($token[1]);
+			// $user = $this -> dao -> select_user($this->db, $decode, $void_email);
 
-			if (!isset ($_SESSION['username']) != $user){
-				if(isset ($_SESSION['username']) != $user) {
-					return 'not_match';
-				}
-				return 'match';
+			// if (!isset ($_SESSION['username']) != $user){
+			// 	if(isset ($_SESSION['username']) != $user) {
+			// 		return 'not_match';
+			// 	}
+			// 	return 'match';
+			// }
+			$token_dec = middleware::decode_token($args);
+			
+			if (isset($_SESSION['username']) && ($_SESSION['username']) == $token_dec['username']) {
+				return "Correct_User";
+				exit();
+			} else {
+				return "Wrong_User";
+				exit();
 			}
 		}
 
@@ -180,14 +211,32 @@
             return $new_token;
 		}
 
-		public function get_token_expires_BLL($args) {
-			$token = explode('"', $args);
-			$decode = middleware::decode_exp($token[1]);
+		public function get_expires_BLL($args) {
+			// $token = explode('"', $args);
+			// $decode = middleware::decode_exp($token[1]);
 			
-            if(time() >= $decode) {  
-				return "inactivo"; 
-			} else{
-				return "activo";
+            // if(time() >= $decode) {  
+			// 	return "inactivo"; 
+			// } else{
+			// 	return "activo";
+			// }
+
+			$refreshtoken_dec = middleware::decode_token($args[0]);
+			$accesstoken_dec = middleware::decode_token($args[1]);
+		   
+			if ($refreshtoken_dec['exp'] < time()) {
+				return "Wrong_User";
 			}
+			if($accesstoken_dec['username']==$refreshtoken_dec['username']){
+				$new_token = middleware::create_accesstoken($refreshtoken_dec['username'],$refreshtoken_dec['id']);
+				return $new_token;
+			}else{
+				return "Wrong_User";
+			}
+
+
+
+
+
 		}
 	}

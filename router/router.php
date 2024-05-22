@@ -9,7 +9,6 @@
 
     // ob_start();
     session_start();
-
     class router {
         private $uriModule;
         private $uriFunction;

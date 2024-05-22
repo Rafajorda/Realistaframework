@@ -167,7 +167,7 @@ function likebutton(){
 
                     }).catch(function() {
                         console.log('Something has occurred in likes');
-                       
+               
                     });
                 }else if(data==1){
 
@@ -660,7 +660,7 @@ function viviendas_related(loadeds = 0, ahorro, total_viviendas, idvivienda) {
                             }).finally(function() {
                                 detailsLoading = false;
                             });
-                    }
+}
 
     //_____________________________________________________________________________________________________________
 

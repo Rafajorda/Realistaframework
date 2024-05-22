@@ -14,8 +14,7 @@
         }
 
         function register() {
-              echo json_encode(common::load_model('login_model','get_register', [$_POST['username'], $_POST['password'], $_POST['email']]));
-         
+              echo json_encode(common::load_model('login_model','get_register', [$_POST['username'], $_POST['password'], $_POST['email']]));     
         }
 
         function social_login() {
@@ -47,23 +46,23 @@
         } 
 
         function data_user() {
-            echo json_encode(common::load_model('login_model', 'get_data_user', $_POST['token']));
+            echo json_encode(common::load_model('login_model', 'get_data_user', $_POST['accesstoken']));
         }
 
-        function activity() {
+        function actividad() {
             echo json_encode(common::load_model('login_model', 'get_activity'));
         }
 
         function controluser() {
-            echo json_encode(common::load_model('login_model', 'get_controluser', $_POST['token']));
+            echo json_encode(common::load_model('login_model', 'get_controluser', $_POST['accesstoken']));
         }
 
         function refresh_token() {
-            echo json_encode(common::load_model('login_model', 'get_refresh_token', $_POST['token']));
+            echo json_encode(common::load_model('login_model', 'get_refresh_token', [$_POST['accesstoken'], $_POST['refreshtoken']]));
         } 
         
-        function token_expires() {
-            echo json_encode(common::load_model('login_model', 'get_token_expires', $_POST['token']));
+        function expires() {
+            echo json_encode(common::load_model('login_model', 'get_expires', [$_POST['accesstoken'], $_POST['refreshtoken']]));
         }
 
         function refresh_cookie() {

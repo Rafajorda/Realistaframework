@@ -56,6 +56,26 @@
 				// echo json_encode($rdo);
 			
 			return $this -> dao->likes($this -> db,$args[1],$token['id']);
+		}
+		public function get_addlike_BLL($args) {
+			//return "hola carrusel bll";
+
+			$token = middleware::decode_token($args[0]);
+			
+			//	$this -> dao->likes($args[1],$token['id']);
+				// echo json_encode($rdo);
+			
+			return $this -> dao->addlike($this -> db,$args[1],$token['id']);
+		}
+		public function get_deletelike_BLL($args) {
+		//return "hola carrusel bll";
+
+		$token = middleware::decode_token($args[0]);
+		
+		//	$this -> dao->likes($args[1],$token['id']);
+			// echo json_encode($rdo);
+		
+		return $this -> dao->deletelike($this -> db,$args[1],$token['id']);
+		}
 	}
-}
 ?>

@@ -16,26 +16,26 @@ function carrusel() {
             }
 
            // Initialize Glider
-var glider = new Glider(carouselList.get(0), {
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    draggable: true,
-    dots: '.dots',
-    scrollLock: false,
-    arrows: {
-        prev: '.glider-prev',
-        next: '.glider-next'
-    },
-    scrollPropagate: true, // Allow scroll events to propagate
-    onEndAnimated: function () {
-        // Check if it's the last slide, and if so, manually scroll back to the first one
-        if (glider.getCurrentSlide() === glider.slides.length - 3) {
-            setTimeout(function () {
-                glider.scrollTo(0);
-            },100);
-        }
-    }
-});
+            var glider = new Glider(carouselList.get(0), {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                draggable: true,
+                dots: '.dots',
+                scrollLock: false,
+                arrows: {
+                    prev: '.glider-prev',
+                    next: '.glider-next'
+                },
+                scrollPropagate: true, // Allow scroll events to propagate
+                onEndAnimated: function () {
+                    // Check if it's the last slide, and if so, manually scroll back to the first one
+                    if (glider.getCurrentSlide() === glider.slides.length - 3) {
+                        setTimeout(function () {
+                            glider.scrollTo(0);
+                        },100);
+                    }
+                }
+            });
 
             // Set an interval for auto-scrolling (e.g., every 3 seconds)
             var autoScrollInterval = setInterval(function () {

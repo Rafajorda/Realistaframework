@@ -39,6 +39,12 @@ class controller_shop{
     function likes(){
       echo json_encode(common::load_model('shop_model', 'get_likes',array($_POST['accesstoken'],$_POST['idvivienda'])));
     }
+    function addlike(){
+      echo json_encode(common::load_model('shop_model', 'get_addlike',array($_POST['accesstoken'],$_POST['idvivienda'])));
+    }
+    function deletelike(){
+      echo json_encode(common::load_model('shop_model', 'get_deletelike',array($_POST['accesstoken'],$_POST['idvivienda'])));
+    }
 }
 ?>
 

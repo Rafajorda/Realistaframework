@@ -277,29 +277,31 @@ function send_new_password(token_email){
 
 // ------------------- LOAD CONTENT ------------------------ //
 function login() {
-    if (validate_login() != 0) {
-       
+    if (validate_login() != 0) {  
           var  username =document.getElementById('username_log').value;
           var  passwd= document.getElementById('passwd_log').value;
-        
        // console.log(formData);
         ajaxPromise(friendlyURL("?module=login&op=login"), 'POST', 'JSON',{'username': username, 'password': passwd})
             .then(function(result) {
                 console.log(result+ " result");
-                if (result[0] === "error_user") {
+                if (result === "error_user") {
                     document.getElementById('error_username_log').innerHTML = "El usario no existe,asegurase de que lo a escrito correctamente"
-                } else if (result[0] === "error_passwd") {
+                } else if (result === "error_passwd") {
                     document.getElementById('error_passwd_log').innerHTML = "La contraseña es incorrecta"
-                } else {
+                }else if (result === "3_fails"){
+                    //document.getElementById('error_passwd_log').innerHTML = "ha fallado mucho, se le ha enviado un codigo"
+                    toastr.success("Ha fallado mucho, ingrese el codigo enviado a su email");
+                    $(".login-form").hide();
+                }else {
                    localStorage.setItem("accesstoken", result[0]);
                    localStorage.setItem("refreshtoken", result[1]);
                     toastr.success("Loged succesfully");
                     console.log("access"+result[0]);
                     console.log("refresh"+result[1]);
                     if (localStorage.getItem('redirect_like')) {
-                    //   setTimeout( window.location.href = friendlyURL("?module=shop") , 1000);
+                      setTimeout( window.location.href = friendlyURL("?module=shop") , 1000);
                     } else {
-                    //   setTimeout( window.location.href = friendlyURL("?module=shop ") , 1000);
+                     setTimeout( window.location.href = friendlyURL("?module=home") , 1000);
                     }
                 }
             }).catch(function(textStatus) {
@@ -320,13 +322,28 @@ function key_login() {
     });
 }
 
-function button_login() {
-    $('#login').on('click', function(e) {
-        e.preventDefault();
-        login();
+    function button_login() {
+        $('#login').on('click', function(e) {
+            e.preventDefault();
+            login();
+        });
+    }
+    function press_recover(){
+        $('#psforget').on('click', function(e) {
+            
+                $(".forget_html").show();    
+                $(".login-form").hide();
+        
+        });
+    }
+    function press_recoverback(){
+        $('#button_forgetb').on('click', function(e) {
+            console.log("botoncito");
+        $(".forget_html").hide();    
+        $(".login-form").show();
     });
-}
 
+    }
 function validate_login() {
     var error = false;
 
@@ -354,18 +371,18 @@ function validate_login() {
     }
 }
 
-
-
 $(document).ready(function() {
     $('#register').on('submit', function(e) {
         e.preventDefault(); // Prevent page reload
         register(); // Call your registration function
     });
-    
-        key_login();
-        button_login();
+   $(".forget_html").hide();
+    press_recover();
+    press_recoverback();
+    key_login();
+    button_login();
        // likebutton();
-    
+    click_recover_password();
     click_register();
     button_register();
 });

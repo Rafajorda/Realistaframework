@@ -46,8 +46,8 @@ class login_model {
         return $this -> bll -> get_data_user_BLL($args);
     }
 
-    public function get_activity() {
-        return $this -> bll -> get_activity_BLL();
+    public function get_actividad() {
+        return $this -> bll -> get_actividad_BLL();
     }
 
     public function get_controluser($args) {
@@ -58,7 +58,7 @@ class login_model {
         return $this -> bll -> get_refresh_token_BLL($args);
     }
 
-    public function get_token_expires($args) {
-        return $this -> bll -> get_token_expires_BLL($args);
+    public function get_expires($args) {
+        return $this -> bll -> get_expires_BLL($args);
     }
 }

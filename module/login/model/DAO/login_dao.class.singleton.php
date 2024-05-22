@@ -14,8 +14,8 @@
 
         public function insert_user($db, $username, $hashed_pass, $email, $avatar, $token_email) {
            
-            $sql ="   INSERT INTO `users`(`username`, `password`, `email`, `type_user`, `avatar`, token_email, activate) 
-            VALUES ('$username','$hashed_pass','$email','client','$avatar','$token_email', 0)";
+            $sql ="   INSERT INTO `users`(`username`, `password`, `email`, `type_user`, `avatar`, token_email, activate,fails) 
+            VALUES ('$username','$hashed_pass','$email','client','$avatar','$token_email', 0,0)";
 
             // $sql = "INSERT INTO users (id, username, password, email, user_type, avatar, token_email, activate)
             // VALUES ('$id', '$username_reg', '$hashed_pass', '$email_reg', 'client', '$avatar', '$token_email', 0)";
@@ -23,11 +23,12 @@
             return $stmt = $db->ejecutar($sql);
         }
        
-        public function select_user($db, $username){
-            $sql = "SELECT `id_user`,`username`, `password`, `email`, `type_user`, `avatar`, `token_email`, `activate` FROM `users` WHERE username='$username'";
+        public function select_user($db, $username,$email){
+            $sql = "SELECT `id_user`,`username`, `password`, `email`, `type_user`, `avatar`, `token_email`, `activate`, `fails` FROM `users` WHERE username='$username'";
 
             $stmt = $db->ejecutar($sql);
-            return $db->listar($stmt);
+                return $db->listar($stmt);
+            
         }
 
         public function select_social_login($db, $id){
@@ -40,7 +41,7 @@
 
         public function insert_social_login($db, $id, $username, $email, $avatar){
 
-            $sql ="INSERT INTO users (id, username, password, email, user_type, avatar, token_email, activate)     
+            $sql ="INSERT INTO users (id, username, password, email, user_type, avatar, token_email, activate,fails)     
                 VALUES ('$id', '$username', '', '$email', 'client', '$avatar', '', 1)";
 
             return $stmt = $db->ejecutar($sql);
@@ -60,6 +61,12 @@
 
             $stmt = $db->ejecutar($sql);
             return "update";
+        }
+        public function set_active($db,$username){
+            $sql = "UPDATE users SET activate = 0 WHERE username='$username'";
+            $stmt = $db->ejecutar($sql);
+            return "failure";
+
         }
 
         public function select_recover_password($db, $email){
@@ -88,11 +95,37 @@
 
         public function select_data_user($db, $username){
 
-			$sql = "SELECT id, username, password, email, user_type, avatar, token_email, activate FROM users WHERE username = '$username'";
+			$sql =  "SELECT * FROM users WHERE username='$username'";
             
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
+            
         }
+        public function seecount($db, $username){
+
+			$sql =  "SELECT fails FROM users WHERE username='$username'";
+            
+            $stmt = $db->ejecutar($sql);
+             $result=  $db->listar($stmt);
+             return $result[0]['fails'];
+        }
+        public function addcount($db, $username){
+
+			$sql = "UPDATE users SET fails= fails + 1 WHERE username='$username'";
+            
+            $stmt = $db->ejecutar($sql);
+            return "ouch";
+        }
+        public function rescount($db, $username){
+
+			$sql = "UPDATE users SET fails =0 WHERE username='$username'";
+            
+            $stmt = $db->ejecutar($sql);
+           return "done";
+        }
+
+       
+
 
     }
 

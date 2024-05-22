@@ -41,7 +41,13 @@
        }
        public function get_likes($args) {
         return $this -> bll -> get_likes_BLL($args);
-    }
+        }
+        public function get_addlike($args) {
+            return $this -> bll -> get_addlike_BLL($args);
+        }
+        public function get_deletelike($args) {
+            return $this -> bll -> get_deletelike_BLL($args);
+        }
 
     }
 ?>

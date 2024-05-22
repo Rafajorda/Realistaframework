@@ -45,8 +45,8 @@
         <uri>data_user</uri>
     </function>
     <function>
-        <name>activity</name>
-        <uri>activity</uri>
+        <name>actividad</name>
+        <uri>actividad</uri>
     </function>
     <function>
         <name>controluser</name>
@@ -57,8 +57,8 @@
         <uri>refresh_token</uri>
     </function>
     <function>
-        <name>token_expires</name>
-        <uri>token_expires</uri>
+        <name>expires</name>
+        <uri>expires</uri>
     </function>
     <function>
         <name>refresh_cookie</name>

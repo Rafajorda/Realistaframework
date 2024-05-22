@@ -37,7 +37,7 @@ require __DIR__ . '/vendor/autoload.php';
                     $email['fromEmail'] = 'Acme <onboarding@resend.dev>';
                     $email['toEmail'] = $email['toEmail'];
                     $email['inputMatter'] = 'Recover password';
-                    email['inputMessage'] = "<h2>Email verification.</h2><a href='http://realista/login/recover/$email[token]'>Click here for verify your email.</a>";
+                    $email['inputMessage'] = "<h2>Email verification.</h2><a href='http://realista/login/recover/$email[token]'>Click here for verify your email.</a>";
              }
             return self::send_resend($email);
         }

@@ -37,10 +37,11 @@ function friendlyURL(url) {
 
 //================LOAD-HEADER================
 function load_menu() {
-    var token = localStorage.getItem('accesstoken');
-    if (token) {
-        ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', { 'token': token })
+    var accesstoken = localStorage.getItem('accesstoken');
+    if (accesstoken) {
+        ajaxPromise(friendlyURL("?module=login&op=data_user"), 'POST', 'JSON', { 'accesstoken': accesstoken })
             .then(function(data) {
+                console.log("data user  ",data[0]);
                 $('#user_info').empty();
                 if (data.type_user == "client") {
                     console.log("Client loged");
@@ -53,11 +54,11 @@ function load_menu() {
                 }
                 $('.log-icon').empty();
                 $('#user_info').empty();
-                $('<img src="' + data.avatar + '"alt="Robot">').appendTo('.log-icon');
+                $('<img src="' + data[0].avatar + '"alt="Robot">').appendTo('.log-icon');
                 $('<p></p>').attr({ 'id': 'user_info' }).appendTo('#des_inf_user')
                     .html(
                         '<a id="logout"><i id="icon-logout" class="fa-solid fa-right-from-bracket"></i></a>' +
-                        '<a>' + data.username + '<a/>'
+                        '<a>' + data[0].username + '<a/>'
 
                     )
 
@@ -150,4 +151,6 @@ $(document).ready(function() {
      click_logout();
      change_button();
    // click_shop();
+
+   
 });
