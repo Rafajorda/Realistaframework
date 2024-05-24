@@ -66,6 +66,7 @@
 						$_SESSION['username'] = $user[0]['username'];
 						$_SESSION['tiempo'] = time();
 						// session_regenerate_id();
+						$reset= $this -> dao -> reset_fails($this->db,$user[0]['username']);
 					 $potato=	$this -> dao -> rescount($this->db,$args[0]);
 						$accesstoken= middleware::create_accesstoken($user[0]["username"],$user[0]["id_user"]);
 						$refreshtoken= middleware::create_refreshtoken($user[0]["username"],$user[0]["id_user"]);
@@ -82,8 +83,9 @@
 						return 'error_passwd';
 						}else{
 						$activate=	$this -> dao -> set_active($this->db,$args[0]);
-						//$pinguino=	$this -> dao -> addcount($this->db,$args[0]);
+						
 						$message = common::generate_OTP();
+						$updateotp =$this -> dao -> addOTP($this->db,$args[0],$message);
 						$rr= OTP::OTP_send2($message);
 							return'3_fails';
 						}
@@ -93,20 +95,40 @@
 				return 'error_user';
 			}
 		}
-		
+		public function get_OTPTOKEN_BLL($args){
+			
+			$OTPtoken = middleware::create_OTPtoken($args);
+			return $OTPtoken;
 
-		// public function get_social_login_BLL($args) {
-		// 	if (!empty($this -> dao -> select_user($this->db, $args[1], $args[2]))) {
-		// 		$user = $this -> dao -> select_user($this->db, $args[1], $args[2]);
-		// 		$jwt = jwt_process::encode($user[0]['username']);
-		// 		return json_encode($jwt);
-        //     } else {
-		// 		$this -> dao -> insert_social_login($this->db, $args[0], $args[1], $args[2], $args[3]);
-		// 		$user = $this -> dao -> select_user($this->db, $args[1], $args[2]);
-		// 		$jwt = jwt_process::encode($user[0]['username']);
-		// 		return json_encode($jwt);
-		// 	}
-		// }
+		}
+		public function get_OTP_verify_BLL($args){
+			
+			$OTPuser = $args[0];
+			$OTPcode = $args[1];
+			$decode = middleware::decode_token($OTPuser);
+
+			if($this -> dao -> select_OTP_verify($this->db,$decode['username'],$OTPcode)){
+				$this -> dao -> update_OTP_verify($this->db,$decode['username']);
+				return 'verify';
+			} else {
+				return $decode['username'];
+				
+			}
+
+		}
+
+		public function get_social_login_BLL($args) {
+			if (!empty($this -> dao -> select_user($this->db, $args[1], $args[2]))) {
+				$user = $this -> dao -> select_user($this->db, $args[1], $args[2]);
+				$jwt = jwt_process::encode($user[0]['username']);
+				return json_encode($jwt);
+            } else {
+				$this -> dao -> insert_social_login($this->db, $args[0], $args[1], $args[2], $args[3]);
+				$user = $this -> dao -> select_user($this->db, $args[1], $args[2]);
+				$jwt = jwt_process::encode($user[0]['username']);
+				return json_encode($jwt);
+			}
+		}
 
 		public function get_verify_email_BLL($args) {
 			if($this -> dao -> select_verify_email($this->db, $args)){

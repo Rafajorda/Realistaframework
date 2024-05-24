@@ -70,6 +70,20 @@ class middleware{
     }
 
 
+    public static function create_OTPtoken($username){
+        $jwt = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/utils/credentials.ini');
+        $header = $jwt['JWT_HEADER'];
+       
+        $secret = $jwt['JWT_SECRET'];
+    // $payload = '{"iat":"' . time() . '","exp":"' . time() + (600) . '","username":"' . $username . '"}';
+        $payload = '{"iat":"' . time() . '","exp":"' . (time() + 900) . '","username":"' . $username . '"}';
+
+        $JWT = new JWT;
+        $token = $JWT->encode($header, $payload, $secret);
+        return $token;
+    }
+
+
 
 
 }

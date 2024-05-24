@@ -61,4 +61,10 @@ class login_model {
     public function get_expires($args) {
         return $this -> bll -> get_expires_BLL($args);
     }
+    public function get_OTPTOKEN($args) {
+        return $this -> bll -> get_OTPTOKEN_BLL($args);
+    }
+    public function get_OTP_verify($args) {
+        return $this -> bll -> get_OTP_verify_BLL($args);
+    }
 }

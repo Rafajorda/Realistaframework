@@ -68,6 +68,13 @@
         function refresh_cookie() {
             session_regenerate_id();
         } 
+        function OTPTOKEN(){
+            echo json_encode(common::load_model('login_model', 'get_OTPTOKEN', $_POST['username']));
+        }
+        function OTP_verify(){
+            echo json_encode(common::load_model('login_model', 'get_OTP_verify',[$_POST['OTPuser'],$_POST['OTPcode']]));
+        }
+        
     
     }
     

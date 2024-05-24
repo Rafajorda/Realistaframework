@@ -14,8 +14,8 @@
 
         public function insert_user($db, $username, $hashed_pass, $email, $avatar, $token_email) {
            
-            $sql ="   INSERT INTO `users`(`username`, `password`, `email`, `type_user`, `avatar`, token_email, activate,fails) 
-            VALUES ('$username','$hashed_pass','$email','client','$avatar','$token_email', 0,0)";
+            $sql ="   INSERT INTO `users`(`username`, `password`, `email`, `type_user`, `avatar`, token_email, activate,fails,OTP) 
+            VALUES ('$username','$hashed_pass','$email','client','$avatar','$token_email', 0,0,000000)";
 
             // $sql = "INSERT INTO users (id, username, password, email, user_type, avatar, token_email, activate)
             // VALUES ('$id', '$username_reg', '$hashed_pass', '$email_reg', 'client', '$avatar', '$token_email', 0)";
@@ -24,7 +24,7 @@
         }
        
         public function select_user($db, $username,$email){
-            $sql = "SELECT `id_user`,`username`, `password`, `email`, `type_user`, `avatar`, `token_email`, `activate`, `fails` FROM `users` WHERE username='$username'";
+            $sql = "SELECT `id_user`,`username`, `password`, `email`, `type_user`, `avatar`, `token_email`, `activate`, `fails`, `OTP` FROM `users` WHERE username='$username'";
 
             $stmt = $db->ejecutar($sql);
                 return $db->listar($stmt);
@@ -41,7 +41,7 @@
 
         public function insert_social_login($db, $id, $username, $email, $avatar){
 
-            $sql ="INSERT INTO users (id, username, password, email, user_type, avatar, token_email, activate,fails)     
+            $sql ="INSERT INTO users (id, username, password, email, user_type, avatar, token_email, activate,fails,OTP)     
                 VALUES ('$id', '$username', '', '$email', 'client', '$avatar', '', 1)";
 
             return $stmt = $db->ejecutar($sql);
@@ -55,6 +55,30 @@
             return $db->listar($stmt);
         } 
 
+        public function select_OTP_verify($db, $username,$OTP){
+
+			$sql = "SELECT username FROM users WHERE username = '$username' AND OTP = '$OTP'";
+
+            $stmt = $db->ejecutar($sql);
+            return $db->listar($stmt);
+        } 
+
+        public function update_OTP_verify($db, $username){
+
+            $sql = "UPDATE users SET activate = 1 WHERE username = '$username'";
+
+            $stmt = $db->ejecutar($sql);
+            return "update";
+        }
+
+        public function reset_fails($db, $username){
+
+            $sql = "UPDATE users SET fails = 0 WHERE username = '$username'";
+
+            $stmt = $db->ejecutar($sql);
+            return "update";
+
+        }
         public function update_verify_email($db, $token_email){
 
             $sql = "UPDATE users SET activate = 1, token_email= '' WHERE token_email = '$token_email'";
@@ -122,6 +146,13 @@
             
             $stmt = $db->ejecutar($sql);
            return "done";
+        }
+        public function addOTP($db, $username,$OTP){
+
+			$sql = "UPDATE users SET OTP=  $OTP WHERE username='$username'";
+            
+            $stmt = $db->ejecutar($sql);
+            return "ouch";
         }
 
        

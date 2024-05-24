@@ -64,4 +64,12 @@
         <name>refresh_cookie</name>
         <uri>refresh_cookie</uri>
     </function>
+     <function>
+        <name>OTPTOKEN</name>
+        <uri>OTPTOKEN</uri>
+    </function>
+     <function>
+        <name>OTP_verify</name>
+        <uri>OTP_verify</uri>
+    </function>
 </functions>
