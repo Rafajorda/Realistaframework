@@ -1,6 +1,20 @@
 <?php
     class controller_login {
 
+    static $instance;
+
+    
+    function __construct() {}
+
+    static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+        
+
         function view() {
             common::load_view('top_page_login.html', VIEW_PATH_LOGIN . 'login.html');
         }
@@ -18,7 +32,7 @@
         }
 
         function social_login() {
-            echo json_encode(common::load_model('login_model', 'get_social_login', [$_POST['id'], $_POST['username'], $_POST['email'], $_POST['avatar']]));
+            echo json_encode(common::load_model('login_model', 'get_social_login', [$_POST['id'], $_POST['username'], $_POST['email'], $_POST['avatar'], $_POST['type']]));
         } 
     
         function verify_email() {
@@ -39,6 +53,7 @@
         }  
     
         function logout() {
+
             unset($_SESSION['username']);
             unset($_SESSION['tiempo']);
             session_destroy();
@@ -74,7 +89,9 @@
         function OTP_verify(){
             echo json_encode(common::load_model('login_model', 'get_OTP_verify',[$_POST['OTPuser'],$_POST['OTPcode']]));
         }
-        
+        function Social_credentials(){
+            echo json_encode(common::load_model('login_model', 'get_Social_credentials'));
+        }
     
     }
     

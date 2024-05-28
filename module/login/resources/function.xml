@@ -72,4 +72,8 @@
         <name>OTP_verify</name>
         <uri>OTP_verify</uri>
     </function>
+     <function>
+        <name>Social_credentials</name>
+        <uri>Social_credentials</uri>
+    </function>
 </functions>

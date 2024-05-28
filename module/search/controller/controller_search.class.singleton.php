@@ -1,5 +1,16 @@
 <?php
     class controller_search{  
+
+      static $instance;
+      function __construct() {}
+  
+      static function getInstance() {
+          if (self::$instance === null) {
+              self::$instance = new self();
+          }
+          return self::$instance;
+      }
+
        function type_vivienda(){
          // echo ("hola view");
       //   echo json_encode(common::load_model('search_model', 'get_type_vivienda'));

@@ -1,5 +1,18 @@
 <?php
 class controller_shop{  
+
+  static $instance;
+
+    
+    function __construct() {}
+
+    static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
     function view(){
       // echo ("hola view");
         common::load_view('top_page_shop.html', VIEW_PATH_SHOP . 'shop.html');

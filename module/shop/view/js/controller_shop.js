@@ -188,7 +188,7 @@ function likebutton(){
             });
         }else{           
             setTimeout(function(){ 
-                window.location.href = 'index.php?page=login';
+                window.location.href =friendlyURL("?module=login");
               }, 1000); 
         }
     });

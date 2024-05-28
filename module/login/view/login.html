@@ -1,7 +1,6 @@
 <div class="login-wrap">
 	<div class="login-html">
-		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign
-			In</label>
+		<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign 	In</label>
 		<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
 		<div class="login-form">
 			<form id="login__form" method="POST">
@@ -9,16 +8,30 @@
 					<div class="group">
 						<label for="user" class="label">Username</label>
 						<input id="username_log" type="text" class="input" name="username_log">
-						<span id="error_username_log" class="error"></span>
+						<font color="red">
+							<span id="error_username" class="error"></span>
+						</font>
 					</div>
 					<div class="group">
 						<label for="pass" class="label">Password</label>
 						<input id="passwd_log" type="password" class="input" name="passwd_log">
-						<span id="error_passwd_log" class="error"></span>
-
+						<font color="red">
+							<span id="error_password" class="error"></span>
+						</font>		
 					</div>
+					<div class="hr"></div>
 					<div class="group">
 						<input type="submit" id="login" class="button" value="Sign In">
+					</div>
+					<div class="social_login">
+						<div class="google_login" id="google">
+							<img class="google_img"/>
+							<h4 class="google_title">Google</h4>
+						</div>
+						<div class="github_login" id="github">
+							<img class="github_img"/>
+							<h4 class="github_title">Git Hub</h4>
+						</div>
 					</div>
 					<div class="hr"></div>
 					<div class="foot-lnk">
@@ -54,6 +67,16 @@
 					</div>
 					<div class="group">
 						<input type="submit" id="register" class="button" value="Sign Up">
+					</div>
+					<div class="social_login">
+						<div class="google_login" id="google">
+							<img class="google_img"/>
+							<h4 class="google_title">Google</h4>
+						</div>
+						<div class="github_login" id="github">
+							<img class="github_img"/>
+							<h4 class="github_title">Git Hub</h4>
+						</div>
 					</div>
 					<div class="hr"></div>
 					<div class="foot-lnk">

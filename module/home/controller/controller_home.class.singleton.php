@@ -2,6 +2,18 @@
 //  $path = $_SERVER['DOCUMENT_ROOT'] . '/RealistaF/RealistaFramework/';
 //  include($path . "utils/common.inc.php");
 class controller_home{
+
+    static $instance;
+
+    
+    function __construct() {}
+
+    static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
     
     function view(){
       // echo ("hola view");

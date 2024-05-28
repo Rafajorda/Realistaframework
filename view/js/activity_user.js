@@ -1,6 +1,8 @@
 function protecturl() {
-    var accesstoken = localStorage.getItem('accesstoken');
+    //var accesstoken = localStorage.getItem('accesstoken');
+    var accesstoken = localStorage.getItem('accesstoken') || null;
     var refreshtoken =localStorage.getItem('refreshtoken');
+    if(accesstoken!==null){
     ajaxPromise(friendlyURL("?module=login&op=controluser"), 'POST', 'JSON', { 'accesstoken': accesstoken })
         .then(function(data) {
             if (data == "Correct_User") {
@@ -22,7 +24,7 @@ function protecturl() {
             }
         })
         .catch(function() { console.log("ANONYMOUS_user") });
-
+    }
 
 }
 
@@ -60,6 +62,11 @@ function refresh_cookie() {
     ajaxPromise(friendlyURL("?module=login&op=refresh_cookie"), 'POST', 'JSON')
         .then(function(response) {
             console.log("Refresh cookie correctly");
+            console.log(response);
+            
+        })
+        .catch(function(error) {
+            console.error("Error refreshing cookie:", error); // Log any errors
         });
 }
 
@@ -97,8 +104,8 @@ function remove_filterslogout() {
     }
 
 $(document).ready(function() {
-    setInterval(function() { control_activity() }, 60000); //10min= 600000
+    setInterval(function() { control_activity() }, 600000); //10min= 600000
     protecturl();
     // setInterval(function() { refresh_token() }, 60000);
-    setInterval(function() { refresh_cookie() }, 60000);
+    setInterval(function() { refresh_cookie() }, 600000);
 });

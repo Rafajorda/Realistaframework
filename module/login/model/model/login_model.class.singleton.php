@@ -67,4 +67,7 @@ class login_model {
     public function get_OTP_verify($args) {
         return $this -> bll -> get_OTP_verify_BLL($args);
     }
+    public function get_Social_credentials() {
+        return $this -> bll -> get_Social_credentials_BLL();
+    }
 }

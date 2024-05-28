@@ -60,7 +60,7 @@
 
 			if (!empty($this -> dao -> select_user($this->db, $args[0], $args[0]))) {	
 				$user = $this -> dao -> select_user($this->db, $args[0], $args[0]);
-				
+				if($user[0]["origin"]=="local"){
 					if (password_verify($args[1], $user[0]['password']) && $user[0]['activate'] == 1) {
 						//$jwt = jwt_process::encode($user[0]['username']);
 						$_SESSION['username'] = $user[0]['username'];
@@ -90,6 +90,9 @@
 							return'3_fails';
 						}
 					}
+				}else{
+					return 'social';
+				}
 				
             } else {
 				return 'error_user';
@@ -116,17 +119,49 @@
 			}
 
 		}
+		public function get_Social_credentials_BLL(){
+			$cred = parse_ini_file($_SERVER['DOCUMENT_ROOT'] . '/utils/credentials.ini');
+
+
+			$credentials = [
+				'apiKey'=> $cred['SOCIAL_API'],
+				'authDomain' => $cred['SOCIAL_AUTH'],
+				'projectId'=> $cred['SOCIAL_PROJECT'],
+				'storageBucket'=> $cred['SOCIAL_STORAGEB'],
+				'messagingSenderId'=> $cred['SOCIAL_MESSAGING'],
+				'appId'=> $cred['SOCIAL_APPID'],
+				'measurementId' =>$cred['SOCIAL_MEASUREMENTID']
+			];
+
+
+			return $credentials;
+		}
 
 		public function get_social_login_BLL($args) {
-			if (!empty($this -> dao -> select_user($this->db, $args[1], $args[2]))) {
+			if (!empty($this -> dao -> select_user_social($this->db, $args[1], $args[2],$args[4]))) {
 				$user = $this -> dao -> select_user($this->db, $args[1], $args[2]);
-				$jwt = jwt_process::encode($user[0]['username']);
-				return json_encode($jwt);
+				// // $jwt = jwt_process::encode($user[0]['username']);
+				// // return json_encode($jwt);
+				
+				$accesstoken= middleware::create_accesstoken($user[0]["username"],$user[0]["id_user"]);
+						$refreshtoken= middleware::create_refreshtoken($user[0]["username"],$user[0]["id_user"]);
+						$token = array($accesstoken,$refreshtoken);
+						$_SESSION['username'] = $user[0]['username']; //Guardamos el usario 
+						$_SESSION['tiempo'] = time();
+				return $token;
+				// return "hola";
             } else {
-				$this -> dao -> insert_social_login($this->db, $args[0], $args[1], $args[2], $args[3]);
+				$this -> dao -> insert_social_login($this->db, $args[0], $args[1], $args[2], $args[3],$args[4]);
 				$user = $this -> dao -> select_user($this->db, $args[1], $args[2]);
-				$jwt = jwt_process::encode($user[0]['username']);
-				return json_encode($jwt);
+				// //$jwt = jwt_process::encode($user[0]['username']);
+
+				$accesstoken= middleware::create_accesstoken($user[0]["username"],$user[0]["id_user"]);
+						$refreshtoken= middleware::create_refreshtoken($user[0]["username"],$user[0]["id_user"]);
+						$token = array($accesstoken,$refreshtoken);
+						$_SESSION['username'] = $user[0]['username']; //Guardamos el usario 
+						$_SESSION['tiempo'] = time();
+				return $token;
+				// return "hola";
 			}
 		}
 

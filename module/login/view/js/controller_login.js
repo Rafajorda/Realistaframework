@@ -180,7 +180,10 @@
             }).done(function(data) {
                 if(data == "error"){		
                     $("#error_email_forg").html("The email doesn't exist");
-                } else{
+                } else if(data=="social"){
+
+                }
+                else{
                     toastr.options.timeOut = 3000;
                     toastr.success("Email sended");
                     setTimeout('window.location.href = friendlyURL("?module=login")', 3000);
@@ -283,7 +286,7 @@
         // console.log(formData);
             ajaxPromise(friendlyURL("?module=login&op=login"), 'POST', 'JSON',{'username': username, 'password': passwd})
                 .then(function(result) {
-                    console.log(result+ " result");
+                   // console.log(result+ " result");
                     if (result === "error_user") {
                         document.getElementById('error_username_log').innerHTML = "El usario no existe,asegurase de que lo a escrito correctamente"
                     } else if (result === "error_passwd") {
@@ -304,12 +307,15 @@
                             }
                         });
 
+                    }else if(result=== "social"){
+                        document.getElementById('error_username_log').innerHTML = "El usario es de una cuenta registrada de terceros, use el boton apropiado"
+                        console.log("sociaaaal!!");
                     }else {
                     localStorage.setItem("accesstoken", result[0]);
                     localStorage.setItem("refreshtoken", result[1]);
                         toastr.success("Loged succesfully");
-                        console.log("access"+result[0]);
-                        console.log("refresh"+result[1]);
+                       // console.log("access"+result[0]);
+                        // console.log("refresh"+result[1]);
                         if (localStorage.getItem('redirect_like')) {
                         setTimeout( window.location.href = friendlyURL("?module=shop") , 1000);
                         } else {
@@ -318,7 +324,7 @@
                     }
                 }).catch(function(textStatus) {
                     if (console && console.log) {
-                        console.log("La solicitud ha fallado: " + textStatus);
+                       // console.log("La solicitud ha fallado: " + textStatus);
                     }
                 });
         }
@@ -334,7 +340,7 @@
                 document.getElementById('error_username_log').innerHTML = "El usuario tiene que tener 5 caracteres como minimo";
                 error = true;
             } else {
-                document.getElementById('error_username_log').innerHTML = "";
+              //  document.getElementById('error_username_log').innerHTML = "";
             }
         }
 
@@ -342,11 +348,91 @@
             document.getElementById('error_passwd_log').innerHTML = "Tienes que escribir la contraseña";
             error = true;
         } else {
-            document.getElementById('error_passwd_log').innerHTML = "";
+            //document.getElementById('error_passwd_log').innerHTML = "";
         }
 
         if (error == true) {
             return 0;
+        }
+    }
+        
+    function social_login(param){
+        ajaxPromise(friendlyURL("?module=login&op=Social_credentials"), 'POST', 'JSON')
+            .then(function(data) {
+            authService = firebase_config(data);
+            authService.signInWithPopup(provider_config(param))
+            .then(function(result) {
+                //console.log('Hemos autenticado al usuario ', result);
+                email_name = result.user.email;
+                let username = email_name.split('@');
+                //console.log(username[0]);
+        
+                social_user = {id: result.user.uid, username: username[0], email: result.user.email, avatar: result.user.photoURL, type: param};
+              //  console.log(social_user);
+                if (result) {
+                    ajaxPromise(friendlyURL("?module=login&op=social_login"), 'POST', 'JSON', social_user)
+                    .then(function(datasocial) {
+                      //  console.log("datasocial",datasocial);
+                        localStorage.setItem("accesstoken", datasocial[0]);
+                        localStorage.setItem("refreshtoken", datasocial[1]);
+                        toastr.options.timeOut = 3000;
+                        toastr.success("Inicio de sesión realizado");
+                        if(localStorage.getItem('likes') == null && localStorage.getItem('cart') == null) {
+                            setTimeout('window.location.href = friendlyURL("?module=home")', 1000);
+                        } else {
+                            setTimeout('window.location.href = friendlyURL("?module=shop")', 1000);
+                        }
+                    })
+                    .catch(function() {
+                        console.log('Error: Social login error');
+                    });
+                    }
+            })
+            .catch(function(error) {
+                var errorCode = error.code;
+                console.log(errorCode);
+                var errorMessage = error.message;
+                console.log(errorMessage);
+                var email = error.email;
+                console.log(email);
+                var credential = error.credential;
+                console.log(credential);
+            });
+        }).catch(function() {
+            console.log('Error: Social login error');
+        });
+    
+    }
+    
+    function firebase_config(data){
+        
+                console.log(data)
+                var config = {
+                    apiKey: data.apiKey,
+                    authDomain: data.authDomain,
+                    projectId: data.projectId,
+                    storageBucket: data.storageBucket,
+                    messagingSenderId: data.messagingSenderId,
+                    appId: data.appId,
+                    measurementId: data.measurementId
+                  };
+           
+        if(!firebase.apps.length){
+            firebase.initializeApp(config);
+        }else{
+            firebase.app();
+        }
+        return authService = firebase.auth();
+
+    }
+    
+    function provider_config(param){
+        if(param === 'google'){
+            var provider = new firebase.auth.GoogleAuthProvider();
+            provider.addScope('email');
+            return provider;
+        }else if(param === 'github'){
+            return provider = new firebase.auth.GithubAuthProvider();
         }
     }
 
@@ -358,6 +444,15 @@
                 login();
             }
         });
+
+        
+    $('#google').on('click', function(e) {
+        social_login('google');
+    }); 
+
+    $('#github').on('click', function(e) {
+        social_login('github');
+    }); 
     }
 
     function button_login() {
@@ -376,7 +471,7 @@
     }
     function press_recoverback(){
         $('#button_forgetb').on('click', function(e) {
-            console.log("botoncito");
+           // console.log("botoncito");
         $(".forget_html").hide();    
         $(".login-form").show();
     });
@@ -403,6 +498,7 @@
        ajaxPromise(friendlyURL("?module=login&op=OTP_verify"), 'POST', 'JSON',{'OTPuser': OTPuser,'OTPcode':OTPcode})
                         .then(function(data) {
                             if(data=="verify"){
+                                localStorage.removeItem('OTPuser');
                                 toastr.success('count reactivated');
                                 $(".login-form").show();
                                 $(".OTP_html").hide();
