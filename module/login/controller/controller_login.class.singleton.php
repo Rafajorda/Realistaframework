@@ -1,19 +1,17 @@
 <?php
     class controller_login {
 
-    static $instance;
-
-    
-    function __construct() {}
-
-    static function getInstance() {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+        static $instance;
 
         
+        function __construct() {}
+
+        static function getInstance() {
+            if (self::$instance === null) {
+                self::$instance = new self();
+            }
+            return self::$instance;
+        }
 
         function view() {
             common::load_view('top_page_login.html', VIEW_PATH_LOGIN . 'login.html');

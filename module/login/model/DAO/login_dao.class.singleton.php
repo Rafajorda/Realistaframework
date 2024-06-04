@@ -31,7 +31,7 @@
             
         }
         public function select_user_Social($db, $username,$email,$origin){
-            $sql = "SELECT `id_user`,`username`, `password`, `email`, `type_user`, `avatar`, `token_email`, `activate`, `fails`, `OTP`, `origin` FROM `users` WHERE username='$username'AND `origin` = '$origin'";
+            $sql = "SELECT `id_user`,`username`, `password`, `email`, `type_user`, `avatar`, `token_email`, `activate`, `fails`, `OTP`, `origin` FROM `users` WHERE `username`='$username'AND `origin` = '$origin'";
 
             $stmt = $db->ejecutar($sql);
                 return $db->listar($stmt);

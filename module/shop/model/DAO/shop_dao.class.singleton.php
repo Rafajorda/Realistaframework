@@ -55,7 +55,7 @@
 		return $db -> listar($stmt);
 		}
 
-		function filtershome_vivienda($filtershome){
+		function filtershome_vivienda($db,$filtershome){
         $select = "SELECT `vivienda`.*, `categoria`.`namecat`, `tipo`.`nametipo`, `city`.`namecity`, `operation`.`nameop`,`ahorro`.`nameahorro`, `images`.`imgimages`
 		FROM `tipo`
 			LEFT JOIN `vivienda` ON `vivienda`.`tipo` = `tipo`.`idtipo`
@@ -82,17 +82,8 @@
             $select.= " WHERE ahorro = '$prueba'";
 		}
        
-        $conexion = connect::con();
-        $res = mysqli_query($conexion, $select);
-        connect::close($conexion);
-
-        $retrArray = array();
-        if ($res -> num_rows > 0) {
-            while ($row = mysqli_fetch_assoc($res)) {
-                $retrArray[] = $row;
-            }
-        }
-        return $retrArray;
+		$stmt = $db -> ejecutar($select);
+		return $db -> listar($stmt);
    	 	}
 
 		function select_filtersshop($db,$filtershop,$total_prod, $items_page){

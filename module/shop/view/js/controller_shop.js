@@ -292,122 +292,7 @@ function ajaxForSearch2(url, send, filtros, total_prod = 0, items_page = 3) {
             });
         }
 //_____________________________details block_____________________________________________________
-    // function loadDetails(idvivienda) {
-       
-    //     ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=details_vivienda&id=' + idvivienda, 'GET', 'JSON')
-    //     .then(function(data) {
-    //         console.log("details",data);
-    //         $('.details-shop').empty();
-    //         $('#content_shop_vivienda').empty();
-    //         $('.date_vivienda').empty()
-    //         $('.date_img_dentro').empty();
-    //         $('#container-date-img').empty();
-    //         $('.date_img').empty();
-    //         $('.date_vivienda_dentro').empty();
-    //         $('.div-filters').empty();
-    //         $('.mapd').empty();
-    //         $('.containerinshop').empty();
-    //         $('.container_shop').empty();
-    //         $('.title_content').empty();
-          
-    //         if (data && data[0].imgimages) {
-    //             if ($('.date_img').hasClass('slick-initialized')) {
-    //                 $('.date_img').slick('unslick');
-    //             }   
-              
-    //             $('.date_img').empty();
-
-    //             console.log('Image URLs:', data[0].imgimages);
-              
-
-    //             var ImageUrls = data[0].imgimages.split(':'); // Split the imgimages string
-    //             ImageUrls.forEach(function(ImageUrl) { // Loop through each ImageUrl
-    //                 // $('<div></div>').attr({ 'id': data[0].idvivienda, class: 'date_img_dentro' }).appendTo('.date_img')
-    //                 //     .html(
-    //                 //         "<div class='content-img-details'>" +
-    //                 //         "<img src='" + ImageUrl + "' style='width: 520px; height: 400px;' />" + 
-    //                 //         "</div>"
-    //                 //     );
-    //                 $('<div><img src="' + ImageUrl + '"></div>').appendTo('.date_img');
-    //             });
-    //         }
-
-    //         $('<div></div>').attr({ 'id': data[0].idvivienda, class: 'date_vivienda_dentro' }).appendTo('.date_vivienda')
-    //         .html(
-    //             "<div class='list_product_details'>" +
-    //                 "<div class='product-info_details'>" +
-    //                     "<div class='product-content_details'>" +
-    //                         "<h1><b>" + data[0].nameviv  + "</b></h1>" +        
-    //                         "<hr class=hr-shop>" +
-    //                         "<table id='table-shop'>"+
-    //                             "<tr>" +
-    //                                 "<td style='padding-right: 200px;'>"+
-    //                                     " <img src= view/img/icon/cityic.png  alt= Icono de ciudad width=50 height=50> &nbsp;"+ data[0].namecity+
-    //                                 "</td>" +
-    //                                 "<td style='padding-right: 200px;'>"+
-    //                                     " <img src= view/img/icon/houseic.png  alt= Icono de categoria width=50 height=50> &nbsp;"+ data[0].namecat+
-    //                                 "</td>" +
-    //                                 "<td style='padding-right: 200px;'>"+
-    //                                     " <img src= view/img/icon/squareic.png  alt= Icono de ciudad width=50 height=50> &nbsp;"+ data[0].superficie+ " m2"+
-    //                                 "</td>" +
-    //                             "</tr>" +
-    //                             "<tr>" +
-    //                                 "<td>"+
-    //                                     " <img src= view/img/icon/cityic.png  alt= Icono de tipo width=50 height=50> &nbsp;"+ data[0].nametipo+
-    //                                 "</td>" +
-                    
-    //                                 "<td>"+
-    //                                     " <img src= view/img/icon/sellic.png  alt= Icono de operacion width=50 height=50> &nbsp;"+ data[0].nameop+
-    //                                 "</td>" +
-                            
-    //                                 "<td>"+
-    //                                     " <img src= view/img/icon/energyic.png  alt= Icono de ahorro energetico width=50 height=50> &nbsp;"+ data[0].nameahorro+
-    //                                 "</td>" +
-    //                             "</tr>" +
-    //                         "</table>" +
-    //                         "<hr class=hr-shop>" +
-    //                         "<h3><b>" + "More Information:" + "</b></h3>" +
-    //                         "<div class='buttons_details'>" +
-    //                                 "<a class='button add' href='#'>BUY</a>" +
-                    
-    //                                 "<span class='button' id='price_details'>" + data[0].price + "<i class='fa-solid fa-euro-sign'></i> </span>" +
-    //                                 "<a class='details__heart' id='" +data[0].idvivienda + "'><i id=" +data[0].idvivienda + " class='fa-solid fa-heart fa-lg'></i></a>" +
-    //                             "<div id='mapd'></div>"+ 
-    //                         "</div>" +
-    //                 "</div>" +
-    //             "</div>" +
-    //         "</div>"
-    //     );
-      
-       
-    //             $('.date_img').slick({
-    //                 infinite: true,
-    //                 speed: 300,
-    //                 slidesToShow: 3,
-    //                 adaptiveHeight: true,
-    //                 autoplay: true,
-    //                 autoplaySpeed: 1500,
-    //                 dots: true,
-    //                 prevArrow: '<button type="button" class="slick-prev">Previous</button>',
-    //                 nextArrow: '<button type="button" class="slick-next">Next</button>'
-
-    //             });
-    //         setTimeout(function() {
-    //             mapBox(data[0]);
-    //         }, 100);
-    //         $('.results').empty();
-
-    //        loadrelated(data[0].ahorro,data[0].idvivienda);
-       
-    //         // setTimeout(function() {
-    //             document.documentElement.scrollTop = 0;
-    //     // }, 500);
-    //     }).catch(function(error) {
-    //         console.error('Error fetching data:', error);
-    //         // Handle error appropriately
-    //     });
-    // }
-
+  
     function loadDetails(idvivienda) {
         ajaxPromise(friendlyURL("?module=shop&op=details"),'POST','JSON', { 'idvivienda': idvivienda })
         //ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=details_vivienda&id=' + idvivienda, 'GET', 'JSON')
@@ -440,12 +325,19 @@ function ajaxForSearch2(url, send, filtros, total_prod = 0, items_page = 3) {
                         $('<div><img src="' + ImageUrl + '"></div>').appendTo('.date_img');
                     });
                 }
+                var cartButtonHTML = "<span class='cart_button' data-idvivienda='" + data[0].idvivienda + "'><img src='view/img/icon/cart.png' alt='Cart Icon'></span>";
+            if (data[0].stock <= 0) {
+                cartButtonHTML = "<span class='cart_button no-stock' data-idvivienda='" + data[0].idvivienda + "' disabled>No Stock</span>";
+            }
     
                 $('<div></div>').attr({ 'id': data[0].idvivienda, class: 'date_vivienda_dentro' }).appendTo('.date_vivienda')
                     .html(
                         "<div class='list_product_details'>" +
                         "<div class='product-info_details'>" +
                         "<div class='product-content_details'>" +
+                        //"<span class='cart_button' id='cart_details'><img src=view/img/icon/cart.png alt='Cart Icon'></span>"+
+                        //"<span class='cart_button' data-idvivienda='" + data[0].idvivienda + "'><img src=view/img/icon/cart.png alt='Cart Icon'></span>" +
+                        cartButtonHTML+
                         "<h1><b>" + data[0].nameviv + "</b></h1>" +
                         "<hr class=hr-shop>" +
                         "<table id='table-shop'>" +
@@ -505,7 +397,7 @@ function ajaxForSearch2(url, send, filtros, total_prod = 0, items_page = 3) {
     
                 loadrelated(data[0].ahorro, data[0].idvivienda);
     
-                // Call likes function to check if user has liked the item
+                
                 likes(data[0].idvivienda, function(likeValue) {
                     var likeButtonHTML = "";
                     if (likeValue === 0) {
@@ -522,7 +414,7 @@ function ajaxForSearch2(url, send, filtros, total_prod = 0, items_page = 3) {
             })
             .catch(function(error) {
                 console.error('Error fetching data:', error);
-                // Handle error appropriately
+               
             });
     }
     
@@ -1498,6 +1390,44 @@ function viviendas_related(loadeds = 0, ahorro, total_viviendas, idvivienda) {
 
             //  highlightFilters();
         }
+    function button_cart(){
+
+        $(document).on("click", ".cart_button", function() {
+            var idvivienda = $(this).data('idvivienda');
+                console.log('ID Vivienda:', idvivienda);
+            
+                if(localStorage.getItem("accesstoken")){
+                    accesstoken =  localStorage.getItem("accesstoken");
+                    ajaxPromise(friendlyURL("?module=cart&op=addtocart"),'POST','JSON', { 'idvivienda': idvivienda,'accesstoken':accesstoken })
+                    //ajaxPromise('module/shop/ctrl/ctrl_shop.php?op=details_vivienda&id=' + idvivienda, 'GET', 'JSON')
+                        .then(function(data) {
+                            if(data==="added"){
+                                toastr.success("updated");
+                            }
+                            else if(data==="created"){
+
+                                toastr.success("created");
+                            }else if(data==="no stock"){
+
+                                toastr.error("no stock");
+                            }
+
+                        })
+                        .catch(function(error) {
+                            console.error('Error fetching data:', error);
+                           
+                        });
+
+                        count_cart(accesstoken);
+                }else{
+                setTimeout(function(){ 
+                    window.location.href =friendlyURL("?module=login");
+                  }, 1000);
+                } 
+        });
+
+    }
+ 
 
     $(document).ready(function() {
         loadvivienda();
@@ -1506,7 +1436,8 @@ function viviendas_related(loadeds = 0, ahorro, total_viviendas, idvivienda) {
          filter_button();
        highlightFilters();
         likebutton();
-
+        button_cart();
+       //count_cart();
         setupMapScrolling();
 
        // pagination();

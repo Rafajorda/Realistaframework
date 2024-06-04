@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>view</name>
+        <uri>view</uri>
+    </function>
+     <function>
+        <name>list</name>
+        <uri>list</uri>
+    </function>
+     <function>
+        <name>addtocart</name>
+        <uri>addtocart</uri>
+    </function>
+     <function>
+        <name>count</name>
+        <uri>count</uri>
+    </function>
+    <function>
+        <name>delete_item</name>
+        <uri>delete_item</uri>
+    </function>
+    <function>
+        <name>update_quantity</name>
+        <uri>update_quantity</uri>
+    </function>
+     <function>
+        <name>checkout</name>
+        <uri>checkout</uri>
+    </function>
+</functions>

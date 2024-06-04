@@ -65,12 +65,12 @@
         // define ('VIEW_PATH_ERRORS', SITE_ROOT . 'module/errors/view/');
         
         // //MODEL_CART
-        // define('UTILS_CART', SITE_ROOT . 'module/cart/utils/');
-        // define('DAO_CART', SITE_ROOT . 'module/cart/model/DAO/');
-        // define('BLL_CART', SITE_ROOT . 'module/cart/model/BLL/');
-        // define('MODEL_CART', SITE_ROOT . 'module/cart/model/model/');
-        // define('JS_VIEW_CART', SITE_PATH . 'module/cart/view/js/');
-        // define ('VIEW_PATH_CART', SITE_ROOT . 'module/cart/view/');
+       // define('UTILS_CART', SITE_ROOT . 'module/cart/utils/');
+        define('DAO_CART', SITE_ROOT . 'module/cart/model/DAO/');
+        define('BLL_CART', SITE_ROOT . 'module/cart/model/BLL/');
+        define('MODEL_CART', SITE_ROOT . 'module/cart/model/model/');
+        define('JS_VIEW_CART', SITE_PATH . 'module/cart/view/js/');
+        define ('VIEW_PATH_CART', SITE_ROOT . 'module/cart/view/');
         
         //MODEL_LOGIN
         define('UTILS_LOGIN', SITE_ROOT . 'module/login/utils/');
@@ -79,6 +79,13 @@
         define('MODEL_LOGIN', SITE_ROOT . 'module/login/model/model/');
         define('JS_VIEW_LOGIN', SITE_PATH . 'module/login/view/js/');
         define ('VIEW_PATH_LOGIN', SITE_ROOT . 'module/login/view/');
+          //MODEL_PROFILE
+         // define('UTILS_PROFILE', SITE_ROOT . 'module/login/utils/');
+          define('DAO_PROFILE', SITE_ROOT . 'module/profile/model/DAO/');
+          define('BLL_PROFILE', SITE_ROOT . 'module/profile/model/BLL/');
+          define('MODEL_PROFILE', SITE_ROOT . 'module/profile/model/model/');
+          define('JS_VIEW_PROFILE', SITE_PATH . 'module/profile/view/js/');
+          define ('VIEW_PATH_PROFILE', SITE_ROOT . 'module/profile/view/');
 
         // Friendly
         define('URL_FRIENDLY', TRUE);

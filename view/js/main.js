@@ -120,9 +120,22 @@ function logout() {
             console.log('Something has occured');
         });
 }
+//================show cart================
 
+function show_cart(){
 
+    var token = localStorage.getItem('accesstoken');
 
+    if(token){
+        $('#boton_cart').show();
+    }
+}
+function click_cart(){
+    $(document).on('click', '#boton_cart', function() {
+        window.location.href = friendlyURL("?module=cart");
+    });
+
+}
 
 
 function change_button() {
@@ -142,15 +155,37 @@ function change_button() {
         }
     }
 }
+
+function count_cart(accesstoken){
+    if (!accesstoken) {
+        
+        accesstoken = localStorage.getItem('accesstoken');
+    }
+    
+    ajaxPromise(friendlyURL("?module=cart&op=count"),'POST','JSON', {'accesstoken':accesstoken })
+    
+        .then(function(data) {
+            document.getElementById('cart-count').innerText = data;
+        })
+        .catch(function(error) {
+            console.error('Error fetching data:', error);
+           
+        });
+
+   
+}
 //________________________________________________________________________________
 
 $(document).ready(function() {
+    $('#boton_cart').hide();
     load_content();
      load_menu();
      friendlyURL();
      click_logout();
      change_button();
    // click_shop();
-
+   show_cart();
+    click_cart();
+    count_cart();
    
 });
