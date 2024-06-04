@@ -155,6 +155,14 @@ function change_button() {
         }
     }
 }
+function click_log_icon() {
+    $(document).on('click', '.log-icon', function() {
+        
+        window.location.href = friendlyURL("?module=profile");
+       
+    });
+
+}
 
 function count_cart(accesstoken){
     if (!accesstoken) {
@@ -183,6 +191,7 @@ $(document).ready(function() {
      friendlyURL();
      click_logout();
      change_button();
+     click_log_icon();
    // click_shop();
    show_cart();
     click_cart();
