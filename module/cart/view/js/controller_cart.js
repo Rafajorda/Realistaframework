@@ -298,7 +298,7 @@ function checkout(){
 
 $(document).ready(function() {
     show_products();
-    $('#checkout-button').click(function() {
+     $('#checkout-button').click(function() {
         checkout();
     }); 
  });

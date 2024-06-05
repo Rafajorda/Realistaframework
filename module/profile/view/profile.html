@@ -1,8 +1,44 @@
 <div class="profile-container">
-    <h1>profile</h1>
+
+    <div class="profile-html">
+        <h2>Nombre de usuario: <span id="currentUsername">X</span></h2>
+        <div class="profile-form">
+            <!-- Formulario para cambiar el nombre de usuario -->
+            <form id="changeUsernameForm" class="active" method="POST">
+                <div class="group">
+                    <label for="newUsername" class="label">Nuevo nombre de usuario</label>
+                    <input id="newUsername" type="text" class="input" name="newUsername">
+                    <font color="red">
+                        <span id="error_newUsername" class="error"></span>
+                    </font>
+                </div>
+                <div class="group">
+                    <input type="submit" id="changeUsernameBtn" class="button" value="Cambiar Nombre de Usuario">
+                </div>
+            </form>
+    
+            <!-- Formulario para cambiar la contraseña -->
+            <form id="changePasswordForm" class="inactive" method="POST">
+                <!-- Aquí va el formulario para cambiar la contraseña -->
+            </form>
+    
+            <!-- Formulario para subir el avatar -->
+            <form id="uploadAvatarForm" class="inactive" enctype="multipart/form-data" method="POST">
+                <div class="group">
+                    <label for="avatarFile" class="label">Subir Avatar</label>
+                    <input type="file" id="avatarFile" name="avatarFile" class="input">
+                </div>
+                <div class="group">
+                    <input type="submit" id="uploadAvatarBtn" class="button" value="Subir Avatar">
+                </div>
+            </form>
+        </div>
+    </div>
+    <h1>purchases</h1>
     <div class="profile-items">
         <!--profile items will be dynamically inserted here -->
     </div>
+    <h1>likes</h1>
     <div class="profile-likes">
         <!--profile items will be dynamically inserted here -->
     </div>

@@ -15,10 +15,15 @@
             return self::$_instance;
         }
 
-        public function get_list($args){
-            return $this -> bll -> get_list_BLL($args);
+        public function get_listinvoices($args){
+            return $this -> bll -> get_listinvoices_BLL($args);
         }
-            
+        public function get_listlikes($args){
+            return $this -> bll -> get_listlikes_BLL($args);
+        } 
+        public function get_generatepdf($args){
+            return $this -> bll -> get_generatepdf_BLL($args);
+        }    
         
     }
 ?>

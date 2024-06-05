@@ -5,7 +5,15 @@
         <uri>view</uri>
     </function>
      <function>
-        <name>listbill</name>
-        <uri>listbill</uri>
+        <name>listinvoices</name>
+        <uri>listinvoices</uri>
+    </function>
+    <function>
+        <name>listlikes</name>
+        <uri>listlikes</uri>
+    </function>
+    <function>
+        <name>generatepdf</name>
+        <uri>generatepdf</uri>
     </function>
 </functions>
