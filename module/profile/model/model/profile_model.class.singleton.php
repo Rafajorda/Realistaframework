@@ -23,7 +23,13 @@
         } 
         public function get_generatepdf($args){
             return $this -> bll -> get_generatepdf_BLL($args);
-        }    
+        }
+        public function get_getUserType($args){
+            return $this -> bll -> get_getUserType_BLL($args);
+        }
+        public function get_changeUsername($args){
+            return $this -> bll -> get_changeUsername_BLL($args);
+        }   
         
     }
 ?>

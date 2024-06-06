@@ -76,10 +76,51 @@
 				
 				return $db->listar($stmt); 
 		}
-	
+		function select_userP($db, $username) {
+			$sql = "SELECT COUNT(*) AS count FROM `users` WHERE username = '$username'";
+			$stmt = $db->ejecutar($sql);
+			$result = $db->listar($stmt);
 		
-	}
+			// Check if any rows were returned
+			if (!empty($result) && isset($result[0]['count'])) {
+				if ($result[0]['count'] > 0) {
+					return "exists"; // Username exists
+				} else {
+					return false; // Username doesn't exist
+				}
+			}
+		
+			return false; // Default to false if no rows were returned or count couldn't be obtained
+		}
 
-	
-	
+		function update_Username($db, $username, $id) {
+			$sql = "UPDATE `users` SET `username` = '$username' WHERE `id_user` = $id";
+			$stmt = $db->ejecutar($sql);
+			
+			
+			if ($stmt) {
+				return true; // Username updated successfully
+			} else {
+				return false; // Failed to update username
+			}
+		}
+		public function select_typeuser($db, $userId) {
+			$sql = "SELECT origin FROM users WHERE id_user = $userId";
+			$stmt = $db->ejecutar($sql);
+			$result = $db->listar($stmt);
+		
+			// Check if any rows were returned
+			if (!empty($result) && isset($result[0]['origin'])) {
+				return $result[0]['origin']; // Return the user type
+			}
+		
+			return false; // Default to false if no rows were returned or type_user couldn't be obtained
+		}
+
+
+
+
+
+
+	}	
 ?>

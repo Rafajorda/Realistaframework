@@ -100,7 +100,7 @@ function remove_filterslogout() {
     localStorage.removeItem('filter_pricemax');
     localStorage.removeItem('order');
     localStorage.removeItem('currentPage');
-    
+    localStorage.removeItem('userType');    
     }
 
 $(document).ready(function() {

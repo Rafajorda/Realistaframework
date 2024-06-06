@@ -26,6 +26,12 @@
         function generatepdf(){
             echo json_encode(common::load_model('profile_model', 'get_generatepdf',$_POST['invoiceID']));
         }
+        function getUserType(){
+            echo json_encode(common::load_model('profile_model', 'get_getUserType',$_POST['accesstoken']));
+        }
+        function changeUsername(){
+            echo json_encode(common::load_model('profile_model', 'get_changeUsername', Array($_POST['newUsername'], $_POST['accesstoken'])));
+        }
        
     
     }

@@ -16,4 +16,20 @@
         <name>generatepdf</name>
         <uri>generatepdf</uri>
     </function>
+    <function>
+        <name>changeUsername</name>
+        <uri>changeUsername</uri>
+    </function>
+    <function>
+        <name>changePassword</name>
+        <uri>changePassword</uri>
+    </function>
+    <function>
+        <name>changeAvatar</name>
+        <uri>changeAvatar</uri>
+    </function>
+    <function>
+        <name>getUserType</name>
+        <uri>getUserType</uri>
+    </function>
 </functions>

@@ -1,37 +1,68 @@
 <div class="profile-container">
 
     <div class="profile-html">
-        <h2>Nombre de usuario: <span id="currentUsername">X</span></h2>
-        <div class="profile-form">
-            <!-- Formulario para cambiar el nombre de usuario -->
-            <form id="changeUsernameForm" class="active" method="POST">
-                <div class="group">
-                    <label for="newUsername" class="label">Nuevo nombre de usuario</label>
-                    <input id="newUsername" type="text" class="input" name="newUsername">
-                    <font color="red">
-                        <span id="error_newUsername" class="error"></span>
-                    </font>
+            
+            <div class="profile-html">
+                <h2>Nombre de usuario: <span id="currentUsername">X</span></h2>
+                <div class="profile-form">
+                    <!-- Formulario para cambiar el nombre de usuario -->
+                    <h3>Cambiar Nombre de Usuario</h3>
+                    <form id="changeUsernameForm" method="POST">
+                        <div class="group">
+                            <label for="newUsername" class="label">Nuevo nombre de usuario</label>
+                            <input id="newUsername" type="text" class="input" name="newUsername" placeholder="Ingrese su nuevo nombre de usuario">
+                            <font color="red">
+                                <span id="error_newUsername" class="error"></span>
+                            </font>
+                        </div>
+                        <div class="group">
+                            <input type="submit" id="changeUsernameBtn" class="button" value="Cambiar Nombre de Usuario">
+                        </div>
+                    </form>
+            
+                    <!-- Formulario para cambiar la contraseña -->
+                    <h3>Cambiar Contraseña</h3>
+                    <form id="changePasswordForm" method="POST">
+                        <div class="group">
+                            <label for="oldPassword" class="label">Contraseña actual</label>
+                            <input id="oldPassword" type="password" class="input" name="oldPassword" placeholder="Ingrese su contraseña actual">
+                            <font color="red">
+                                <span id="error_oldPassword" class="error"></span>
+                            </font>
+                        </div>
+                        <div class="group">
+                            <label for="newPassword" class="label">Nueva contraseña</label>
+                            <input id="newPassword" type="password" class="input" name="newPassword" placeholder="Ingrese su nueva contraseña">
+                            <font color="red">
+                                <span id="error_newPassword" class="error"></span>
+                            </font>
+                        </div>
+                        <div class="group">
+                            <label for="confirmNewPassword" class="label">Confirmar nueva contraseña</label>
+                            <input id="confirmNewPassword" type="password" class="input" name="confirmNewPassword" placeholder="Confirme su nueva contraseña">
+                            <font color="red">
+                                <span id="error_confirmNewPassword" class="error"></span>
+                            </font>
+                        </div>
+                        <div class="group">
+                            <input type="submit" id="changePasswordBtn" class="button" value="Cambiar Contraseña">
+                        </div>
+                    </form>
+            
+                    <!-- Formulario para subir el avatar -->
+                    <h3>Subir Avatar</h3>
+                    <form id="uploadAvatarForm" enctype="multipart/form-data" method="POST">
+                        <div class="group">
+                            <label for="avatarFile" class="label">Subir Avatar</label>
+                            <input type="file" id="avatarFile" name="avatarFile" class="input">
+                        </div>
+                        <div class="group">
+                            <input type="submit" id="uploadAvatarBtn" class="button" value="Subir Avatar">
+                        </div>
+                    </form>
                 </div>
-                <div class="group">
-                    <input type="submit" id="changeUsernameBtn" class="button" value="Cambiar Nombre de Usuario">
-                </div>
-            </form>
-    
-            <!-- Formulario para cambiar la contraseña -->
-            <form id="changePasswordForm" class="inactive" method="POST">
-                <!-- Aquí va el formulario para cambiar la contraseña -->
-            </form>
-    
-            <!-- Formulario para subir el avatar -->
-            <form id="uploadAvatarForm" class="inactive" enctype="multipart/form-data" method="POST">
-                <div class="group">
-                    <label for="avatarFile" class="label">Subir Avatar</label>
-                    <input type="file" id="avatarFile" name="avatarFile" class="input">
-                </div>
-                <div class="group">
-                    <input type="submit" id="uploadAvatarBtn" class="button" value="Subir Avatar">
-                </div>
-            </form>
+            </div>
+
         </div>
     </div>
     <h1>purchases</h1>
@@ -42,4 +73,4 @@
     <div class="profile-likes">
         <!--profile items will be dynamically inserted here -->
     </div>
-</div>
+</div

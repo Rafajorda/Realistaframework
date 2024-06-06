@@ -115,11 +115,31 @@ function logout() {
         .then(function(data) {
             localStorage.removeItem('accesstoken');
             localStorage.removeItem('refreshtoken');
+            remove_filterslogout();
             window.location.href = friendlyURL("?module=home");
+            
         }).catch(function() {
             console.log('Something has occured');
         });
 }
+
+function remove_filterslogout() {
+    localStorage.removeItem('filters');
+    localStorage.removeItem('filter_m2');
+    localStorage.removeItem('filter_m2MAX');
+    localStorage.removeItem('filter_m2MIN');
+    localStorage.removeItem('filter_ahorro');
+    localStorage.removeItem('filter_type');
+    localStorage.removeItem('filter_category');
+    localStorage.removeItem('filter_operation');
+    localStorage.removeItem('filter_city');
+    localStorage.removeItem('filtrosshop');
+    localStorage.removeItem('filter_pricemin');
+    localStorage.removeItem('filter_pricemax');
+    localStorage.removeItem('order');
+    localStorage.removeItem('currentPage');
+    localStorage.removeItem('userType');    
+    }
 //================show cart================
 
 function show_cart(){
