@@ -30,6 +30,9 @@
         public function get_changeUsername($args){
             return $this -> bll -> get_changeUsername_BLL($args);
         }   
+        public function get_changePassword($args){
+            return $this -> bll -> get_changePassword_BLL($args);
+        } 
         
     }
 ?>

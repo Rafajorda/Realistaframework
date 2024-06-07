@@ -32,8 +32,10 @@
         function changeUsername(){
             echo json_encode(common::load_model('profile_model', 'get_changeUsername', Array($_POST['newUsername'], $_POST['accesstoken'])));
         }
-       
-    
+        function changePassword(){
+            echo json_encode(common::load_model('profile_model', 'get_changePassword', Array($_POST['oldPassword'],$_POST['newPassword'], $_POST['accesstoken'])));
+        }
+        
     }
     
 ?>

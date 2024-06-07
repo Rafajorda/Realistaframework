@@ -91,6 +91,28 @@ require_once 'C:/wamp64/www/RealistaF/Realistaframework/utils/PDF.inc.php';
 
 			return $this->dao->select_typeuser($this->db,$decode['id']);
 		}
-		
+		public function get_changePassword_BLL($args){
+			
+			$hashed_newpass = password_hash($args[1], PASSWORD_DEFAULT, ['cost' => 12]);
+			$decode = middleware::decode_token($args[2]);
+			$user = $this->dao->select_user($this->db, $decode['id']);
+			if ($user) {
+				// Verify the old password
+				if (password_verify($args[0], $user[0]['password'])) {
+
+					$this->dao->update_user_password($this->db, $decode['id'], $hashed_newpass);
+					return 'password_success';
+				} else {
+					// Old password is incorrect
+					return 'incorrect_old_password';
+				}
+			} else {
+				// User not found
+				return 'user_not_found';
+			}
+
+
+
+		}
 	}
 ?>

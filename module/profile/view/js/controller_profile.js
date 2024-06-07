@@ -169,10 +169,6 @@ function validateChangePassword() {
 }
 
 
-function button(){
-
-}
-
     function changeUsername() {
         if (validateChangeUsername() != 0) {
             var newUsername = document.getElementById('newUsername').value;
@@ -196,31 +192,31 @@ function button(){
         }
     }
 
-function validateChangeUsername() {
-    var username_exp = /^(?=.{5,}$)(?=.*[a-zA-Z0-9]).*$/;
-    var error = false;
+// function validateChangeUsername() {
+//     var username_exp = /^(?=.{5,}$)(?=.*[a-zA-Z0-9]).*$/;
+//     var error = false;
 
-    var newUsername = document.getElementById('newUsername').value;
+//     var newUsername = document.getElementById('newUsername').value;
     
-    if (newUsername.length === 0) {
-        document.getElementById('error_newUsername').innerHTML = "Tienes que escribir el nuevo nombre de usuario";
-        error = true;
-    } else {
-        if (newUsername.length < 5) {
-            document.getElementById('error_newUsername').innerHTML = "El nombre de usuario tiene que tener 5 caracteres como mínimo";
-            error = true;
-        } else {
-            if (!username_exp.test(newUsername)) {
-                document.getElementById('error_newUsername').innerHTML = "No se pueden poner caracteres especiales";
-                error = true;
-            } else {
-                document.getElementById('error_newUsername').innerHTML = "";
-            }
-        }
-    }
+//     if (newUsername.length === 0) {
+//         document.getElementById('error_newUsername').innerHTML = "Tienes que escribir el nuevo nombre de usuario";
+//         error = true;
+//     } else {
+//         if (newUsername.length < 5) {
+//             document.getElementById('error_newUsername').innerHTML = "El nombre de usuario tiene que tener 5 caracteres como mínimo";
+//             error = true;
+//         } else {
+//             if (!username_exp.test(newUsername)) {
+//                 document.getElementById('error_newUsername').innerHTML = "No se pueden poner caracteres especiales";
+//                 error = true;
+//             } else {
+//                 document.getElementById('error_newUsername').innerHTML = "";
+//             }
+//         }
+//     }
 
-    return !error;
-}
+//     return !error;
+// }
 function button_changeusername(){
     
     if (!document.getElementById('changeUsernameForm').onsubmit) {
@@ -231,8 +227,68 @@ function button_changeusername(){
     }
 }
 
-function change_password(){
+// function change_password(){
+//     if (validateChangePassword() != 0) {
+//         var oldPassword = document.getElementById('oldPassword').value;
+//         var newPassword = document.getElementById('newPassword').value;
+//         var accesstoken = localStorage.getItem('accesstoken');
+//         ajaxPromise(friendlyURL("?module=profile&op=changePassword"), 'POST', 'JSON', { 'oldPassword': oldPassword, 'newPassword': newPassword, 'accesstoken': accesstoken })
+//         .then(function(result) {
+            
+//             console.log("Password changed successfully:", result);
 
+//              })
+//                 .catch(function(textStatus) {
+//                     if (console && console.log) {
+//                         console.log("La solicitud ha fallado: " + textStatus);
+//                     }
+//                 });
+
+//     }
+
+// }
+function change_password() {
+    if (validateChangePassword() != 0) {
+        var oldPassword = document.getElementById('oldPassword').value;
+        var newPassword = document.getElementById('newPassword').value;
+        var accesstoken = localStorage.getItem('accesstoken');
+        
+        ajaxPromise(friendlyURL("?module=profile&op=changePassword"), 'POST', 'JSON', { 'oldPassword': oldPassword, 'newPassword': newPassword, 'accesstoken': accesstoken })
+        .then(function(result) {
+            if (result === 'password_success') {
+                console.log("Password changed successfully:", result);
+                // Show a success message to the user
+                document.getElementById('error_oldPassword').innerText = "Password changed successfully.";
+            } else if (result === 'incorrect_old_password') {
+                console.log("Incorrect old password:", result);
+                // Show an error message to the user
+                document.getElementById('error_oldPassword').innerText = "The old password is incorrect.";
+            } else if (result === 'user_not_found') {
+                console.log("User not found:", result);
+                // Show an error message to the user
+                document.getElementById('error_oldPassword').innerText = "User not found.";
+            } else {
+                console.log("Unexpected error:", result);
+                // Show a generic error message to the user
+                document.getElementById('error_oldPassword').innerText = "An unexpected error occurred.";
+            }
+        })
+        .catch(function(textStatus) {
+            if (console && console.log) {
+                console.log("La solicitud ha fallado: " + textStatus);
+                // Show a generic error message to the user
+                document.getElementById('error_oldPassword').innerText = "An unexpected error occurred.";
+            }
+        });
+    }
+}
+function button_changePassword() {
+    if (!document.getElementById('changePasswordForm').onsubmit) {
+        document.getElementById('changePasswordForm').onsubmit = function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            change_password();
+        };
+    }
 }
 function change_avatar(){
 
@@ -247,7 +303,7 @@ function checkUserType() {
             .then(function(result) {
                 localStorage.setItem('userType', result);
                 if (result === "google") {
-                    // Hide the forms for social clients
+                   
                     // document.getElementById('changeUsernameForm').style.display = 'none';
                     // document.getElementById('changePasswordForm').style.display = 'none';
                     // document.getElementById('uploadAvatarForm').style.display = 'none';
@@ -259,7 +315,7 @@ function checkUserType() {
             });
     } else {
         if (userType === "google") {
-            // Hide the forms for social clients
+            
             // document.getElementById('changeUsernameForm').style.display = 'none';
             // document.getElementById('changePasswordForm').style.display = 'none';
             // document.getElementById('uploadAvatarForm').style.display = 'none';
@@ -273,4 +329,5 @@ $(document).ready(function() {
       show_likes();
       button_changeusername();
       checkUserType();
+      button_changePassword();
  });

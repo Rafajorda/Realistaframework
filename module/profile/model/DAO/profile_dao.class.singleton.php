@@ -117,6 +117,20 @@
 			return false; // Default to false if no rows were returned or type_user couldn't be obtained
 		}
 
+		public function select_user($db, $id){
+            $sql = "SELECT `id_user`,`username`, `password`, `email`, `type_user`, `avatar`, `token_email`, `activate`, `fails`, `OTP`, `origin` FROM `users` WHERE id_user='$id'";
+
+            $stmt = $db->ejecutar($sql);
+                return $db->listar($stmt);
+            
+        }
+		public function update_user_password($db, $user_id, $hashed_newpass) {
+			
+			$sql = "UPDATE users SET password = '$hashed_newpass' WHERE id_user = '$user_id'";
+			$stmt = $db->ejecutar($sql);
+			return $stmt;
+		}
+
 
 
 
