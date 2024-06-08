@@ -114,5 +114,25 @@ require_once 'C:/wamp64/www/RealistaF/Realistaframework/utils/PDF.inc.php';
 
 
 		}
-	}
+		public function get_changeAvatar_BLL($args){
+			$decode = middleware::decode_token($args[1]);
+			$targetDirectory = '/uploads/avatar'; // Relative path
+			
+			$uploadedFilePath = $_SERVER['DOCUMENT_ROOT'] . $targetDirectory . '/' . $args[0]['name']; // Full path
+			
+			if (move_uploaded_file($args[0]['tmp_name'], $uploadedFilePath)) {
+				// Update the user's avatar path in the database
+				$avatarPath = $targetDirectory . '/' . $args[0]['name']; // Relative path
+				$done = $this->dao->update_avatar($this->db, $avatarPath, $decode['id']);
+				if ($done) {
+					return "done";
+				} else {
+					return "error updating avatar path in database";
+				}
+			} else {
+				return "error moving uploaded avatar file";
+			}
+		}
+	
+	 }
 ?>

@@ -62,7 +62,7 @@ class middleware{
        
         $secret = $jwt['JWT_SECRET'];
     // $payload = '{"iat":"' . time() . '","exp":"' . time() + (600) . '","username":"' . $username . '"}';
-        $payload = '{"iat":"' . time() . '","exp":"' . (time() + 2400) . '","username":"' . $username . '","id":"' . $id . '"}';
+        $payload = '{"iat":"' . time() . '","exp":"' . (time() + 1800) . '","username":"' . $username . '","id":"' . $id . '"}';
 
         $JWT = new JWT;
         $token = $JWT->encode($header, $payload, $secret);

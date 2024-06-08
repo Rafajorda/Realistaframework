@@ -33,6 +33,9 @@
         public function get_changePassword($args){
             return $this -> bll -> get_changePassword_BLL($args);
         } 
+        public function get_changeAvatar($args){
+            return $this -> bll -> get_changeAvatar_BLL($args);
+        }
         
     }
 ?>

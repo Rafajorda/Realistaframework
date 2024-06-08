@@ -227,26 +227,7 @@ function button_changeusername(){
     }
 }
 
-// function change_password(){
-//     if (validateChangePassword() != 0) {
-//         var oldPassword = document.getElementById('oldPassword').value;
-//         var newPassword = document.getElementById('newPassword').value;
-//         var accesstoken = localStorage.getItem('accesstoken');
-//         ajaxPromise(friendlyURL("?module=profile&op=changePassword"), 'POST', 'JSON', { 'oldPassword': oldPassword, 'newPassword': newPassword, 'accesstoken': accesstoken })
-//         .then(function(result) {
-            
-//             console.log("Password changed successfully:", result);
 
-//              })
-//                 .catch(function(textStatus) {
-//                     if (console && console.log) {
-//                         console.log("La solicitud ha fallado: " + textStatus);
-//                     }
-//                 });
-
-//     }
-
-// }
 function change_password() {
     if (validateChangePassword() != 0) {
         var oldPassword = document.getElementById('oldPassword').value;
@@ -290,11 +271,62 @@ function button_changePassword() {
         };
     }
 }
-function change_avatar(){
+// function change_avatar(){
+//     var avatarFile = document.getElementById('avatarFile').files[0];
+//     var accesstoken = localStorage.getItem('accesstoken');
+//     ajaxPromise(friendlyURL("?module=profile&op=changeAvatar"), 'POST', 'JSON', { 'newAvatar': avatarFile,'accesstoken': accesstoken })
+//         .then(function(result) {
 
 
+//         })
+//             .catch(function(textStatus) {
+//                 if (console && console.log) {
+//                     console.log("La solicitud ha fallado: " + textStatus);
+//                     // Show a generic error message to the user
+                    
+//                 }
+//             });
+        
+
+// }
+function change_avatar() {
+    var avatarFile = document.getElementById('avatarFile').files[0];
+    var accesstoken = localStorage.getItem('accesstoken');
+    var formData = new FormData();
+    formData.append('newAvatar', avatarFile);
+    formData.append('accesstoken', accesstoken);
+
+    
+    fetch(friendlyURL("?module=profile&op=changeAvatar"), {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result === 'done') {
+            
+            toastr.success('Avatar changed successfully.');
+           
+            window.location.reload();
+        } else {
+            
+            toastr.error('An error occurred while changing the avatar.');
+        }
+    })
+    .catch(error => {
+       
+    });
 }
 
+
+function button_changeAvatar() {
+    if (!document.getElementById('uploadAvatarForm').onsubmit) {
+        document.getElementById('uploadAvatarForm').onsubmit = function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            change_avatar();
+        };
+    }
+}
 function checkUserType() {
     var userType = localStorage.getItem('userType');
     var accesstoken = localStorage.getItem('accesstoken');
@@ -330,4 +362,5 @@ $(document).ready(function() {
       button_changeusername();
       checkUserType();
       button_changePassword();
+      button_changeAvatar();
  });

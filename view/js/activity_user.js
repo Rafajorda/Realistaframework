@@ -9,7 +9,7 @@ function protecturl() {
                 console.log("CORRECTO-->El usario coincide con la session");
             } else if (data == "Wrong_User") {
                 console.log("INCORRCTO--> Estan intentando acceder a una cuenta");
-                logout_auto();
+               logout_auto();
             }
         })
         .catch(function() { console.log("ANONYMOUS_user") });
@@ -20,7 +20,7 @@ function protecturl() {
                 console.log("CORRECTO-->El usario coincide con la session(expires)");
             } else if (data == "Wrong_User") {
                 console.log("INCORRCTO--> Estan intentando acceder a una cuenta(expires)");
-                logout_auto();
+              logout_auto();
             }
         })
         .catch(function() { console.log("ANONYMOUS_user") });

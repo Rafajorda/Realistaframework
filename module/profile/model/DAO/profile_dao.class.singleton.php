@@ -130,7 +130,12 @@
 			$stmt = $db->ejecutar($sql);
 			return $stmt;
 		}
-
+		public function update_avatar($db,$avatarroute ,$user_id) {
+			
+			$sql = "UPDATE users SET avatar = '$avatarroute' WHERE id_user = '$user_id'";
+			$stmt = $db->ejecutar($sql);
+			return $stmt;
+		}
 
 
 

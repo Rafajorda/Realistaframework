@@ -210,14 +210,6 @@
 
 		public function get_data_user_BLL($args) {
 
-			// $json = decode_token($_POST['token']);
-			// $daoLog = new DAOLogin();
-			// $rdo = $daoLog->select_data_user($json['username']);
-			// echo json_encode($rdo);
-			// exit;
-			
-
-			// $token = explode('"', $args);
 			$decode = middleware::decode_token($args);
 			return $this -> dao -> select_data_user($this->db, $decode['username']);
 		}
