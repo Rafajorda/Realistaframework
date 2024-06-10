@@ -295,27 +295,43 @@ function change_avatar() {
     var formData = new FormData();
     formData.append('newAvatar', avatarFile);
     formData.append('accesstoken', accesstoken);
+    var validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    var maxSizeInBytes = 5 * 1024 * 1024; // 5MB
 
     
-    fetch(friendlyURL("?module=profile&op=changeAvatar"), {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result === 'done') {
+    if (!avatarFile) {
+        toastr.error('Please select a file.');
+        return;
+    }
+     if (!validImageTypes.includes(avatarFile.type)) {
+        toastr.error('Invalid file type. Please select an image file (jpeg, png, gif).');
+        return;
+    }
+     if (avatarFile.size > maxSizeInBytes) {
+        toastr.error('File size exceeds 5MB.');
+        return;
+     }
+    
+        fetch(friendlyURL("?module=profile&op=changeAvatar"), {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result === 'done') {
+                
+                toastr.success('Avatar changed successfully.');
             
-            toastr.success('Avatar changed successfully.');
-           
-            window.location.reload();
-        } else {
-            
+                window.location.reload();
+            } else {
+                
+                toastr.error('An error occurred while changing the avatar.');
+            }
+        })
+        .catch(error => {
             toastr.error('An error occurred while changing the avatar.');
-        }
-    })
-    .catch(error => {
-       
-    });
+        });
+    
 }
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 27-03-2024 a las 10:47:29
+-- Tiempo de generación: 10-06-2024 a las 18:23:06
 -- Versión del servidor: 8.2.0
 -- Versión de PHP: 8.2.13
 
@@ -45,6 +45,71 @@ INSERT INTO `ahorro` (`idahorro`, `nameahorro`, `imgahorro`) VALUES
 ('3', 'colector agua lluvia', 'view/img/ahorro/lluvia.jpg'),
 ('4', 'aerogenerador', 'view/img/ahorro/aire.jpg'),
 ('5', 'domotica', 'view/img/ahorro/domotica.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bills`
+--
+
+DROP TABLE IF EXISTS `bills`;
+CREATE TABLE IF NOT EXISTS `bills` (
+  `ID` varchar(100) NOT NULL,
+  `id_user` varchar(100) NOT NULL,
+  `items` int NOT NULL,
+  `price` int NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `bills`
+--
+
+INSERT INTO `bills` (`ID`, `id_user`, `items`, `price`) VALUES
+('21-139986', '21', 4, 900000),
+('21-223127', '21', 1, 150000),
+('22-477640', '22', 3, 600000),
+('21-159974', '21', 2, 1234000),
+('2-904565', '2', 4, 1000000),
+('3-312104', '3', 5, 540000),
+('3-004938', '3', 1, 300000);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cart`
+--
+
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE IF NOT EXISTS `cart` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_user` int NOT NULL,
+  `id_vivienda` varchar(100) NOT NULL,
+  `quantity` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `isactive` tinyint(1) NOT NULL DEFAULT '1',
+  `bill_id` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`) USING BTREE,
+  KEY `id_vivienda` (`id_vivienda`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `cart`
+--
+
+INSERT INTO `cart` (`id`, `id_user`, `id_vivienda`, `quantity`, `isactive`, `bill_id`) VALUES
+(4, 21, '13', '2', 0, '21-139986'),
+(7, 21, '15', '2', 0, '21-139986'),
+(8, 21, '2', '2', 0, '21-094317'),
+(9, 21, '13', '1', 0, '21-223127'),
+(10, 22, '15', '1', 0, '22-477640'),
+(11, 22, '13', '2', 0, '22-477640'),
+(12, 21, '1', '1', 0, '21-159974'),
+(13, 21, '8', '1', 0, '21-159974'),
+(14, 2, '20', '4', 0, '2-904565'),
+(15, 3, '3', '3', 0, '3-312104'),
+(16, 3, '23', '2', 0, '3-312104'),
+(17, 3, '15', '1', 0, '3-004938');
 
 -- --------------------------------------------------------
 
@@ -127,6 +192,41 @@ INSERT INTO `images` (`idimages`, `nameimages`, `imgimages`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `likes`
+--
+
+DROP TABLE IF EXISTS `likes`;
+CREATE TABLE IF NOT EXISTS `likes` (
+  `idvivienda` varchar(100) NOT NULL,
+  `id_user` int NOT NULL,
+  PRIMARY KEY (`idvivienda`,`id_user`),
+  KEY `id_user` (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `likes`
+--
+
+INSERT INTO `likes` (`idvivienda`, `id_user`) VALUES
+('1', 2),
+('13', 2),
+('3', 2),
+('8', 3),
+('1', 4),
+('12', 4),
+('2', 4),
+('23', 4),
+('9', 4),
+('3', 5),
+('6', 5),
+('13', 21),
+('13', 22),
+('20', 22),
+('8', 22);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `operation`
 --
 
@@ -149,6 +249,32 @@ INSERT INTO `operation` (`idop`, `nameop`, `imgop`) VALUES
 ('3', 'opcion a compra', 'view/img/operation/opcioncompra.jpg'),
 ('4', 'compartir', 'view/img/operation/share.jpg'),
 ('5', 'habitacion', 'view/img/operation/bed.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `services`
+--
+
+DROP TABLE IF EXISTS `services`;
+CREATE TABLE IF NOT EXISTS `services` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `type` varchar(100) NOT NULL,
+  `stock` int NOT NULL DEFAULT '0',
+  `price` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `services`
+--
+
+INSERT INTO `services` (`id`, `type`, `stock`, `price`) VALUES
+(1, 'limpieza', 40, '2.50'),
+(2, 'jardineria', 25, '3.5'),
+(3, 'mantenimiento electrico 24H', 12, '5'),
+(4, 'fontaneria 24h', 23, '5.0'),
+(5, 'mantenimiento piscina', 6, '4.35');
 
 -- --------------------------------------------------------
 
@@ -180,6 +306,43 @@ INSERT INTO `tipo` (`idtipo`, `nametipo`, `imgtipo`, `visit`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id_user` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(25) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `type_user` varchar(50) DEFAULT NULL,
+  `avatar` varchar(100) DEFAULT NULL,
+  `token_email` varchar(200) NOT NULL,
+  `activate` tinyint(1) NOT NULL,
+  `fails` int NOT NULL,
+  `OTP` varchar(10) NOT NULL,
+  `origin` varchar(100) NOT NULL,
+  `UID` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id_user`, `username`, `password`, `email`, `type_user`, `avatar`, `token_email`, `activate`, `fails`, `OTP`, `origin`, `UID`) VALUES
+(1, 'patata', '$2y$12$jfWdFcxrlluc4wsndgT/R.hQ0UO2OkmAtxaGNmxu/gR9Lb7ggb.JW', 'patata@gmail.com', 'client', 'https://i.pravatar.cc/500?u=785fefe6795bcbd014704229986df1ac', '', 1, 0, '000000', 'local', ''),
+(2, 'usuario1', '$2y$12$M6/jrBHIDFTxG0DKEwZYse8IQ/GV/fCRM5eCyMTNBeRTHnV9Ls/8i', 'usuario1@gmail.com', 'client', 'https://i.pravatar.cc/500?u=084352b66b58c811e491346111edaa24', '', 1, 0, '000000', 'local', ''),
+(3, 'usuario2', '$2y$12$m21TdKtHZUx7pUYy6uX0oODLf/k0gICAw40yeA99UvnecdX28zQQW', 'usuario2@gmail.com', 'client', '/uploads/avatar/thomas-morse-r-5-mb-11-p-268-D3K0GC.jpg', '', 1, 0, '000000', 'local', ''),
+(4, 'usuario3', '$2y$12$.X70VMbhxGe0rn.aN21O5uEGh9Ljg6MOfWfJsQjPHQr7DeM2ex6BS', 'usuario3@gmail.com', 'client', 'https://i.pravatar.cc/500?u=ebd4046c0fa2a2ebdb6773311bce5ef1', '', 1, 0, '000000', 'local', ''),
+(5, 'usuario4', '$2y$12$yuZ2xGEwY1bDVsjOazpRq.bE6KGoJ.Pttvs3AcMEVhKBSdO/pfsqC', 'usuario4@gmail.com', 'client', 'https://i.pravatar.cc/500?u=c965762f0c00ab3b65f7306d1fbcb042', '', 1, 0, '000000', 'local', ''),
+(6, 'estoesunusuariomuylargopo', '$2y$12$CBGjxtPNy03om3nFInklIeWTa1jvIs/MLMwlDgdR6I2NkypwArM8e', 'estoestodomuylargo@gmail.com', 'client', 'https://i.pravatar.cc/500?u=c541a2851191311745509436e95d46f0', '', 1, 0, '000000', 'local', ''),
+(21, 'Rafael', '$2y$12$jJgqzXCKQEaB.kzBd.U3h..Y2o4liulfM.U5WCGehLPMLWuHrmIv2', 'rafajorgis@gmail.com', 'client', '/uploads/avatar/perfil.png', '', 1, 0, '903452', 'local', ''),
+(22, 'rafajorgis', '', 'rafajorgis@gmail.com_google', 'client', 'https://lh3.googleusercontent.com/a/ACg8ocJ5x7BhfFbaQNiEks2cxab5FbTmV_MIxFDH_VcA-oAuD0xCGQ=s96-c', '', 1, 0, '000000', 'google', '3iEVrvk12DbkvMAbMO8nPSU1TG62');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `vivienda`
 --
 
@@ -198,6 +361,7 @@ CREATE TABLE IF NOT EXISTS `vivienda` (
   `visitas` int NOT NULL,
   `lat` varchar(100) NOT NULL,
   `longi` varchar(100) NOT NULL,
+  `stock` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`idvivienda`),
   UNIQUE KEY `idvivienda` (`idvivienda`),
   KEY `tipo` (`tipo`),
@@ -212,25 +376,42 @@ CREATE TABLE IF NOT EXISTS `vivienda` (
 -- Volcado de datos para la tabla `vivienda`
 --
 
-INSERT INTO `vivienda` (`idvivienda`, `nameviv`, `tipo`, `categoria`, `operation`, `city`, `superficie`, `price`, `ahorro`, `images`, `visitas`, `lat`, `longi`) VALUES
-('1', 'pisito en la playa', '4', '3', '1', '1', '200', '684000', '1', '4', 13, '38.8231', '-0.6158'),
-('10', 'Casa rural', '4', '4', '5', '4', '200', '350000', '4', '3', 56, '38.9897', '-0.5366'),
-('11', 'Apartamento luminoso', '2', '1', '1', '2', '70', '120000', '2', '5', 33, '38.8991', '-0.5024'),
-('12', 'Villa junto al mar', '5', '2', '3', '3', '400', '780000', '1', '3', 68, ' 38.8803', '-0.5901'),
-('13', 'Piso reformado', '1', '3', '4', '4', '90', '150000', '3', '4', 90, '38.991000', '-0.519972'),
-('14', 'Casa adosada familiar', '3', '4', '5', '5', '250', '420000', '4', '2', 101, '38.8665', '-0.5089'),
-('2', 'chalecito en aielo\r\n', '2', '1', '3', '3', '62', '79000', '2', '2', 101, ' 38.8783', '-0.5905'),
-('3', 'muy sosa', '3', '2', '5', '2', '150', '60000', '3', '2', 3, '38.9032', '-0.4980'),
-('4', 'yipicayei', '5', '4', '4', '4', '100', '20000', '2', '1', 69, '38.9878', '-0.5236'),
-('5', 'coso', '1', '4', '2', '2', '6000', '9800000', '5', '1', 8, '38.9035', '-0.4985'),
-('6', 'casa en bufali', '1', '2', '3', '5', '150', '200000', '4', '3', 5, '38.8668', '-0.5099'),
-('7', 'Apartamento acogedor', '1', '1', '1', '1', '120', '250000', '1', '5', 12, '38.8190', '-0.6146'),
-('8', 'Chalet moderno', '3', '3', '2', '2', '300', '550000', '3', '3', 7, '38.9038', '-0.4982'),
-('9', 'Piso céntrico', '2', '2', '4', '3', '80', '180000', '5', '4', 2, '38.8679', '-0.5910');
+INSERT INTO `vivienda` (`idvivienda`, `nameviv`, `tipo`, `categoria`, `operation`, `city`, `superficie`, `price`, `ahorro`, `images`, `visitas`, `lat`, `longi`, `stock`) VALUES
+('1', 'pisito en la playa', '4', '3', '1', '1', '200', '684000', '1', '4', 24, '38.8231', '-0.6158', 25),
+('10', 'Casa rural', '4', '4', '5', '4', '200', '350000', '4', '3', 58, '38.9897', '-0.5366', 3),
+('11', 'Apartamento luminoso', '2', '1', '1', '2', '70', '120000', '1', '5', 34, '38.8991', '-0.5024', 2),
+('12', 'Villa junto al mar', '5', '2', '3', '3', '400', '780000', '1', '3', 69, ' 38.8803', '-0.5901', 6),
+('13', 'Piso reformado', '1', '3', '4', '4', '90', '150000', '3', '4', 190, '38.991000', '-0.519972', 68),
+('14', 'Casa adosada familiar', '3', '4', '5', '5', '250', '420000', '4', '2', 103, '38.8665', '-0.5089', 7),
+('15', 'Casa de campo', '1', '1', '1', '1', '180', '300000', '1', '1', 38, '38.8213', '-0.6140', 8),
+('16', 'Piso luminoso', '4', '2', '2', '2', '100', '150000', '2', '2', 20, '38.9001', '-0.5032', 12),
+('17', 'Chalet adosado', '3', '3', '3', '3', '250', '500000', '3', '3', 122, '38.8888', '-0.5900', 1),
+('18', 'Apartamento moderno', '2', '4', '4', '4', '80', '200000', '4', '4', 42, '38.9888', '-0.5222', 0),
+('19', 'Villa con piscina', '5', '1', '5', '5', '400', '800000', '5', '1', 50, '38.8777', '-0.5090', 4),
+('2', 'chalecito en aielo\r\n', '2', '1', '3', '3', '62', '79000', '2', '2', 102, ' 38.8783', '-0.5905', 12),
+('20', 'Piso céntrico', '1', '2', '1', '1', '120', '250000', '1', '2', 72, '38.8199', '-0.6149', 8),
+('21', 'Chalet en las montañas', '3', '3', '2', '2', '300', '600000', '2', '3', 71, '38.9000', '-0.5000', 5),
+('22', 'Casa antigua restaurada', '4', '4', '3', '3', '200', '400000', '3', '4', 96, '38.8899', '-0.5888', 0),
+('23', 'Apartamento con vistas', '2', '1', '4', '4', '90', '180000', '4', '1', 128, '38.9889', '-0.5210', 10),
+('24', 'Piso económico', '1', '2', '4', '5', '60', '100000', '5', '2', 100, '38.8188', '-0.6138', 2),
+('3', 'muy sosa', '3', '2', '5', '2', '150', '60000', '3', '2', 17, '38.9032', '-0.4980', 1),
+('4', 'yipicayei', '5', '4', '4', '4', '100', '20000', '2', '1', 70, '38.9878', '-0.5236', 0),
+('5', 'coso', '1', '4', '2', '2', '6000', '9800000', '5', '1', 8, '38.9035', '-0.4985', 8),
+('6', 'casa en bufali', '1', '2', '3', '5', '150', '200000', '1', '3', 7, '38.8668', '-0.5099', 0),
+('7', 'Apartamento acogedor', '1', '1', '1', '1', '120', '250000', '4', '5', 16, '38.8190', '-0.6146', 0),
+('8', 'Chalet moderno', '3', '3', '2', '2', '300', '550000', '3', '3', 13, '38.9038', '-0.4982', 3),
+('9', 'Piso céntrico', '2', '2', '4', '3', '80', '180000', '5', '4', 2, '38.8679', '-0.5910', 0);
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `likes`
+--
+ALTER TABLE `likes`
+  ADD CONSTRAINT `likes_ibfk_1` FOREIGN KEY (`idvivienda`) REFERENCES `vivienda` (`idvivienda`),
+  ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 
 --
 -- Filtros para la tabla `vivienda`
