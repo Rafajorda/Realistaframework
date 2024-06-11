@@ -17,7 +17,7 @@
 		$sql=	"SELECT cart.*, vivienda.price,vivienda.nameviv,  vivienda.stock FROM cart JOIN vivienda ON cart.id_vivienda = vivienda.idvivienda WHERE cart.id_user ='$id_user'";
 		$stmt = $db->ejecutar($sql);
 
-				return $db->listar($stmt); 
+				return $db->listar($stmt); 	
 		}
 
 		function select_carrito($db,$id_vivienda,$id_user){
@@ -158,6 +158,16 @@
 			} else {
 				return false; 
 			}
+		}
+		function get_items_Bill($db, $bill_id) {
+			$sql = "SELECT id_vivienda, quantity FROM cart WHERE bill_id = '$bill_id'";
+			$stmt = $db->ejecutar($sql);
+			return $db->listar($stmt);
+		}
+	
+		 function reduce_stock($db, $id_vivienda, $quantity) {
+			$sql = "UPDATE vivienda SET stock = stock - $quantity WHERE idvivienda = '$id_vivienda'";
+			return $db->ejecutar($sql);
 		}
 
 

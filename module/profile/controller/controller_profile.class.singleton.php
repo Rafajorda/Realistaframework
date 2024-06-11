@@ -35,9 +35,7 @@
         function changePassword(){
             echo json_encode(common::load_model('profile_model', 'get_changePassword', Array($_POST['oldPassword'],$_POST['newPassword'], $_POST['accesstoken'])));
         }
-        // function changeAvatar(){
-        //     echo json_encode(common::load_model('profile_model', 'get_changeAvatar', Array($_FILES['newAvatar'], $_POST['accesstoken'])));
-        // }
+        
         function changeAvatar() {
             if (isset($_FILES['newAvatar']) && isset($_POST['accesstoken'])) {
                 $avatarFile = $_FILES['newAvatar'];

@@ -30,6 +30,13 @@
                 return $db->listar($stmt);
             
         }
+        public function select_email($db,$email){
+            $sql = "SELECT `id_user`,`username`, `password`, `email`, `type_user`, `avatar`, `token_email`, `activate`, `fails`, `OTP`, `origin` FROM `users` WHERE email='$email'";
+
+            $stmt = $db->ejecutar($sql);
+                return $db->listar($stmt);
+            
+        }
         public function select_user_Social($db, $username,$email,$origin){
             $sql = "SELECT `id_user`,`username`, `password`, `email`, `type_user`, `avatar`, `token_email`, `activate`, `fails`, `OTP`, `origin` FROM `users` WHERE `username`='$username'AND `origin` = '$origin'";
 
@@ -73,7 +80,7 @@
 
         public function update_OTP_verify($db, $username){
 
-            $sql = "UPDATE users SET activate = 1 WHERE username = '$username'";
+            $sql = "UPDATE users SET activate = 1, fails = 0 WHERE username = '$username'";
 
             $stmt = $db->ejecutar($sql);
             return "update";
@@ -157,7 +164,7 @@
         }
         public function addOTP($db, $username,$OTP){
 
-			$sql = "UPDATE users SET OTP=  $OTP WHERE username='$username'";
+			$sql = "UPDATE users SET OTP=  '$OTP' WHERE username='$username'";
             
             $stmt = $db->ejecutar($sql);
             return "ouch";

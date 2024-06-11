@@ -23,12 +23,12 @@
             $avatar = "https://i.pravatar.cc/500?u=$hashavatar";
 			$token_email = common::generate_Token_secure(20);
 
-			if (!empty($this -> dao -> select_user($this->db, $args[0]))) {
-				return array(
-					'success' => false,
-					'message' => 'El usuario ya está en uso, por favor, elige otro nombre de usuario.'
-				);
-            } else {
+			if (!empty($this -> dao -> select_user($this->db, $args[0],$args[0]))) {
+				return "error_user";
+            }else if(!empty($this -> dao -> select_email($this->db, $args[2]))){
+				return "error_email";
+			}
+			 else {
 				$result = $this -> dao -> insert_user($this->db, $args[0], $hashed_pass, $args[2], $avatar, $token_email);
 				$message = [ 'type' => 'validate', 
 								'token' => $token_email, 

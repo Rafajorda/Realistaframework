@@ -371,6 +371,19 @@ function checkUserType() {
         }
     }
 }
+function updateusernamescreen(){
+
+    var accessToken = localStorage.getItem('accessToken');
+
+    if (username) {
+       console.log(username,"username");
+        document.getElementById('currentUsername').textContent = username;
+    } else {
+        
+        document.getElementById('currentUsername').textContent = 'Default Username';
+    }
+
+}
 
 $(document).ready(function() {
     show_invoices();
@@ -379,4 +392,5 @@ $(document).ready(function() {
       checkUserType();
       button_changePassword();
       button_changeAvatar();
+      updateusernamescreen();
  });

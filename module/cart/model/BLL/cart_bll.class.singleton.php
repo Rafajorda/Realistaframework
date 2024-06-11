@@ -66,8 +66,16 @@
 			$countbill= $this->dao->select_countbill($this->db,$decode['id'],$bill_id);
 			$pricebill = $this->dao->select_countpricebill($this->db,$decode['id'],$bill_id);
 			$done= $this->dao->create_invoice($this->db,$decode['id'],$bill_id,$countbill,$pricebill);
+
+			$items = $this->dao->get_items_Bill($this->db, $bill_id);
+
+			
+			foreach ($items as $item) {
+				$this->dao->reduce_stock($this->db, $item['id_vivienda'], $item['quantity']);
+			}
 			  return "done";
 		}
+		
 
 	}
 ?>

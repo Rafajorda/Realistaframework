@@ -54,6 +54,7 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '/';
             return str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
         }
 
+        
         function friendlyURL_php($url) {
             $link = "";
             if (URL_FRIENDLY) {

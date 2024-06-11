@@ -75,10 +75,10 @@
     }
 
     function register() {
-        console.log("me registre"); 
+     //   console.log("me registre"); 
         if (validate_register() != 0) {
 
-            console.log("me registre"); 
+          //  console.log("me registre"); 
             // var data = $('#register__form').serialize();
 
 
@@ -95,7 +95,7 @@
                         document.getElementById('error_username_reg').innerHTML = "El usuario ya esta en uso, intentalo con otro"
                     } else {
                         toastr.success("Registery succesfully");
-                        setTimeout(window.location.href = 'login', 1000);
+                       // setTimeout(window.location.href = 'login', 1000);
                                 
                     }
                 }).catch(function(textStatus) {
@@ -110,7 +110,7 @@
         $("#register").keypress(function(e) {
             var code = (e.keyCode ? e.keyCode : e.which);
             if (code == 13) {
-                console.log("potato");
+                //console.log("potato");
                 e.preventDefault();
                 register();
             }
