@@ -51,10 +51,10 @@ activar la aplicación.
 **🛒cart:**
 Este módulo lista los items a los que has dado en el botón del carrito, y la cantidad de estos, pudiendo eliminarlos, o cambiar la cantidad,
 siempre teniendo en cuenta el stock, además de un botón para hacer la compra.
-![Captura de pantalla 2024-06-11 191955](https://github.com/Rafajorda/Realistaframework/assets/157410611/d2e05b95-2e25-4c0a-bc33-ba9726fe86dc)
-![Captura de pantalla 2024-06-11 191919](https://github.com/Rafajorda/Realistaframework/assets/157410611/35176c28-5a53-4f09-ba2a-673adf01eebd)
+![Captura de pantalla 2024-06-11 192249](https://github.com/Rafajorda/Realistaframework/assets/157410611/306cd248-0dbb-401d-92a3-d5ca9cb32cd2)
 
 **🧑profile:**
 Este módulo muestra las compras y las facturas, pudiendo tener un PDF de estas, además de mostrar los items a los que les has dado a like.
-![Captura de pantalla 2024-06-11 192249](https://github.com/Rafajorda/Realistaframework/assets/157410611/306cd248-0dbb-401d-92a3-d5ca9cb32cd2)
+![Captura de pantalla 2024-06-11 191955](https://github.com/Rafajorda/Realistaframework/assets/157410611/d2e05b95-2e25-4c0a-bc33-ba9726fe86dc)
+![Captura de pantalla 2024-06-11 191919](https://github.com/Rafajorda/Realistaframework/assets/157410611/35176c28-5a53-4f09-ba2a-673adf01eebd)
 
