@@ -119,7 +119,7 @@
 
     function button_register() {
         $('#register').on('click', function(e) {
-            console.log("potato");
+          //  console.log("potato");
             e.preventDefault();
             register();
         });
@@ -309,7 +309,7 @@
 
                     }else if(result=== "social"){
                         document.getElementById('error_username_log').innerHTML = "El usario es de una cuenta registrada de terceros, use el boton apropiado"
-                        console.log("sociaaaal!!");
+                    //    console.log("sociaaaal!!");
                     }else {
                     localStorage.setItem("accesstoken", result[0]);
                     localStorage.setItem("refreshtoken", result[1]);
