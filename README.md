@@ -1,23 +1,23 @@
-**REALISTA**
+###**REALISTA**
 
-1 [¿que es realista?](L9)
+1 [¿que es realista?](#L9)
 
 2 módulos
 
 
 
-**¿Que es realista?**
+**##¿Que es realista?**
 
 Realista es el proyecto de Primero de Desarrollo de Aplicaciones Web de Rafael Jordá.
 Es una aplicación que pretende simular una web de compra de viviendas con un énfasis en el ahorro energético.
 
 
-**Módulos**
+##**Módulos**
 
 realista contiene varios módulos.
 
 
-**🏠Home:** 
+#**🏠Home:** 
  La página principal de la aplicación mostrando un carrusel con las diferentes formas de ahorro que pueden tener las viviendas, mostrando después diversas. 
 Opciones de las casas: véase el tipo, la localidad o la ciudad.
 ![Captura de pantalla 2024-06-11 185544](https://github.com/Rafajorda/Realistaframework/assets/157410611/8b467dfc-c4f8-4571-8398-c62c62a972c7)
