@@ -1,13 +1,12 @@
 ### **REALISTA**
 
-1 [¿Que es realista?](https://github.com/Rafajorda/Realistaframework/blob/e0e3142e217c224c8e74ad4791d88204b8cd170b/README.md?plain=1#L9)
+1 [¿Que es realista?](que-es-realista)
 
-2[ Módulos](https://github.com/Rafajorda/Realistaframework/blob/e0e3142e217c224c8e74ad4791d88204b8cd170b/README.md?plain=1#L15)
+2[ Módulos](módulos)
 
-3 [Tecnologias](https://github.com/Rafajorda/Realistaframework/blob/e0e3142e217c224c8e74ad4791d88204b8cd170b/README.md?plain=1#L69)
+3 [Tecnologias](tecnologias)
 
-3 [Librerias](https://github.com/Rafajorda/Realistaframework/blob/e0e3142e217c224c8e74ad4791d88204b8cd170b/README.md?plain=1#L77)
-
+3 [Librerias](librearias)
 ## **¿Que es realista?**
 
 Realista es el proyecto de Primero de Desarrollo de Aplicaciones Web de Rafael Jordá.
@@ -18,12 +17,12 @@ Es una aplicación que pretende simular una web de compra de viviendas con un é
  
 realista contiene varios módulos.
 
-1: [home]([url](https://github.com/Rafajorda/Realistaframework/blob/e0e3142e217c224c8e74ad4791d88204b8cd170b/README.md?plain=1#L26))
-2: [shop]([url](https://github.com/Rafajorda/Realistaframework/blob/e0e3142e217c224c8e74ad4791d88204b8cd170b/README.md?plain=1#L33))
-3: [search]([url](https://github.com/Rafajorda/Realistaframework/blob/e0e3142e217c224c8e74ad4791d88204b8cd170b/README.md?plain=1#L43))
-4: [login]([url](https://github.com/Rafajorda/Realistaframework/blob/e0e3142e217c224c8e74ad4791d88204b8cd170b/README.md?plain=1#L50))
-5: [cart]([url](https://github.com/Rafajorda/Realistaframework/blob/e0e3142e217c224c8e74ad4791d88204b8cd170b/README.md?plain=1#L57))
-6: [profile]([url](https://github.com/Rafajorda/Realistaframework/blob/e0e3142e217c224c8e74ad4791d88204b8cd170b/README.md?plain=1#L62)) 
+-  1: [Home](home)
+-  2: [Shop](shop)
+-  3: [Search](search)
+-  4: [Login](login)
+-  5: [Cart](cart)
+-  6: [Profile](profile) 
 
 
 # **🏠Home:** 
