@@ -10,7 +10,7 @@
 ## **¿Que es realista?**
 
 Realista es el proyecto de Primero de Desarrollo de Aplicaciones Web de Rafael Jordá.
-Es una aplicación que pretende simular una web de compra de viviendas con un énfasis en el ahorro energético.
+Es una aplicación que pretende simular una aplicacion web de compra de viviendas con un énfasis en el ahorro energético.
 
 
 ## **Módulos** 
