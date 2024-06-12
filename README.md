@@ -6,7 +6,7 @@
 
 3 [Tecnologias](#tecnologias)
 
-3 [Librerias](#librearias)
+3 [Librerias](#librerias)
 ## **¿Que es realista?**
 
 Realista es el proyecto de Primero de Desarrollo de Aplicaciones Web de Rafael Jordá.
